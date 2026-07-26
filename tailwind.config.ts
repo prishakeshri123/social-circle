@@ -1,0 +1,112 @@
+import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate';
+
+export default {
+  darkMode: ['selector', '[data-theme="dark"]'],
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: 'var(--color-primary-50)',
+          100: 'var(--color-primary-100)',
+          200: 'var(--color-primary-200)',
+          500: 'var(--color-primary-500)',
+          600: 'var(--color-primary-600)',
+          700: 'var(--color-primary-700)',
+          900: 'var(--color-primary-900)',
+        },
+        accent: { 500: 'var(--color-accent-500)', 600: 'var(--color-accent-600)' },
+        success: { 100: 'var(--color-success-100)', 500: 'var(--color-success-500)' },
+        warning: { 100: 'var(--color-warning-100)', 500: 'var(--color-warning-500)' },
+        error: { 100: 'var(--color-error-100)', 500: 'var(--color-error-500)' },
+        info: { 100: 'var(--color-info-100)', 500: 'var(--color-info-500)' },
+        gray: {
+          50: 'var(--color-gray-50)',
+          100: 'var(--color-gray-100)',
+          200: 'var(--color-gray-200)',
+          300: 'var(--color-gray-300)',
+          400: 'var(--color-gray-400)',
+          500: 'var(--color-gray-500)',
+          700: 'var(--color-gray-700)',
+          900: 'var(--color-gray-900)',
+        },
+        background: 'var(--color-background)',
+        surface: 'var(--color-surface)',
+        'surface-raised': 'var(--color-surface-raised)',
+        border: 'var(--color-border)',
+        'border-strong': 'var(--color-border-strong)',
+        foreground: 'var(--color-text-primary)',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
+        'text-muted': 'var(--color-text-muted)',
+        'text-inverse': 'var(--color-text-inverse)',
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+      },
+      fontSize: {
+        xs: ['12px', { lineHeight: '1.5' }],
+        sm: ['14px', { lineHeight: '1.5' }],
+        base: ['16px', { lineHeight: '1.625' }],
+        lg: ['18px', { lineHeight: '1.5' }],
+        xl: ['20px', { lineHeight: '1.4' }],
+        '2xl': ['24px', { lineHeight: '1.3' }],
+        '3xl': ['30px', { lineHeight: '1.2' }],
+        '4xl': ['36px', { lineHeight: '1.1' }],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+        sidebar: 'var(--sidebar-width)',
+        'sidebar-sm': 'var(--sidebar-width-sm)',
+      },
+      borderRadius: {
+        sm: 'var(--radius-sm)',
+        DEFAULT: 'var(--radius-md)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
+        xl: 'var(--radius-xl)',
+        '2xl': 'var(--radius-2xl)',
+        full: 'var(--radius-full)',
+      },
+      boxShadow: {
+        card: '0 1px 3px 0 rgba(0,0,0,0.10), 0 1px 2px -1px rgba(0,0,0,0.10)',
+        'card-hover': '0 4px 6px -1px rgba(0,0,0,0.10)',
+        modal: '0 20px 25px -5px rgba(0,0,0,0.10)',
+        sidebar: '4px 0 6px -2px rgba(0,0,0,0.05)',
+      },
+      transitionDuration: {
+        fast: 'var(--duration-fast)',
+        normal: 'var(--duration-normal)',
+        slow: 'var(--duration-slow)',
+      },
+      zIndex: {
+        raised: 'var(--z-raised)',
+        overlay: 'var(--z-overlay)',
+        modal: 'var(--z-modal)',
+        toast: 'var(--z-toast)',
+        tooltip: 'var(--z-tooltip)',
+      },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+      },
+      keyframes: {
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '20%, 60%': { transform: 'translateX(-4px)' },
+          '40%, 80%': { transform: 'translateX(4px)' },
+        },
+      },
+      animation: {
+        shake: 'shake 0.2s ease-in-out',
+      },
+    },
+  },
+  plugins: [tailwindcssAnimate],
+} satisfies Config;

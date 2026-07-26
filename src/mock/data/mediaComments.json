@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cmt_001",
+    "mediaId": "med_001",
+    "userId": "usr_mod01",
+    "text": "Great turnout this year!",
+    "createdAt": "2026-07-12T09:30:00.000Z"
+  },
+  {
+    "id": "cmt_002",
+    "mediaId": "med_001",
+    "userId": "usr_member02",
+    "text": "So pumped for next year already 🙌",
+    "createdAt": "2026-07-12T10:00:00.000Z"
+  },
+  {
+    "id": "cmt_003",
+    "mediaId": "med_003",
+    "userId": "usr_owner01",
+    "text": "You all crushed it!",
+    "createdAt": "2026-07-12T11:15:00.000Z"
+  }
+]

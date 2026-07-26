@@ -1,0 +1,44 @@
+[
+  {
+    "id": "txn_001",
+    "userId": "usr_member01",
+    "clubId": "clu_blrtech01",
+    "type": "club_subscription",
+    "amount": 1499,
+    "currency": "INR",
+    "status": "success",
+    "gateway": "mock",
+    "gatewayTransactionId": "mockpay_txn_001",
+    "planId": "plan_blrtech_annual",
+    "description": "Bengaluru Tech Circle — Annual Membership",
+    "invoiceUrl": "#",
+    "createdAt": "2026-06-01T09:05:00.000Z"
+  },
+  {
+    "id": "txn_002",
+    "userId": "usr_member01",
+    "clubId": "clu_blrtech01",
+    "eventId": "evt_009",
+    "type": "event_ticket",
+    "amount": 499,
+    "currency": "INR",
+    "status": "success",
+    "gateway": "mock",
+    "gatewayTransactionId": "mockpay_txn_002",
+    "description": "Circle Workshop — Event Ticket",
+    "invoiceUrl": "#",
+    "createdAt": "2026-07-01T10:00:00.000Z"
+  },
+  {
+    "id": "txn_003",
+    "userId": "usr_member01",
+    "clubId": "clu_blrtech01",
+    "type": "club_subscription",
+    "amount": 1499,
+    "currency": "INR",
+    "status": "failed",
+    "gateway": "mock",
+    "description": "Bengaluru Tech Circle — Annual Membership (renewal attempt)",
+    "createdAt": "2026-05-28T09:00:00.000Z"
+  }
+]

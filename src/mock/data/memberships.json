@@ -1,0 +1,92 @@
+[
+  {
+    "id": "mem_mt_owner",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2025-06-01T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_mod",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_mod01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-06-03T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member01",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-06-10T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member02",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_member02",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-06-12T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member03",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_member03",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-06-15T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member04",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_member04",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-06-20T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member06",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_member06",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-07-01T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member07",
+    "clubId": "clu_mumtrail01",
+    "userId": "usr_member07",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-07-05T09:00:00.000Z"
+  },
+  {
+    "id": "mem_bt_owner",
+    "clubId": "clu_blrtech01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2025-05-01T09:00:00.000Z"
+  },
+  {
+    "id": "mem_bt_member01",
+    "clubId": "clu_blrtech01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2025-06-01T09:00:00.000Z",
+    "subscriptionId": "sub_001",
+    "expiresAt": "2027-06-01T09:00:00.000Z"
+  },
+  {
+    "id": "mem_bt_pending01",
+    "clubId": "clu_blrtech01",
+    "userId": "usr_member05",
+    "role": "member",
+    "status": "pending_approval",
+    "joinedAt": "2026-07-24T09:00:00.000Z"
+  }
+]

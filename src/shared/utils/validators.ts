@@ -1,0 +1,134 @@
+import { z } from 'zod';
+import {
+  MAX_BIO_LENGTH,
+  MAX_CONTACT_SUBJECT_LENGTH,
+  MIN_CONTACT_MESSAGE_LENGTH,
+  OTP_LENGTH,
+  MIN_POLL_OPTIONS,
+  MAX_POLL_OPTIONS,
+  MAX_CAPTION_LENGTH,
+} from '@/shared/constants/app.constants';
+import { en } from '@/shared/constants/locales/en';
+
+const e = en.errors;
+
+// ── Primitives ────────────────────────────────────────────
+export const emailSchema = z.string().min(1, e.required).email(e.emailInvalid);
+
+export const phoneSchema = z
+  .string()
+  .min(1, e.required)
+  .regex(/^\+?[1-9]\d{9,14}$/, e.phoneInvalid);
+
+export const passwordSchema = z
+  .string()
+  .min(8, e.passwordMin)
+  .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])/, e.passwordWeak);
+
+export const urlSchema = z.string().url(e.urlInvalid).optional().or(z.literal(''));
+
+export const otpSchema = z.string().length(OTP_LENGTH, e.otpInvalid).regex(/^\d+$/, e.otpInvalid);
+
+// ── Auth forms ────────────────────────────────────────────
+export const loginSchema = z.object({
+  email: emailSchema,
+  password: z.string().min(1, e.required),
+  rememberMe: z.boolean().optional(),
+});
+
+export const signupSchema = z
+  .object({
+    fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
+    email: emailSchema,
+    phone: phoneSchema.optional().or(z.literal('')),
+    password: passwordSchema,
+    confirmPassword: z.string(),
+    terms: z.boolean().refine((v) => v === true, { message: e.termsRequired }),
+  })
+  .refine((d) => d.password === d.confirmPassword, {
+    message: e.passwordMatch,
+    path: ['confirmPassword'],
+  });
+
+export const contactSchema = z.object({
+  fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
+  email: emailSchema,
+  subject: z.string().min(1, e.required).max(MAX_CONTACT_SUBJECT_LENGTH),
+  message: z.string().min(MIN_CONTACT_MESSAGE_LENGTH, e.messageTooShort),
+});
+
+export const forgotPasswordSchema = z.object({
+  target: z.union([emailSchema, phoneSchema]),
+});
+
+export const resetPasswordSchema = z
+  .object({
+    otp: otpSchema,
+    newPassword: passwordSchema,
+    confirmPassword: z.string(),
+  })
+  .refine((d) => d.newPassword === d.confirmPassword, {
+    message: e.passwordMatch,
+    path: ['confirmPassword'],
+  });
+
+// ── Profile ───────────────────────────────────────────────
+export const profileSchema = z.object({
+  fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
+  bio: z.string().max(MAX_BIO_LENGTH, e.bioTooLong).optional(),
+  city: z.string().max(80).optional(),
+  websiteUrl: urlSchema,
+  interests: z.array(z.string()).min(1, e.atLeastOneInterest),
+});
+
+// ── Onboarding (2-step profile setup) ──────────────────────
+export const onboardingStep1Schema = z.object({
+  fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
+  bio: z.string().max(MAX_BIO_LENGTH, e.bioTooLong).optional().or(z.literal('')),
+});
+
+export const onboardingStep2Schema = z.object({
+  interests: z.array(z.string()).min(1, e.atLeastOneInterest),
+  city: z.string().max(80).optional().or(z.literal('')),
+});
+
+// ── Events ────────────────────────────────────────────────
+// Event creation happens entirely in the separate Admin Dashboard. This
+// schema covers only the fields the owning member can edit from Event
+// Detail (Part 2 S-13) -- ticket pricing/type/quantity, visibility,
+// recurrence, and type are set once at creation and not editable here.
+export const eventEditSchema = z.object({
+  title: z.string().min(3).max(120),
+  description: z.string().min(20),
+  coverImageUrl: z.string().optional(),
+  startAt: z.string().refine((d) => new Date(d) > new Date(), e.dateMustBeFuture),
+  endAt: z.string().optional(),
+  timezone: z.string(),
+  locationType: z.enum(['physical', 'virtual']),
+  physicalAddress: z.string().min(5).optional(),
+  virtualLink: urlSchema,
+  capacity: z.number().int().min(0).optional(),
+  rsvpDeadline: z.string().optional(),
+});
+
+// ── Albums ────────────────────────────────────────────────
+export const createAlbumSchema = z.object({
+  title: z.string().min(3, e.required).max(80),
+  description: z.string().optional(),
+  visibility: z.enum(['members_only', 'public']),
+  allowMemberUploads: z.boolean(),
+});
+
+export const mediaCaptionSchema = z.object({
+  caption: z.string().max(MAX_CAPTION_LENGTH).optional(),
+});
+
+// ── Chat: polls ───────────────────────────────────────────
+export const pollCreateSchema = z.object({
+  question: z.string().min(3, e.required).max(200),
+  options: z
+    .array(z.string().min(1, e.required).max(80))
+    .min(MIN_POLL_OPTIONS)
+    .max(MAX_POLL_OPTIONS),
+  allowMultiple: z.boolean(),
+});

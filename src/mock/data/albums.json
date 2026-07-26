@@ -1,0 +1,27 @@
+[
+  {
+    "id": "alb_annualmeet",
+    "clubId": "clu_mumtrail01",
+    "eventId": "evt_005",
+    "title": "Annual Meetup Photos",
+    "description": "Highlights from our 2026 Annual Meetup at Sanjay Gandhi National Park.",
+    "coverUrl": "https://picsum.photos/seed/alb-annualmeet-cover/600/450",
+    "mediaCount": 5,
+    "visibility": "members_only",
+    "allowMemberUploads": true,
+    "createdById": "usr_owner01",
+    "createdAt": "2026-07-12T08:00:00.000Z"
+  },
+  {
+    "id": "alb_trailscenic",
+    "clubId": "clu_mumtrail01",
+    "title": "Scenic Trail Shots",
+    "description": "Our favourite views from weekend runs.",
+    "coverUrl": "https://picsum.photos/seed/alb-trailscenic-cover/600/450",
+    "mediaCount": 3,
+    "visibility": "public",
+    "allowMemberUploads": false,
+    "createdById": "usr_owner01",
+    "createdAt": "2026-06-20T08:00:00.000Z"
+  }
+]

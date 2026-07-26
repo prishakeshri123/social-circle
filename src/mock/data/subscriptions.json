@@ -1,0 +1,13 @@
+[
+  {
+    "id": "sub_001",
+    "userId": "usr_member01",
+    "clubId": "clu_blrtech01",
+    "planId": "plan_blrtech_annual",
+    "status": "active",
+    "currentPeriodStart": "2026-06-01T09:00:00.000Z",
+    "currentPeriodEnd": "2027-06-01T09:00:00.000Z",
+    "cancelAtPeriodEnd": false,
+    "createdAt": "2026-06-01T09:00:00.000Z"
+  }
+]

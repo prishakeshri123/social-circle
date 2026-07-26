@@ -1,0 +1,46 @@
+[
+  {
+    "id": "ch_mt_general",
+    "clubId": "clu_mumtrail01",
+    "name": "general",
+    "type": "group",
+    "pinnedMessageId": "msg_gen_001",
+    "createdAt": "2025-06-01T09:00:00.000Z"
+  },
+  {
+    "id": "ch_mt_announcements",
+    "clubId": "clu_mumtrail01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2025-06-01T09:00:00.000Z"
+  },
+  {
+    "id": "ch_mt_eventplanning",
+    "clubId": "clu_mumtrail01",
+    "name": "event-planning",
+    "type": "group",
+    "createdAt": "2025-06-05T09:00:00.000Z"
+  },
+  {
+    "id": "ch_bt_general",
+    "clubId": "clu_blrtech01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2025-05-01T09:00:00.000Z"
+  },
+  {
+    "id": "ch_bt_announcements",
+    "clubId": "clu_blrtech01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2025-05-01T09:00:00.000Z"
+  },
+  {
+    "id": "ch_dm_mod_member01",
+    "clubId": "",
+    "name": "Direct Message",
+    "type": "direct",
+    "participantIds": ["usr_mod01", "usr_member01"],
+    "createdAt": "2026-07-20T09:00:00.000Z"
+  }
+]
