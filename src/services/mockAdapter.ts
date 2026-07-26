@@ -8,8 +8,6 @@ const mock = new MockAdapter(apiClient, {
   onNoMatch: 'throwException',
 });
 
-if (import.meta.env.DEV) {
-  registerMockHandlers(mock);
-}
+registerMockHandlers(mock);
 
 export { mock };
