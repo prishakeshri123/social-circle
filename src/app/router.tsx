@@ -17,19 +17,23 @@ import { AboutPage } from '@/features/discovery/pages/AboutPage';
 import { ServicesPage } from '@/features/discovery/pages/ServicesPage';
 import { ContactPage } from '@/features/discovery/pages/ContactPage';
 import { SearchPage } from '@/features/search/pages/SearchPage';
+import { ClubsPage } from '@/features/discovery/pages/ClubsPage';
+import { EventsPage } from '@/features/discovery/pages/EventsPage';
 import { ClubLandingPage } from '@/features/clubs/pages/ClubLandingPage';
 import { PublicEventDetailPage } from '@/features/events/pages/PublicEventDetailPage';
 import { ConversationsHubPage } from '@/features/chat/pages/ConversationsHubPage';
 import { ClubDashboardLayout } from '@/features/clubs/components/ClubDashboardLayout';
 
 export const router = createBrowserRouter([
+  // --- Login/Signup: bespoke full-page split layout, no shared AuthLayout shell ---
+  { path: ROUTES.login, element: <LoginPage />, errorElement: <ErrorFallback /> },
+  { path: ROUTES.signup, element: <SignupPage />, errorElement: <ErrorFallback /> },
+
   // --- Public auth routes ---------------------------------------------
   {
     element: <AuthLayout />,
     errorElement: <ErrorFallback />,
     children: [
-      { path: ROUTES.login, element: <LoginPage /> },
-      { path: ROUTES.signup, element: <SignupPage /> },
       { path: ROUTES.verifyOtp, element: <OtpVerificationPage /> },
       { path: ROUTES.forgotPassword, element: <ForgotPasswordPage /> },
       { path: ROUTES.authCallback, element: <SocialCallbackPage /> },
@@ -45,6 +49,8 @@ export const router = createBrowserRouter([
       { path: ROUTES.about, element: <AboutPage /> },
       { path: ROUTES.services, element: <ServicesPage /> },
       { path: ROUTES.contact, element: <ContactPage /> },
+      { path: ROUTES.clubs, element: <ClubsPage /> },
+      { path: ROUTES.events, element: <EventsPage /> },
       { path: ROUTES.search, element: <SearchPage /> },
       { path: ROUTES.clubLanding(':slug'), element: <ClubLandingPage /> },
       { path: ROUTES.eventDetail(':slug', ':eventId'), element: <PublicEventDetailPage /> },

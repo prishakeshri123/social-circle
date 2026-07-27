@@ -1,25 +1,25 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Compass } from 'lucide-react';
+import { ArrowRight, Compass } from 'lucide-react';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
 import { EmptyState } from '@/shared/components/feedback/EmptyState';
-import { Button } from '@/shared/components/ui/Button';
+import { HorizontalCarousel } from '@/shared/components/ui/HorizontalCarousel';
 import { en } from '@/shared/constants/locales/en';
-import { CLUB_SORT_OPTIONS, PAGE_SIZE_DEFAULT } from '@/shared/constants/app.constants';
+import { ROUTES } from '@/shared/constants/routes';
+import { CLUB_SORT_OPTIONS, POPULAR_CLUBS_STRIP_LIMIT } from '@/shared/constants/app.constants';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { useClubsFeed } from '@/features/discovery/hooks/useClubsFeed';
-import { ClubCard } from '@/features/discovery/components/ClubCard';
 import { ClubCardSkeleton } from '@/features/discovery/components/ClubCardSkeleton';
-import { CategoryFilterStrip } from '@/features/discovery/components/CategoryFilterStrip';
-import { FilterSortRow } from '@/features/discovery/components/FilterSortRow';
+import { PopularClubCard } from '@/features/discovery/components/PopularClubCard';
 import { WelcomeBanner } from '@/features/discovery/components/WelcomeBanner';
-import { HeroSection } from '@/features/discovery/components/HeroSection';
+import { HeroSection, type HeroSearchParams } from '@/features/discovery/components/HeroSection';
+import { FeaturesSection } from '@/features/discovery/components/FeaturesSection';
 import { StatsStrip } from '@/features/discovery/components/StatsStrip';
 import { UpcomingEventsStrip } from '@/features/discovery/components/UpcomingEventsStrip';
-import { HowItWorksSection } from '@/features/discovery/components/HowItWorksSection';
 import { TestimonialsSection } from '@/features/discovery/components/TestimonialsSection';
 import { MarketingFaqSection } from '@/features/discovery/components/MarketingFaqSection';
-import { NewsletterSignup } from '@/features/discovery/components/NewsletterSignup';
+import { CommunityCtaSection } from '@/features/discovery/components/CommunityCtaSection';
 import { MarketingFooter } from '@/features/discovery/components/MarketingFooter';
 import type { ClubFilters } from '@/types/club.types';
 
@@ -27,109 +27,140 @@ export function HomePage() {
   const { user } = useAuth();
   const [category, setCategory] = useState<string>();
   const [type, setType] = useState<ClubFilters['type']>();
-  const [sort, setSort] = useState<(typeof CLUB_SORT_OPTIONS)[number]>('recommended');
+  const [sort] = useState<(typeof CLUB_SORT_OPTIONS)[number]>('recommended');
+  const [city, setCity] = useState<string>();
+  const [search, setSearch] = useState<string>();
 
-  const { data, isPending, isError, refetch, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useClubsFeed({
-      category,
-      type,
-      sort,
-    });
+  const { data, isPending, isError, refetch } = useClubsFeed({
+    category,
+    type,
+    sort,
+    city,
+    search,
+  });
 
   const clubs = data?.pages.flatMap((page) => page.data) ?? [];
-  const hasFilters = Boolean(category || type);
+  const hasFilters = Boolean(category || type || city || search);
 
   function clearFilters() {
     setCategory(undefined);
     setType(undefined);
+    setCity(undefined);
+    setSearch(undefined);
   }
 
+  function handleHeroSearch(params: HeroSearchParams) {
+    setCategory(params.category);
+    setCity(params.city);
+    setSearch(params.search);
+  }
+
+  // Guest view: a curated "Explore Top Communities" carousel matching the
+  // marketing reference — same filtered data (hero search updates it), no
+  // category tiles / pagination chrome.
+  const popularClubs = clubs.slice(0, POPULAR_CLUBS_STRIP_LIMIT);
+
+  const guestDiscoveryContent = (
+    <>
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-primary-600">
+            {en.marketing.popularClubsEyebrow}
+          </p>
+          <h2 className="mt-1 text-2xl font-bold text-primary-900 sm:text-3xl">
+            {en.marketing.popularClubsTitle}
+          </h2>
+        </div>
+        <Link
+          to={ROUTES.search}
+          className="hidden shrink-0 items-center gap-1 text-sm font-medium text-primary-600 transition-colors duration-fast hover:text-primary-700 sm:flex"
+        >
+          {en.marketing.viewAllClubsCta}
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+      </div>
+
+      {isError && (
+        <EmptyState
+          title={en.discovery.failedToLoad}
+          ctaLabel={en.actions.retry}
+          onCtaClick={() => refetch()}
+        />
+      )}
+
+      {!isError && isPending && (
+        <div className="no-scrollbar flex gap-4 overflow-x-auto pb-2" aria-hidden="true">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="w-60 shrink-0">
+              <ClubCardSkeleton />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!isError && !isPending && popularClubs.length === 0 && (
+        <EmptyState
+          icon={Compass}
+          title={en.discovery.noClubsFiltered}
+          ctaLabel={hasFilters ? en.actions.clearFilters : undefined}
+          onCtaClick={hasFilters ? clearFilters : undefined}
+        />
+      )}
+
+      {!isError && popularClubs.length > 0 && (
+        <HorizontalCarousel
+          ariaLabel={en.marketing.popularClubsTitle}
+          className="[mask-image:linear-gradient(to_right,black_calc(100%_-_32px),transparent)]"
+        >
+          {popularClubs.map((club) => (
+            <div key={club.id} className="w-60 shrink-0 snap-start">
+              <PopularClubCard club={club} />
+            </div>
+          ))}
+        </HorizontalCarousel>
+      )}
+    </>
+  );
+
   return (
-    <PageContainer className="space-y-10">
+    <>
       <Helmet>
         <title>{en.discovery.title} | Social Circle</title>
         <meta name="description" content={en.discovery.subtitle} />
       </Helmet>
 
-      {!user && <HeroSection />}
-      {!user && <StatsStrip />}
+      {/* Rendered outside PageContainer so it sits flush at y=0, flush behind the
+          fixed transparent header, with no padding gap above it. */}
+      {!user && <HeroSection onSearch={handleHeroSearch} />}
 
-      {user && <WelcomeBanner fullName={user.fullName} />}
+      <PageContainer className="space-y-6">
+        {!user && <FeaturesSection />}
 
-      {user && (
-        <div>
-          <h1 className="text-2xl font-semibold text-text-primary">{en.discovery.title}</h1>
-          <p className="text-sm text-text-secondary">{en.discovery.subtitle}</p>
-        </div>
-      )}
+        {user && <WelcomeBanner fullName={user.fullName} />}
 
-      <div className="space-y-5">
-        <CategoryFilterStrip selected={category} onSelect={setCategory} />
-        <FilterSortRow type={type} onTypeChange={setType} sort={sort} onSortChange={setSort} />
-
-        {isError && (
-          <EmptyState
-            title={en.discovery.failedToLoad}
-            ctaLabel={en.actions.retry}
-            onCtaClick={() => refetch()}
-          />
-        )}
-
-        {!isError && isPending && (
-          <div
-            id="club-grid"
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-            aria-hidden="true"
-          >
-            {Array.from({ length: 9 }).map((_, i) => (
-              <ClubCardSkeleton key={i} />
-            ))}
+        {user && (
+          <div>
+            <h1 className="text-2xl font-semibold text-text-primary">{en.discovery.title}</h1>
+            <p className="text-sm text-text-secondary">{en.discovery.subtitle}</p>
           </div>
         )}
 
-        {!isError && !isPending && clubs.length === 0 && (
-          <EmptyState
-            icon={Compass}
-            title={en.discovery.noClubsFiltered}
-            ctaLabel={hasFilters ? en.actions.clearFilters : undefined}
-            onCtaClick={hasFilters ? clearFilters : undefined}
-          />
+        {!user && (
+          <section
+            id="browse-clubs"
+            className="scroll-mt-20 space-y-6 rounded-3xl bg-primary-50 px-4 py-6 sm:px-6"
+          >
+            {guestDiscoveryContent}
+          </section>
         )}
 
-        {!isError && clubs.length > 0 && (
-          <>
-            <div id="club-grid" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {clubs.map((club) => (
-                <ClubCard key={club.id} club={club} />
-              ))}
-            </div>
-
-            {hasNextPage && (
-              <div className="flex justify-center pt-2">
-                <Button
-                  variant="outline"
-                  onClick={() => fetchNextPage()}
-                  disabled={isFetchingNextPage}
-                >
-                  {en.discovery.loadMoreCount(PAGE_SIZE_DEFAULT)}
-                </Button>
-              </div>
-            )}
-          </>
-        )}
-
-        <UpcomingEventsStrip />
-      </div>
-
-      {!user && (
-        <div className="space-y-4">
-          <HowItWorksSection />
-          <TestimonialsSection />
-          <MarketingFaqSection />
-          <NewsletterSignup />
-          <MarketingFooter />
-        </div>
-      )}
-    </PageContainer>
+        {!user && <UpcomingEventsStrip />}
+        {!user && <StatsStrip variant="banner" />}
+        {!user && <TestimonialsSection />}
+        {!user && <MarketingFaqSection />}
+        {!user && <CommunityCtaSection />}
+        {!user && <MarketingFooter />}
+      </PageContainer>
+    </>
   );
 }

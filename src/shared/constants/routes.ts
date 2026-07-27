@@ -3,6 +3,8 @@ export const ROUTES = {
   about: '/about',
   services: '/services',
   contact: '/contact',
+  clubs: '/clubs',
+  events: '/events',
   search: '/search',
   myClubs: '/my-clubs',
   notifications: '/notifications',

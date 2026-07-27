@@ -74,14 +74,22 @@ export function OtpVerificationPage() {
         </p>
       </div>
 
-      <OtpInput
-        value={otp}
-        onChange={setOtp}
-        onComplete={handleComplete}
-        disabled={verifyOtp.isPending}
-        error={verifyOtp.isError}
-        autoFocus
-      />
+      <div className="space-y-3 rounded-2xl border border-border bg-surface-subtle p-4 text-left shadow-sm">
+        <p className="text-sm font-medium text-text-primary">{en.labels.emailOrPhone}</p>
+        <p className="text-sm text-text-secondary">{state.masked}</p>
+
+        <div className="pt-2">
+          <p className="mb-3 text-sm font-medium text-text-primary">{en.auth.otpEntryLabel}</p>
+          <OtpInput
+            value={otp}
+            onChange={setOtp}
+            onComplete={handleComplete}
+            disabled={verifyOtp.isPending}
+            error={verifyOtp.isError}
+            autoFocus
+          />
+        </div>
+      </div>
 
       {verifyOtp.isError && (
         <p role="alert" className="text-sm text-error-500" aria-live="polite">

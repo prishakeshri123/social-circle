@@ -7,7 +7,7 @@ export function AuthLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <TopBar />
-      <div className="flex flex-1 items-center justify-center px-4 py-10">
+      <div className="flex flex-1 items-center justify-center px-6 py-10 sm:px-10">
         <motion.div
           initial="hidden"
           animate="visible"

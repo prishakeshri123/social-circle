@@ -50,6 +50,8 @@ export const CLUB_SORT_OPTIONS = ['recommended', 'newest', 'most_members'] as co
 export const GALLERY_PREVIEW_COUNT = 9;
 export const MEMBERS_PREVIEW_COUNT = 12;
 export const SEARCH_MIN_CHARS = 2;
+export const POPULAR_CLUBS_STRIP_LIMIT = 8;
+export const NEW_CLUB_THRESHOLD_DAYS = 30;
 
 // ── Onboarding ─────────────────────────────────────────────
 export const ONBOARDING_TOTAL_STEPS = 2;
@@ -88,6 +90,14 @@ export const BILLING_CYCLE_LABELS = {
   quarterly: 'Quarterly',
   yearly: 'Yearly',
 } as const;
+
+// ── Layout ─────────────────────────────────────────────────
+export const HEADER_HEIGHT_PX = 64;
+export const TRANSPARENT_HEADER_SCROLL_THRESHOLD_PX = 40;
+
+// ── Horizontal scroll carousels (events strip, popular clubs strip) ──────
+export const CAROUSEL_SCROLL_EPSILON_PX = 4;
+export const CAROUSEL_SCROLL_ANIMATION_MS = 400;
 
 // ── Breakpoints (px) -- mirrors tailwind.config.ts ──────
 export const BREAKPOINTS = {

@@ -89,7 +89,7 @@ export function SearchPage() {
   const events = eventResults.data?.data ?? [];
 
   return (
-    <PageContainer className="space-y-5">
+    <PageContainer className="space-y-6 pt-3">
       <Helmet>
         <title>{en.search.title} | Social Circle</title>
       </Helmet>

@@ -46,14 +46,22 @@ const otpAttempts = new Map<string, OtpState>();
 interface PendingSignup {
   fullName: string;
   email: string;
-  password: string;
+  password?: string;
 }
 const pendingSignups = new Map<string, PendingSignup>();
+
+function isEmailTarget(target: string): boolean {
+  return target.includes('@');
+}
 
 function maskEmail(email: string): string {
   const [local, domain] = email.split('@');
   if (!domain) return email;
   return `${local.slice(0, 1)}${'*'.repeat(Math.max(local.length - 1, 3))}@${domain}`;
+}
+
+function maskPhone(phone: string): string {
+  return phone.length <= 2 ? phone : `${'*'.repeat(phone.length - 2)}${phone.slice(-2)}`;
 }
 
 function issueTokens(userId: string): AuthTokens {
@@ -116,10 +124,11 @@ function handleSignup(data: unknown): [number, unknown] {
   pendingSignups.set(email, { fullName, email, password });
   otpAttempts.delete(otpKey(email, 'signup'));
 
+  const emailTarget = isEmailTarget(email);
   const response: SignupResponse = {
     message: en.auth.otpSubtitle,
-    channel: 'email',
-    maskedTarget: maskEmail(email),
+    channel: emailTarget ? 'email' : 'sms',
+    maskedTarget: emailTarget ? maskEmail(email) : maskPhone(email),
   };
   return [200, response];
 }
@@ -152,10 +161,12 @@ function handleVerifyOtp(data: unknown): [number, unknown] {
     }
     pendingSignups.delete(target);
 
+    const emailTarget = isEmailTarget(pending.email);
     const id = `usr_${nanoid(10)}`;
     const newUser: User = {
       id,
-      email: pending.email,
+      email: emailTarget ? pending.email : '',
+      phone: emailTarget ? undefined : pending.email,
       fullName: pending.fullName,
       username: `${pending.email.split('@')[0]}_${nanoid(4)}`.toLowerCase(),
       avatarUrl: '',
@@ -163,8 +174,8 @@ function handleVerifyOtp(data: unknown): [number, unknown] {
       city: '',
       interests: [],
       status: 'active',
-      emailVerified: true,
-      phoneVerified: false,
+      emailVerified: emailTarget,
+      phoneVerified: !emailTarget,
       profileComplete: false,
       joinedAt: new Date().toISOString(),
       lastActiveAt: new Date().toISOString(),
@@ -172,7 +183,9 @@ function handleVerifyOtp(data: unknown): [number, unknown] {
       linkedProviders: [],
     };
     users.push(newUser);
-    passwordsByEmail.set(pending.email, pending.password);
+    if (pending.password) {
+      passwordsByEmail.set(pending.email, pending.password);
+    }
 
     const response: AuthSuccessResponse = { user: newUser, ...issueTokens(id) };
     return [200, response];

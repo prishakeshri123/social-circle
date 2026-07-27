@@ -11,6 +11,7 @@ import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { useRequireAuth } from '@/shared/hooks/useRequireAuth';
 import { useJoinClub } from '@/features/clubs/hooks/useJoinClub';
+import { cn } from '@/shared/utils/cn';
 import type { Club } from '@/types/club.types';
 
 interface ClubCardProps {
@@ -39,7 +40,7 @@ export function ClubCard({ club }: ClubCardProps) {
   return (
     <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
       <Card className="relative overflow-hidden rounded-2xl p-0 transition-shadow duration-normal hover:shadow-card-hover">
-        <Link to={landingUrl} className="absolute inset-0 z-0" aria-label={club.name} />
+        <Link to={landingUrl} className="absolute inset-0 z-10" aria-label={club.name} />
 
         <article>
           <div className="relative z-0 aspect-video w-full bg-surface">
@@ -84,7 +85,11 @@ export function ClubCard({ club }: ClubCardProps) {
               </span>
               <Button
                 size="sm"
-                className="relative z-10"
+                variant={club.type === 'free' ? 'default' : 'outline'}
+                className={cn(
+                  'relative z-20',
+                  club.type !== 'free' && 'border-primary-500 text-primary-600 hover:bg-primary-50',
+                )}
                 onClick={handleJoin}
                 disabled={joinMutation.isPending}
               >

@@ -28,7 +28,7 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <Card className="relative overflow-hidden p-0 transition-shadow duration-fast hover:shadow-card-hover">
-      <Link to={detailUrl} className="absolute inset-0 z-0" aria-label={event.title} />
+      <Link to={detailUrl} className="absolute inset-0 z-10" aria-label={event.title} />
 
       <div className="relative z-0 aspect-video w-full bg-surface">
         {event.coverImageUrl && (
@@ -64,7 +64,7 @@ export function EventCard({ event }: EventCardProps) {
               ? en.events.freeLabel
               : formatCurrency(event.ticketPrice ?? 0)}
           </Badge>
-          <Button size="sm" onClick={handleRsvp} className="relative z-10">
+          <Button size="sm" onClick={handleRsvp} className="relative z-20">
             {en.events.rsvpCta}
           </Button>
         </div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
+import { HorizontalCarousel } from '@/shared/components/ui/HorizontalCarousel';
 import { useEventsFeed } from '@/features/events/hooks/useEventsFeed';
 import { EventCard } from '@/features/events/components/EventCard';
 import { EventCardSkeleton } from '@/features/events/components/EventCardSkeleton';
@@ -25,7 +26,10 @@ export function UpcomingEventsStrip() {
         </Link>
       </div>
 
-      <div className="no-scrollbar flex snap-x gap-4 overflow-x-auto pb-2 pr-4 [mask-image:linear-gradient(to_right,black_calc(100%_-_32px),transparent)]">
+      <HorizontalCarousel
+        ariaLabel={en.discovery.upcomingEventsTitle}
+        className="pr-4 [mask-image:linear-gradient(to_right,black_calc(100%_-_32px),transparent)]"
+      >
         {isPending
           ? Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="w-64 shrink-0 snap-start">
@@ -37,7 +41,7 @@ export function UpcomingEventsStrip() {
                 <EventCard event={event} />
               </div>
             ))}
-      </div>
+      </HorizontalCarousel>
     </section>
   );
 }

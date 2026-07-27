@@ -20,6 +20,25 @@ export const phoneSchema = z
   .min(1, e.required)
   .regex(/^\+?[1-9]\d{9,14}$/, e.phoneInvalid);
 
+// India-only mobile numbers: optional +91/91/0 prefix, then a 10-digit
+// number starting 6-9 (the range TRAI allocates to mobile subscribers).
+const INDIA_PHONE_REGEX = /^(?:\+91|91|0)?[6-9]\d{9}$/;
+
+export const indiaPhoneSchema = z
+  .string()
+  .min(1, e.required)
+  .regex(INDIA_PHONE_REGEX, e.indiaPhoneInvalid);
+
+export const emailOrPhoneSchema = z
+  .string()
+  .min(1, e.required)
+  .refine(
+    (value) =>
+      z.string().email().safeParse(value).success ||
+      INDIA_PHONE_REGEX.test(value.trim().replace(/[\s-]/g, '')),
+    { message: e.emailOrPhoneInvalid },
+  );
+
 export const passwordSchema = z
   .string()
   .min(8, e.passwordMin)
@@ -31,14 +50,16 @@ export const otpSchema = z.string().length(OTP_LENGTH, e.otpInvalid).regex(/^\d+
 
 // ── Auth forms ────────────────────────────────────────────
 export const loginSchema = z.object({
-  email: emailSchema,
+  email: emailOrPhoneSchema,
   password: z.string().min(1, e.required),
   rememberMe: z.boolean().optional(),
 });
 
+export const fullNameSchema = z.string().min(2, e.nameTooShort).max(100, e.nameTooLong);
+
 export const signupSchema = z
   .object({
-    fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
+    fullName: fullNameSchema,
     email: emailSchema,
     phone: phoneSchema.optional().or(z.literal('')),
     password: passwordSchema,
@@ -49,6 +70,12 @@ export const signupSchema = z
     message: e.passwordMatch,
     path: ['confirmPassword'],
   });
+
+export const otpSignupSchema = z.object({
+  fullName: fullNameSchema,
+  target: emailOrPhoneSchema,
+  terms: z.boolean().refine((v) => v === true, { message: e.termsRequired }),
+});
 
 export const contactSchema = z.object({
   fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
