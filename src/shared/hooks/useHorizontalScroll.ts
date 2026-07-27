@@ -12,7 +12,7 @@ function easeOutCubic(t: number) {
 /** Drives a horizontally-scrolling strip's left/right arrow buttons. */
 export function useHorizontalScroll<T extends HTMLElement>() {
   const ref = useRef<T>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
