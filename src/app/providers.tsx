@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider } from '@/shared/contexts/ThemeContext';
 import { Toaster } from '@/shared/components/ui/Toast';
 
 function createQueryClient() {
@@ -26,10 +25,8 @@ export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        {children}
+        <Toaster />
       </QueryClientProvider>
     </HelmetProvider>
   );

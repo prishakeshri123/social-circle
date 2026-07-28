@@ -16,6 +16,10 @@ import { HomePage } from '@/features/discovery/pages/HomePage';
 import { AboutPage } from '@/features/discovery/pages/AboutPage';
 import { ServicesPage } from '@/features/discovery/pages/ServicesPage';
 import { ContactPage } from '@/features/discovery/pages/ContactPage';
+import { TermsPage } from '@/features/discovery/pages/TermsPage';
+import { PrivacyPolicyPage } from '@/features/discovery/pages/PrivacyPolicyPage';
+import { RefundPolicyPage } from '@/features/discovery/pages/RefundPolicyPage';
+import { CookiePolicyPage } from '@/features/discovery/pages/CookiePolicyPage';
 import { SearchPage } from '@/features/search/pages/SearchPage';
 import { ClubsPage } from '@/features/discovery/pages/ClubsPage';
 import { EventsPage } from '@/features/discovery/pages/EventsPage';
@@ -49,6 +53,10 @@ export const router = createBrowserRouter([
       { path: ROUTES.about, element: <AboutPage /> },
       { path: ROUTES.services, element: <ServicesPage /> },
       { path: ROUTES.contact, element: <ContactPage /> },
+      { path: ROUTES.terms, element: <TermsPage /> },
+      { path: ROUTES.privacyPolicy, element: <PrivacyPolicyPage /> },
+      { path: ROUTES.refundPolicy, element: <RefundPolicyPage /> },
+      { path: ROUTES.cookiePolicy, element: <CookiePolicyPage /> },
       { path: ROUTES.clubs, element: <ClubsPage /> },
       { path: ROUTES.events, element: <EventsPage /> },
       { path: ROUTES.search, element: <SearchPage /> },

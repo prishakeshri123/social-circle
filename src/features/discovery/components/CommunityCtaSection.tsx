@@ -3,7 +3,7 @@ import { Button } from '@/shared/components/ui/Button';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { Reveal } from '@/shared/components/ui/Reveal';
-import communityCtaIllustration from '@/assets/community-cta-illustration.png';
+import clubGroupIllustration from '@/assets/images/club-group.svg';
 
 interface CommunityCtaSectionProps {
   title?: string;
@@ -29,11 +29,7 @@ export function CommunityCtaSection({
     >
       <Reveal className="flex flex-col items-center gap-8 sm:flex-row sm:justify-between sm:text-left">
         <div className="hidden shrink-0 sm:block">
-          <img
-            src={communityCtaIllustration}
-            alt=""
-            className="h-24 w-[280px] object-cover [mask-image:linear-gradient(to_right,black_75%,transparent)]"
-          />
+          <img src={clubGroupIllustration} alt="" className="h-32 w-32 object-contain" />
         </div>
 
         <div className="sm:mr-auto">

@@ -18,7 +18,7 @@ import { useAuth } from '@/shared/hooks/useAuth';
 import { en } from '@/shared/constants/locales/en';
 import { contactSchema } from '@/shared/utils/validators';
 import { MOCK_API_DELAY_MS } from '@/shared/constants/app.constants';
-import loginIllustration from '@/assets/contactus.webp';
+import contactIllustration from '@/assets/images/contact-us.svg';
 
 const iconMap = Icons as unknown as Record<string, LucideIcon>;
 
@@ -98,9 +98,9 @@ export function ContactPage() {
 
         <Reveal className="relative mx-auto w-full max-w-md">
           <img
-            src={loginIllustration}
+            src={contactIllustration}
             alt=""
-            className="aspect-square w-full rounded-[2rem] object-cover shadow-modal"
+            className="aspect-square w-full rounded-[2rem] bg-primary-50 object-contain p-6 shadow-modal"
           />
           <span className="absolute -left-4 top-8 flex size-11 items-center justify-center rounded-2xl bg-surface text-primary-600 shadow-modal">
             <Icons.Mail className="size-5" aria-hidden="true" />

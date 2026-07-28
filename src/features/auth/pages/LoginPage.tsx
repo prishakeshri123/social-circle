@@ -370,11 +370,11 @@ export function LoginPage() {
 
       <p className="text-center text-xs text-text-muted">
         {en.auth.legalConsentPrefix}{' '}
-        <Link to={ROUTES.contact} className="font-medium text-primary-600 hover:underline">
+        <Link to={ROUTES.terms} className="font-medium text-primary-600 hover:underline">
           {en.marketing.footerLinkTermsOfService}
         </Link>{' '}
         {en.auth.legalConsentAnd}{' '}
-        <Link to={ROUTES.contact} className="font-medium text-primary-600 hover:underline">
+        <Link to={ROUTES.privacyPolicy} className="font-medium text-primary-600 hover:underline">
           {en.marketing.footerLinkPrivacyPolicy}
         </Link>
         .

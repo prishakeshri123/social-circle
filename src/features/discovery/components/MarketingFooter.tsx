@@ -77,9 +77,10 @@ const CLUB_OWNER_LINKS = [
 ] as const;
 
 const LEGAL_LINKS = [
-  { label: en.marketing.footerLinkPrivacyPolicy, to: ROUTES.contact },
-  { label: en.marketing.footerLinkTermsOfService, to: ROUTES.contact },
-  { label: en.marketing.footerLinkCookiePolicy, to: ROUTES.contact },
+  { label: en.marketing.footerLinkPrivacyPolicy, to: ROUTES.privacyPolicy },
+  { label: en.marketing.footerLinkTermsOfService, to: ROUTES.terms },
+  { label: en.marketing.footerLinkCookiePolicy, to: ROUTES.cookiePolicy },
+  { label: en.legal.refundPolicy.heading, to: ROUTES.refundPolicy },
 ] as const;
 
 function FooterNewsletterForm() {

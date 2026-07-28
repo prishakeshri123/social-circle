@@ -118,6 +118,7 @@ export const en = {
     passwordStrengthGood: 'Good',
     passwordStrengthStrong: 'Strong',
     termsLabel: 'I agree to the Terms of Service and Privacy Policy',
+    termsLabelPrefix: 'I agree to the',
     channelEmail: 'email',
     channelPhone: 'phone',
   },
@@ -864,6 +865,324 @@ export const en = {
     contactOfficeAddressLine2: '123 Cyberity Street, Zeeland, Noida, Uttar Pradesh 201301, India',
     contactBannerTitle: "We're here to help you build amazing communities.",
     contactBannerSubtitle: "Reach out anytime. We'll get back to you as soon as possible.",
+  },
+
+  // ── Legal pages (Terms, Privacy, Refund/Cancellation, Cookies) ─
+  legal: {
+    lastUpdatedLabel: 'Last updated',
+    lastUpdatedDate: 'July 1, 2026',
+    sidebarHeading: 'In This Policy',
+    contactCtaTitle: 'Questions about this policy?',
+    contactCtaBody: 'Our support team is happy to walk you through any of the details above.',
+    contactCtaCta: 'Contact Support',
+    entityName: 'Social Circle Technologies Pvt. Ltd.',
+    entityAddress: '123 Cyberity Street, Zeeland, Noida, Uttar Pradesh 201301, India',
+    entityEmail: 'hello@socialcircle.app',
+
+    terms: {
+      pageTitle: 'Terms & Conditions',
+      metaDescription:
+        'Read the terms and conditions that govern your use of Social Circle, including club membership, payments, and account rules.',
+      eyebrow: 'Legal',
+      heading: 'Terms & Conditions',
+      intro:
+        'These Terms & Conditions ("Terms") govern your access to and use of Social Circle, operated by Social Circle Technologies Pvt. Ltd. ("Social Circle", "we", "us"). By creating an account or using the platform, you agree to these Terms.',
+      sections: [
+        {
+          heading: '1. Acceptance of Terms',
+          icon: 'CheckCircle2',
+          body: [
+            "By registering for or using Social Circle, you confirm that you are at least 18 years old (or have a parent/guardian's consent) and that you accept these Terms and our Privacy Policy in full.",
+          ],
+        },
+        {
+          heading: '2. What Social Circle Provides',
+          icon: 'Sparkles',
+          body: [
+            'Social Circle is a community platform that lets members discover clubs, attend events, chat with other members, and — where a club owner has enabled it — pay for club memberships or paid events.',
+          ],
+        },
+        {
+          heading: '3. Your Account',
+          icon: 'UserCircle',
+          body: [
+            'You are responsible for keeping your login credentials confidential and for all activity under your account. Notify us immediately at hello@socialcircle.app if you suspect unauthorized use.',
+          ],
+        },
+        {
+          heading: '4. Club Membership & Paid Events',
+          icon: 'Users',
+          body: [
+            'Some clubs charge a membership fee or ticket price, set independently by the club owner. Social Circle facilitates the payment but is not the seller of the membership or event itself — the club owner is responsible for delivering the community, event, or benefit you paid for.',
+          ],
+        },
+        {
+          heading: '5. Payments & Billing',
+          icon: 'CreditCard',
+          body: [
+            'Payments are processed through our third-party payment gateway partners. We do not store your full card or bank details on our servers. All fees are shown in Indian Rupees (INR) inclusive of applicable taxes unless stated otherwise.',
+            'Recurring subscriptions renew automatically until cancelled. You can cancel anytime from Settings → Payments; cancellation takes effect at the end of the current billing cycle.',
+          ],
+        },
+        {
+          heading: '6. Refunds & Cancellations',
+          icon: 'RefreshCcw',
+          body: [
+            'Refunds and cancellations are handled under our separate Refund & Cancellation Policy, which forms part of these Terms.',
+          ],
+        },
+        {
+          heading: '7. Acceptable Use',
+          icon: 'ShieldAlert',
+          list: [
+            'No harassment, hate speech, or threats directed at other members',
+            'No posting of unlawful, obscene, or infringing content',
+            'No impersonation of another person or organization',
+            'No attempting to circumvent platform security or scrape data',
+          ],
+        },
+        {
+          heading: '8. Content You Post',
+          icon: 'FileText',
+          body: [
+            'You retain ownership of content you post (messages, photos, event details). By posting, you grant Social Circle a non-exclusive, worldwide licence to host and display that content solely to operate the platform.',
+          ],
+        },
+        {
+          heading: '9. Suspension & Termination',
+          icon: 'Ban',
+          body: [
+            'We may suspend or terminate accounts that violate these Terms. You may delete your account at any time from Settings; some records may be retained where required by law or for legitimate business purposes.',
+          ],
+        },
+        {
+          heading: '10. Limitation of Liability',
+          icon: 'Scale',
+          body: [
+            'Social Circle is provided "as is". To the fullest extent permitted by law, we are not liable for indirect or consequential losses arising from your use of the platform, including disputes between members and club owners.',
+          ],
+        },
+        {
+          heading: '11. Governing Law',
+          icon: 'Landmark',
+          body: [
+            'These Terms are governed by the laws of India. Any disputes will be subject to the exclusive jurisdiction of the courts of Noida, Uttar Pradesh.',
+          ],
+        },
+        {
+          heading: '12. Changes to These Terms',
+          icon: 'FileEdit',
+          body: [
+            'We may update these Terms from time to time. Material changes will be notified in-app or by email before they take effect.',
+          ],
+        },
+      ],
+    },
+
+    privacy: {
+      pageTitle: 'Privacy Policy',
+      metaDescription:
+        'Learn how Social Circle collects, uses, and protects your personal data, including payment information.',
+      eyebrow: 'Legal',
+      heading: 'Privacy Policy',
+      intro:
+        'This Privacy Policy explains what personal data Social Circle collects, why we collect it, and the choices you have. It applies to everyone who uses our website and app.',
+      calloutText: "Your privacy is important to us — we'll never sell your data.",
+      sections: [
+        {
+          heading: '1. Information We Collect',
+          icon: 'User',
+          list: [
+            'Account details: name, email, phone number, profile photo',
+            'Usage data: clubs joined, events attended, messages sent within the app',
+            'Payment data: billing name, masked card/UPI details, and transaction history (full card numbers are handled entirely by our payment gateway partner, never stored by us)',
+            'Device data: IP address, browser type, and device identifiers for security and analytics',
+          ],
+        },
+        {
+          heading: '2. How We Use Your Information',
+          icon: 'Settings',
+          list: [
+            'To create and manage your account',
+            'To process club membership and event payments',
+            'To send booking confirmations, receipts, and service updates',
+            'To personalize club and event recommendations',
+            'To detect fraud and keep the platform secure',
+          ],
+        },
+        {
+          heading: '3. Payment Information',
+          icon: 'CreditCard',
+          body: [
+            'All payments are processed by PCI-DSS compliant payment gateway partners. We only receive a masked reference to your payment method and the transaction status — never your full card number, CVV, or bank password.',
+          ],
+        },
+        {
+          heading: '4. Cookies & Tracking',
+          icon: 'Cookie',
+          body: [
+            'We use cookies and similar technologies to keep you signed in, remember preferences, and understand how the platform is used. See our Cookie Policy for details and how to manage your preferences.',
+          ],
+        },
+        {
+          heading: '5. Sharing Your Information',
+          icon: 'Users',
+          body: [
+            'We share data only where necessary: with the club owner of clubs you join (name, profile photo, membership status), with payment gateway partners to process transactions, and with service providers who help us operate the platform under confidentiality obligations. We do not sell your personal data.',
+          ],
+        },
+        {
+          heading: '6. Data Security',
+          icon: 'Lock',
+          body: [
+            'We use industry-standard safeguards — encryption in transit, access controls, and regular security reviews — to protect your data. No system is 100% secure, and we encourage you to use a strong, unique password.',
+          ],
+        },
+        {
+          heading: '7. Your Rights',
+          icon: 'ShieldCheck',
+          body: [
+            'You can access, correct, or delete your personal data from Settings → Privacy, or by emailing hello@socialcircle.app. You may also ask us to export your data or restrict certain processing.',
+          ],
+        },
+        {
+          heading: '8. Data Retention',
+          icon: 'Clock',
+          body: [
+            'We retain account and transaction data for as long as your account is active, and for a reasonable period afterward to comply with tax, accounting, and legal obligations.',
+          ],
+        },
+        {
+          heading: "9. Children's Privacy",
+          icon: 'Baby',
+          body: [
+            'Social Circle is not directed at children under 18. We do not knowingly collect personal data from children.',
+          ],
+        },
+        {
+          heading: '10. Changes to This Policy',
+          icon: 'FileEdit',
+          body: [
+            'We may update this Privacy Policy periodically. We will notify you of material changes in-app or by email.',
+          ],
+        },
+      ],
+    },
+
+    refundPolicy: {
+      pageTitle: 'Refund & Cancellation Policy',
+      metaDescription:
+        'Understand how refunds and cancellations work for club memberships, paid events, and subscription plans on Social Circle.',
+      eyebrow: 'Legal',
+      heading: 'Refund & Cancellation Policy',
+      intro:
+        'This policy explains when you can cancel a paid club membership, event ticket, or subscription on Social Circle, and how refunds are processed.',
+      sections: [
+        {
+          heading: '1. Overview',
+          icon: 'Info',
+          body: [
+            'Because clubs and events are created and priced by individual club owners, refund eligibility can vary by club. The rules below are the platform-wide default that applies unless a club has published a stricter or more generous policy on its own page.',
+          ],
+        },
+        {
+          heading: '2. Club Membership Fees',
+          icon: 'Wallet',
+          body: [
+            'You may cancel a paid club membership within 7 days of the initial charge for a full refund, provided you have not attended a paid event through that membership. After 7 days, membership fees are non-refundable, but you can cancel future renewals at any time.',
+          ],
+        },
+        {
+          heading: '3. Event Tickets',
+          icon: 'Ticket',
+          list: [
+            'More than 48 hours before the event: full refund',
+            'Within 48 hours of the event: 50% refund',
+            'After the event has started or ended: no refund',
+            'If a club owner cancels an event, all ticket holders receive a full, automatic refund',
+          ],
+        },
+        {
+          heading: '4. Subscription Plans',
+          icon: 'Repeat',
+          body: [
+            'Subscription plans purchased through Social Circle can be cancelled anytime from Settings → Payments. Cancelling stops future billing but does not refund the current billing cycle already paid for.',
+          ],
+        },
+        {
+          heading: '5. Refund Timelines',
+          icon: 'Clock',
+          body: [
+            'Approved refunds are issued to your original payment method within 5–7 business days, though your bank or card issuer may take longer to reflect the credit.',
+          ],
+        },
+        {
+          heading: '6. How to Request a Refund',
+          icon: 'Mail',
+          body: [
+            'Go to Settings → Payments and select the transaction, or email hello@socialcircle.app with your transaction ID and the reason for the request. We aim to respond within 2 business days.',
+          ],
+        },
+        {
+          heading: '7. Non-Refundable Items',
+          icon: 'XCircle',
+          list: [
+            'Payment gateway convenience fees, where charged separately',
+            'Memberships or tickets explicitly marked "non-refundable" by the club owner at checkout',
+            'Any amount already consumed (e.g. an event you attended)',
+          ],
+        },
+        {
+          heading: '8. Cancellations by Club Owners',
+          icon: 'Ban',
+          body: [
+            'If a club owner cancels a club or a paid event, all active members/ticket holders are notified and refunded automatically without needing to raise a request.',
+          ],
+        },
+      ],
+    },
+
+    cookiePolicy: {
+      pageTitle: 'Cookie Policy',
+      metaDescription:
+        'See what cookies Social Circle uses and how you can manage your cookie preferences.',
+      eyebrow: 'Legal',
+      heading: 'Cookie Policy',
+      intro:
+        'This Cookie Policy explains how Social Circle uses cookies and similar technologies when you visit our website or use our app.',
+      sections: [
+        {
+          heading: '1. What Are Cookies',
+          icon: 'Cookie',
+          body: [
+            'Cookies are small text files stored on your device that help websites remember information about your visit, such as your session and preferences.',
+          ],
+        },
+        {
+          heading: '2. Types of Cookies We Use',
+          icon: 'ListChecks',
+          list: [
+            'Essential cookies — keep you signed in and secure your session; required for the platform to function',
+            'Preference cookies — remember settings like your saved filters',
+            'Analytics cookies — help us understand how the platform is used so we can improve it',
+          ],
+        },
+        {
+          heading: '3. Managing Cookies',
+          icon: 'Settings',
+          body: [
+            'Most browsers let you block or delete cookies through their settings. Blocking essential cookies may prevent you from staying signed in or completing payments.',
+          ],
+        },
+        {
+          heading: '4. Changes to This Policy',
+          icon: 'FileEdit',
+          body: [
+            'We may update this Cookie Policy from time to time; the "last updated" date above reflects the most recent revision.',
+          ],
+        },
+      ],
+    },
   },
 
   // ── Club dashboard: Chat tab ────────────────────────────────

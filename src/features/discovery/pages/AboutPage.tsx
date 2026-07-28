@@ -9,7 +9,7 @@ import { MarketingFooter } from '@/features/discovery/components/MarketingFooter
 import { useAuth } from '@/shared/hooks/useAuth';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
-import loginIllustration from '@/assets/about-us.webp';
+import aboutIllustration from '@/assets/images/about-us.svg';
 
 const iconMap = Icons as unknown as Record<string, LucideIcon>;
 
@@ -71,11 +71,11 @@ export function AboutPage() {
         </Reveal>
 
         <Reveal className="mx-auto w-full max-w-md">
-          <div className="relative overflow-hidden rounded-[2rem] border border-border bg-surface p-3 shadow-modal">
+          <div className="relative rounded-[2rem] bg-surface p-3 shadow-modal">
             <img
-              src={loginIllustration}
+              src={aboutIllustration}
               alt=""
-              className="aspect-square w-full rounded-[1.6rem] object-cover"
+              className="aspect-square w-full rounded-[1.6rem] bg-primary-50 object-contain p-6"
             />
 
             <div className="absolute inset-x-4 bottom-4 rounded-[1.4rem] border border-white/60 bg-white/90 p-4 backdrop-blur-sm">

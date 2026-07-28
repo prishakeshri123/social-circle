@@ -3,7 +3,7 @@ import { Calendar, CalendarCheck, Link2, MessageCircle, Users } from 'lucide-rea
 import { en } from '@/shared/constants/locales/en';
 import { cn } from '@/shared/utils/cn';
 import { TopBar } from '@/shared/components/layout/TopBar';
-import loginIllustration from '@/assets/login-illustration.png';
+import loginIllustration from '@/assets/images/login.svg';
 
 // Keep a consistent inset from the header and viewport edges on both auth pages
 const PAGE_GUTTER_CLASS = 'px-4 sm:px-6';
@@ -66,15 +66,11 @@ export function AuthSplitLayout({
               <p className="text-sm text-text-secondary">{bottomPrompt}</p>
             </div>
 
-            <div className="relative hidden size-56 shrink-0 items-center justify-center xl:flex">
-              <span
-                className="absolute inset-[-20px] rounded-full border border-primary-200"
-                aria-hidden="true"
-              />
+            <div className="relative hidden h-56 w-64 shrink-0 items-center justify-center xl:flex">
               <img
                 src={loginIllustration}
                 alt=""
-                className="size-40 rounded-full object-cover shadow-modal"
+                className="h-full w-full rounded-[2rem] bg-primary-100 object-contain p-4 shadow-modal"
               />
               <span className="absolute -top-2 -left-4 flex size-11 items-center justify-center rounded-full bg-surface-raised text-success-500 shadow-modal">
                 <MessageCircle className="size-4" aria-hidden="true" />

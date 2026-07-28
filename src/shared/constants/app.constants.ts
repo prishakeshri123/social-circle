@@ -40,7 +40,6 @@ export const ACCESS_TOKEN_KEY = 'accessToken';
 export const REFRESH_TOKEN_KEY = 'refreshToken';
 
 // ── Local storage keys ────────────────────────────────────
-export const LS_THEME_KEY = 'sc_theme';
 export const LS_RECENT_SEARCHES_KEY = 'sc_recent_searches';
 export const LS_HOME_WELCOME_DISMISSED_KEY = 'sc_home_welcome_dismissed';
 export const MAX_RECENT_SEARCHES = 10;

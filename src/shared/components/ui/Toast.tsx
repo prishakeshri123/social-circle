@@ -1,12 +1,9 @@
 import { Toaster as SonnerToaster, type ToasterProps } from 'sonner';
-import { useTheme } from '@/shared/contexts/ThemeContext';
 
 export function Toaster(props: ToasterProps) {
-  const { resolvedTheme } = useTheme();
-
   return (
     <SonnerToaster
-      theme={resolvedTheme}
+      theme="light"
       position="top-right"
       richColors
       closeButton

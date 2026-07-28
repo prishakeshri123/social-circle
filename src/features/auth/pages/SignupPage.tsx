@@ -28,6 +28,21 @@ import type { z } from 'zod';
 type SignupFormValues = z.infer<typeof signupSchema>;
 type SignupMode = 'password' | 'otp';
 
+function TermsConsentText() {
+  return (
+    <>
+      {en.auth.termsLabelPrefix}{' '}
+      <Link to={ROUTES.terms} className="font-medium text-primary-600 hover:underline">
+        {en.marketing.footerLinkTermsOfService}
+      </Link>{' '}
+      {en.auth.legalConsentAnd}{' '}
+      <Link to={ROUTES.privacyPolicy} className="font-medium text-primary-600 hover:underline">
+        {en.marketing.footerLinkPrivacyPolicy}
+      </Link>
+    </>
+  );
+}
+
 export function SignupPage() {
   const navigate = useNavigate();
   const signup = useSignup();
@@ -309,7 +324,7 @@ export function SignupPage() {
                   )}
                 />
                 <Label htmlFor="terms" className="font-normal">
-                  {en.auth.termsLabel}
+                  <TermsConsentText />
                 </Label>
               </div>
               {errors.terms && <p className="text-xs text-error-500">{errors.terms.message}</p>}
@@ -397,7 +412,7 @@ export function SignupPage() {
                   disabled={busy || otpSent}
                 />
                 <Label htmlFor="otpTerms" className="font-normal">
-                  {en.auth.termsLabel}
+                  <TermsConsentText />
                 </Label>
               </div>
               {otpFieldErrors.terms && (

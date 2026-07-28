@@ -1,5 +1,7 @@
+import { forwardRef } from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
 import { revealUp, staggerReveal } from '@/shared/utils/animations';
 
 interface RevealProps {
@@ -42,10 +44,18 @@ export function RevealGroup({ children, className }: RevealGroupProps) {
   );
 }
 
-export function RevealItem({ children, className }: { children: ReactNode; className?: string }) {
+interface RevealItemProps extends Omit<HTMLMotionProps<'div'>, 'variants'> {
+  children: ReactNode;
+  className?: string;
+}
+
+export const RevealItem = forwardRef<HTMLDivElement, RevealItemProps>(function RevealItem(
+  { children, className, ...rest },
+  ref,
+) {
   return (
-    <motion.div className={className} variants={revealUp}>
+    <motion.div ref={ref} className={className} variants={revealUp} {...rest}>
       {children}
     </motion.div>
   );
-}
+});
