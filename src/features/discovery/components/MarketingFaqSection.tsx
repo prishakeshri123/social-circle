@@ -30,7 +30,13 @@ export function MarketingFaqSection() {
           <div className="flex flex-col items-center lg:items-start">
             <div className="w-full max-w-sm">
               <div className="rounded-2xl bg-gradient-to-br from-purple-50 to-white p-8">
-                <img src={faqIllustration} alt="" className="h-auto w-full" />
+                <img
+                  src={faqIllustration}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="h-auto w-full"
+                />
               </div>
             </div>
           </div>

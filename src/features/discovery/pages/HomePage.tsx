@@ -13,7 +13,7 @@ import { useClubsFeed } from '@/features/discovery/hooks/useClubsFeed';
 import { ClubCardSkeleton } from '@/features/discovery/components/ClubCardSkeleton';
 import { PopularClubCard } from '@/features/discovery/components/PopularClubCard';
 import { WelcomeBanner } from '@/features/discovery/components/WelcomeBanner';
-import { HeroSection, type HeroSearchParams } from '@/features/discovery/components/HeroSection';
+import { HeroSection } from '@/features/discovery/components/HeroSection';
 import { FeaturesSection } from '@/features/discovery/components/FeaturesSection';
 import { StatsStrip } from '@/features/discovery/components/StatsStrip';
 import { UpcomingEventsStrip } from '@/features/discovery/components/UpcomingEventsStrip';
@@ -25,39 +25,20 @@ import type { ClubFilters } from '@/types/club.types';
 
 export function HomePage() {
   const { user } = useAuth();
-  const [category, setCategory] = useState<string>();
   const [type, setType] = useState<ClubFilters['type']>();
   const [sort] = useState<(typeof CLUB_SORT_OPTIONS)[number]>('recommended');
-  const [city, setCity] = useState<string>();
-  const [search, setSearch] = useState<string>();
 
-  const { data, isPending, isError, refetch } = useClubsFeed({
-    category,
-    type,
-    sort,
-    city,
-    search,
-  });
+  const { data, isPending, isError, refetch } = useClubsFeed({ type, sort });
 
   const clubs = data?.pages.flatMap((page) => page.data) ?? [];
-  const hasFilters = Boolean(category || type || city || search);
+  const hasFilters = Boolean(type);
 
   function clearFilters() {
-    setCategory(undefined);
     setType(undefined);
-    setCity(undefined);
-    setSearch(undefined);
-  }
-
-  function handleHeroSearch(params: HeroSearchParams) {
-    setCategory(params.category);
-    setCity(params.city);
-    setSearch(params.search);
   }
 
   // Guest view: a curated "Explore Top Communities" carousel matching the
-  // marketing reference — same filtered data (hero search updates it), no
-  // category tiles / pagination chrome.
+  // marketing reference — no category tiles / pagination chrome.
   const popularClubs = clubs.slice(0, POPULAR_CLUBS_STRIP_LIMIT);
 
   const guestDiscoveryContent = (
@@ -131,7 +112,7 @@ export function HomePage() {
 
       {/* Rendered outside PageContainer so it sits flush at y=0, flush behind the
           fixed transparent header, with no padding gap above it. */}
-      {!user && <HeroSection onSearch={handleHeroSearch} />}
+      {!user && <HeroSection />}
 
       <PageContainer className="space-y-6">
         {!user && <FeaturesSection />}

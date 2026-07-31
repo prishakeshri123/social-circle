@@ -45,6 +45,26 @@ function LinkedInGlyph(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+function AppleGlyph(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z" />
+    </svg>
+  );
+}
+
+function GooglePlayGlyph(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      {/* Play-store-style triangle, divided into 4 wedges meeting at a shared centre point */}
+      <path d="M5 4 16 9 13 12Z" fill="#00C3FF" />
+      <path d="M16 9 20 12 16 15 13 12Z" fill="#FF3D00" />
+      <path d="M16 15 5 20 13 12Z" fill="#00E177" />
+      <path d="M5 20 5 4 13 12Z" fill="#FFCE00" />
+    </svg>
+  );
+}
+
 const SOCIAL_LINKS = [
   { icon: FacebookGlyph, label: 'Facebook' },
   { icon: TwitterGlyph, label: 'Twitter' },
@@ -54,26 +74,16 @@ const SOCIAL_LINKS = [
 
 const QUICK_LINKS = [
   { label: en.marketing.footerLinkAboutUs, to: ROUTES.about },
-  { label: en.marketing.footerLinkHowItWorks, to: ROUTES.services },
-  { label: en.marketing.footerLinkPricing, to: ROUTES.subscriptions },
+  { label: en.nav.services, to: ROUTES.services },
+  { label: en.marketing.howItWorksPageTitle, to: ROUTES.howItWorks },
   { label: en.marketing.footerLinkFaqs, to: `${ROUTES.home}#faqs` },
   { label: en.marketing.footerLinkContactUs, to: ROUTES.contact },
 ] as const;
 
 const MEMBER_LINKS = [
-  { label: en.marketing.footerLinkOurClubs, to: `${ROUTES.home}#browse-clubs` },
-  { label: en.marketing.footerLinkUpcomingEvents, to: ROUTES.search },
-  { label: en.marketing.footerLinkCreateClub, to: ROUTES.services },
+  { label: en.marketing.footerLinkOurClubs, to: ROUTES.clubs },
+  { label: en.marketing.footerLinkUpcomingEvents, to: ROUTES.events },
   { label: en.marketing.footerLinkMembershipPlans, to: ROUTES.subscriptions },
-  { label: en.marketing.footerLinkHelpCenter, to: ROUTES.contact },
-] as const;
-
-const CLUB_OWNER_LINKS = [
-  { label: en.marketing.footerLinkClubFeatures, to: ROUTES.services },
-  { label: en.marketing.footerLinkManageClub, to: ROUTES.login },
-  { label: en.marketing.footerLinkResources, to: ROUTES.services },
-  { label: en.marketing.footerLinkSuccessStories, to: ROUTES.about },
-  { label: en.marketing.footerLinkClubGuidelines, to: ROUTES.contact },
 ] as const;
 
 const LEGAL_LINKS = [
@@ -82,6 +92,37 @@ const LEGAL_LINKS = [
   { label: en.marketing.footerLinkCookiePolicy, to: ROUTES.cookiePolicy },
   { label: en.legal.refundPolicy.heading, to: ROUTES.refundPolicy },
 ] as const;
+
+function AppStoreBadges() {
+  function handleClick() {
+    toast(en.marketing.footerAppComingSoon);
+  }
+
+  return (
+    <div className="space-y-3">
+      <p className={FOOTER_HEADING_CLASS}>{en.marketing.footerAppHeading}</p>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={handleClick}
+          aria-label={en.marketing.footerAppAppStoreLabel}
+          className="flex size-8 items-center justify-center rounded-full border border-border text-text-secondary transition-colors duration-fast hover:border-primary-500 hover:text-primary-500"
+        >
+          <AppleGlyph className="size-3.5" aria-hidden="true" />
+        </button>
+
+        <button
+          type="button"
+          onClick={handleClick}
+          aria-label={en.marketing.footerAppGooglePlayLabel}
+          className="flex size-8 items-center justify-center rounded-full border border-border transition-colors duration-fast hover:border-primary-500"
+        >
+          <GooglePlayGlyph className="size-3.5" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function FooterNewsletterForm() {
   const [email, setEmail] = useState('');
@@ -165,18 +206,7 @@ export function MarketingFooter() {
           </ul>
         </nav>
 
-        <nav aria-label={en.marketing.footerContactHeading} className="space-y-3">
-          <p className={FOOTER_HEADING_CLASS}>{en.marketing.footerContactHeading}</p>
-          <ul className="space-y-2 text-sm">
-            {CLUB_OWNER_LINKS.map((link) => (
-              <li key={link.label}>
-                <Link to={link.to} className={FOOTER_LINK_CLASS}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <AppStoreBadges />
 
         <div className="col-span-2 space-y-3 lg:col-span-1">
           <p className={FOOTER_HEADING_CLASS}>{en.marketing.footerNewsletterHeading}</p>

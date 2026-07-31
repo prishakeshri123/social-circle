@@ -29,7 +29,13 @@ export function CommunityCtaSection({
     >
       <Reveal className="flex flex-col items-center gap-8 sm:flex-row sm:justify-between sm:text-left">
         <div className="hidden shrink-0 sm:block">
-          <img src={clubGroupIllustration} alt="" className="h-32 w-32 object-contain" />
+          <img
+            src={clubGroupIllustration}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-32 w-32 object-contain"
+          />
         </div>
 
         <div className="sm:mr-auto">

@@ -1,6 +1,9 @@
+import { Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { TopBar } from '@/shared/components/layout/TopBar';
 import { BottomTabBar } from '@/shared/components/layout/BottomTabBar';
+import { ScrollManager } from '@/shared/components/layout/ScrollManager';
+import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { ROUTES } from '@/shared/constants/routes';
 import { cn } from '@/shared/utils/cn';
@@ -14,9 +17,12 @@ export function AppShell() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <ScrollManager />
       <TopBar />
       <main className={cn('flex-1 pb-16 md:pb-0', !hasTransparentHero && 'pt-16')}>
-        <Outlet />
+        <Suspense fallback={<LoadingSpinner className="min-h-[50vh]" />}>
+          <Outlet />
+        </Suspense>
       </main>
       {isAuthenticated && <BottomTabBar />}
     </div>

@@ -20,12 +20,20 @@ export function PopularClubCard({ club }: PopularClubCardProps) {
   const landingUrl = ROUTES.clubLanding(club.slug);
 
   return (
-    <Card className="relative overflow-hidden rounded-2xl p-0 transition-shadow duration-normal hover:shadow-card-hover">
+    <Card className="relative isolate overflow-hidden rounded-2xl p-0 transition-shadow duration-normal hover:shadow-card-hover">
       <Link to={landingUrl} className="absolute inset-0 z-10" aria-label={club.name} />
 
       <article>
         <div className="relative z-0 aspect-video w-full bg-surface">
-          {club.bannerUrl && <img src={club.bannerUrl} alt="" className="size-full object-cover" />}
+          {club.bannerUrl && (
+            <img
+              src={club.bannerUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="size-full object-cover"
+            />
+          )}
           <Badge variant={badge.variant} className="absolute left-2 top-2">
             {badge.label}
           </Badge>

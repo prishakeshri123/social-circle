@@ -247,67 +247,72 @@ export function SignupPage() {
               )}
             </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="email" className="text-sm">
-                {en.labels.email}
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                autoComplete="email"
-                placeholder={en.placeholders.email}
-                disabled={busy}
-                {...register('email')}
-              />
-              {errors.email && <p className="text-xs text-error-500">{errors.email.message}</p>}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <Label htmlFor="email" className="text-sm">
+                  {en.labels.email}
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder={en.placeholders.email}
+                  disabled={busy}
+                  {...register('email')}
+                />
+                {errors.email && <p className="text-xs text-error-500">{errors.email.message}</p>}
+              </div>
+
+              <div className="space-y-1">
+                <Label htmlFor="phone" className="text-sm">
+                  {en.labels.phone}
+                </Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder={en.placeholders.phone}
+                  disabled={busy}
+                  {...register('phone')}
+                />
+                {errors.phone && <p className="text-xs text-error-500">{errors.phone.message}</p>}
+              </div>
             </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="phone" className="text-sm">
-                {en.labels.phone}
-              </Label>
-              <Input
-                id="phone"
-                type="tel"
-                autoComplete="tel"
-                placeholder={en.placeholders.phone}
-                disabled={busy}
-                {...register('phone')}
-              />
-              {errors.phone && <p className="text-xs text-error-500">{errors.phone.message}</p>}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <Label htmlFor="password" className="text-sm">
+                  {en.labels.password}
+                </Label>
+                <PasswordInput
+                  id="password"
+                  autoComplete="new-password"
+                  placeholder={en.placeholders.password}
+                  disabled={busy}
+                  {...register('password')}
+                />
+                {errors.password && (
+                  <p className="text-xs text-error-500">{errors.password.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <Label htmlFor="confirmPassword" className="text-sm">
+                  {en.labels.confirmPassword}
+                </Label>
+                <PasswordInput
+                  id="confirmPassword"
+                  autoComplete="new-password"
+                  disabled={busy}
+                  {...register('confirmPassword')}
+                />
+                {errors.confirmPassword && (
+                  <p className="text-xs text-error-500">{errors.confirmPassword.message}</p>
+                )}
+              </div>
             </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="password" className="text-sm">
-                {en.labels.password}
-              </Label>
-              <PasswordInput
-                id="password"
-                autoComplete="new-password"
-                placeholder={en.placeholders.password}
-                disabled={busy}
-                {...register('password')}
-              />
-              <PasswordStrengthMeter password={password} />
-              {errors.password && (
-                <p className="text-xs text-error-500">{errors.password.message}</p>
-              )}
-            </div>
-
-            <div className="space-y-1">
-              <Label htmlFor="confirmPassword" className="text-sm">
-                {en.labels.confirmPassword}
-              </Label>
-              <PasswordInput
-                id="confirmPassword"
-                autoComplete="new-password"
-                disabled={busy}
-                {...register('confirmPassword')}
-              />
-              {errors.confirmPassword && (
-                <p className="text-xs text-error-500">{errors.confirmPassword.message}</p>
-              )}
-            </div>
+            <PasswordStrengthMeter password={password} />
 
             <div className="space-y-1">
               <div className="flex items-start gap-2">
@@ -332,71 +337,73 @@ export function SignupPage() {
           </>
         ) : (
           <div className="space-y-4">
-            <div className="space-y-1">
-              <Label htmlFor="otpFullName" className="text-sm">
-                {en.labels.fullName}
-              </Label>
-              <div className="relative">
-                <User
-                  className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
-                  aria-hidden="true"
-                />
-                <Input
-                  id="otpFullName"
-                  autoComplete="name"
-                  placeholder={en.placeholders.fullName}
-                  value={otpFullName}
-                  onChange={(event) => {
-                    setOtpFullName(event.target.value);
-                    if (otpFieldErrors.fullName) {
-                      setOtpFieldErrors((prev) => ({ ...prev, fullName: undefined }));
-                    }
-                  }}
-                  disabled={busy || otpSent}
-                  autoFocus
-                  className="pl-9"
-                />
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <Label htmlFor="otpFullName" className="text-sm">
+                  {en.labels.fullName}
+                </Label>
+                <div className="relative">
+                  <User
+                    className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
+                    aria-hidden="true"
+                  />
+                  <Input
+                    id="otpFullName"
+                    autoComplete="name"
+                    placeholder={en.placeholders.fullName}
+                    value={otpFullName}
+                    onChange={(event) => {
+                      setOtpFullName(event.target.value);
+                      if (otpFieldErrors.fullName) {
+                        setOtpFieldErrors((prev) => ({ ...prev, fullName: undefined }));
+                      }
+                    }}
+                    disabled={busy || otpSent}
+                    autoFocus
+                    className="pl-9"
+                  />
+                </div>
+                {otpFieldErrors.fullName && (
+                  <p className="text-xs text-error-500">{otpFieldErrors.fullName}</p>
+                )}
               </div>
-              {otpFieldErrors.fullName && (
-                <p className="text-xs text-error-500">{otpFieldErrors.fullName}</p>
-              )}
-            </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="otpTarget" className="text-sm">
-                {en.labels.emailOrPhone}
-              </Label>
-              <div className="relative">
-                <Mail
-                  className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
-                  aria-hidden="true"
-                />
-                <Input
-                  id="otpTarget"
-                  type="text"
-                  autoComplete="email"
-                  placeholder={en.placeholders.emailOrPhone}
-                  value={otpTarget}
-                  onChange={(event) => {
-                    setOtpTarget(event.target.value);
-                    if (otpFieldErrors.target) {
-                      setOtpFieldErrors((prev) => ({ ...prev, target: undefined }));
-                    }
-                    if (otpSent) {
-                      setOtpSent(false);
-                      setOtpCode('');
-                      setOtpCooldown(0);
-                    }
-                  }}
-                  disabled={busy}
-                  className="pl-9"
-                />
+              <div className="space-y-1">
+                <Label htmlFor="otpTarget" className="text-sm">
+                  {en.labels.emailOrPhone}
+                </Label>
+                <div className="relative">
+                  <Mail
+                    className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
+                    aria-hidden="true"
+                  />
+                  <Input
+                    id="otpTarget"
+                    type="text"
+                    autoComplete="email"
+                    placeholder={en.placeholders.emailOrPhone}
+                    value={otpTarget}
+                    onChange={(event) => {
+                      setOtpTarget(event.target.value);
+                      if (otpFieldErrors.target) {
+                        setOtpFieldErrors((prev) => ({ ...prev, target: undefined }));
+                      }
+                      if (otpSent) {
+                        setOtpSent(false);
+                        setOtpCode('');
+                        setOtpCooldown(0);
+                      }
+                    }}
+                    disabled={busy}
+                    className="pl-9"
+                  />
+                </div>
+                {otpFieldErrors.target && (
+                  <p className="text-xs text-error-500">{otpFieldErrors.target}</p>
+                )}
               </div>
-              {otpFieldErrors.target && (
-                <p className="text-xs text-error-500">{otpFieldErrors.target}</p>
-              )}
-              <p className="text-xs text-text-muted">{en.auth.otpModeHelper}</p>
             </div>
+            <p className="text-xs text-text-muted">{en.auth.otpModeHelper}</p>
 
             <div className="space-y-1">
               <div className="flex items-start gap-2">

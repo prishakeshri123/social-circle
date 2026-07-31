@@ -23,7 +23,7 @@ const GUEST_NAV_LINKS = [
   { to: ROUTES.home, label: en.nav.home },
   { to: ROUTES.clubs, label: en.nav.clubs },
   { to: ROUTES.events, label: en.nav.events },
-  { to: ROUTES.subscriptions, label: en.nav.membership },
+  { to: ROUTES.services, label: en.nav.services },
   { to: ROUTES.about, label: en.nav.about },
   { to: ROUTES.contact, label: en.nav.contact },
 ] as const;

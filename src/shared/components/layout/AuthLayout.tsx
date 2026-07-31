@@ -1,6 +1,8 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { TopBar } from '@/shared/components/layout/TopBar';
+import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
 import { fadeInUp } from '@/shared/utils/animations';
 
 export function AuthLayout() {
@@ -14,7 +16,9 @@ export function AuthLayout() {
           variants={fadeInUp}
           className="w-full max-w-md rounded-2xl border border-border bg-surface-raised p-8 shadow-card"
         >
-          <Outlet />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Outlet />
+          </Suspense>
         </motion.div>
       </div>
     </div>

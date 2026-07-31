@@ -94,6 +94,10 @@ export const BILLING_CYCLE_LABELS = {
 export const HEADER_HEIGHT_PX = 64;
 export const TRANSPARENT_HEADER_SCROLL_THRESHOLD_PX = 40;
 
+// ── Route hash scrolling (e.g. footer link -> #faqs on another page) ──
+export const SCROLL_TO_HASH_RETRY_MS = 10;
+export const SCROLL_TO_HASH_TIMEOUT_MS = 1500;
+
 // ── Horizontal scroll carousels (events strip, popular clubs strip) ──────
 export const CAROUSEL_SCROLL_EPSILON_PX = 4;
 export const CAROUSEL_SCROLL_ANIMATION_MS = 400;

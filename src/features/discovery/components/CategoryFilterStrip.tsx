@@ -1,11 +1,8 @@
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { LayoutGrid } from 'lucide-react';
 import { CATEGORIES } from '@/shared/constants/categories';
 import { en } from '@/shared/constants/locales/en';
 import { cn } from '@/shared/utils/cn';
-
-const iconMap = Icons as unknown as Record<string, LucideIcon>;
+import { getIcon } from '@/shared/utils/iconRegistry';
 
 interface CategoryFilterStripProps {
   selected: string | undefined;
@@ -53,7 +50,7 @@ export function CategoryFilterStrip({ selected, onSelect }: CategoryFilterStripP
         </button>
 
         {CATEGORIES.map((category) => {
-          const Icon = iconMap[category.icon] ?? Icons.Circle;
+          const Icon = getIcon(category.icon);
           const isSelected = selected === category.slug;
           return (
             <button

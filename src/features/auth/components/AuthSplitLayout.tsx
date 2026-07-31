@@ -70,6 +70,8 @@ export function AuthSplitLayout({
               <img
                 src={loginIllustration}
                 alt=""
+                fetchPriority="high"
+                decoding="async"
                 className="h-full w-full rounded-[2rem] bg-primary-100 object-contain p-4 shadow-modal"
               />
               <span className="absolute -top-2 -left-4 flex size-11 items-center justify-center rounded-full bg-surface-raised text-success-500 shadow-modal">
@@ -91,8 +93,8 @@ export function AuthSplitLayout({
           </div>
 
           {/* Right: auth card */}
-          <div className="flex w-full items-center justify-center py-4 sm:py-6 lg:w-[400px] lg:shrink-0 xl:w-[430px]">
-            <div className="w-full max-w-[22rem] space-y-5 rounded-2xl border border-border bg-surface-raised p-6 shadow-modal sm:p-7 lg:p-8">
+          <div className="flex w-full items-center justify-center py-4 sm:py-6 lg:w-[480px] lg:shrink-0 lg:justify-end xl:w-[520px]">
+            <div className="w-full max-w-[28rem] space-y-4 rounded-2xl border border-border bg-surface-raised p-6 shadow-modal sm:p-7 lg:p-8">
               <h2 className="text-xl font-bold text-text-primary">{cardTitle}</h2>
 
               {children}

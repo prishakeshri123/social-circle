@@ -39,13 +39,19 @@ export function ClubCard({ club }: ClubCardProps) {
 
   return (
     <motion.div whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
-      <Card className="relative overflow-hidden rounded-2xl p-0 transition-shadow duration-normal hover:shadow-card-hover">
+      <Card className="relative isolate overflow-hidden rounded-2xl p-0 transition-shadow duration-normal hover:shadow-card-hover">
         <Link to={landingUrl} className="absolute inset-0 z-10" aria-label={club.name} />
 
         <article>
           <div className="relative z-0 aspect-video w-full bg-surface">
             {club.bannerUrl && (
-              <img src={club.bannerUrl} alt="" className="size-full object-cover" />
+              <img
+                src={club.bannerUrl}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="size-full object-cover"
+              />
             )}
             <Badge
               variant={club.type === 'free' ? 'success' : 'warning'}

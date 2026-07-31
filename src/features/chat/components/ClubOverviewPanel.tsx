@@ -33,7 +33,15 @@ export function ClubOverviewPanel({ club, onBack }: ClubOverviewPanelProps) {
 
       <div className="flex-1 overflow-y-auto">
         <div className="relative aspect-[3/1] w-full bg-surface">
-          {club.bannerUrl && <img src={club.bannerUrl} alt="" className="size-full object-cover" />}
+          {club.bannerUrl && (
+            <img
+              src={club.bannerUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="size-full object-cover"
+            />
+          )}
         </div>
 
         <div className="space-y-4 p-6">

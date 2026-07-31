@@ -98,7 +98,13 @@ export function PublicEventDetailPage() {
 
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface sm:aspect-[21/9] sm:max-h-[40vh]">
         {event.coverImageUrl && (
-          <img src={event.coverImageUrl} alt="" className="size-full object-cover" />
+          <img
+            src={event.coverImageUrl}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            className="size-full object-cover"
+          />
         )}
       </div>
 

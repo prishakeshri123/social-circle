@@ -335,6 +335,9 @@ export const en = {
   discovery: {
     title: 'Discover Clubs',
     subtitle: 'Find your people. Browse clubs picked for you.',
+    heroTagline: 'Where shared passions become real friendships.',
+    heroBody:
+      'From weekend hikes and book clubs to startup meetups and food crawls — browse communities built around what you love, and join the ones that feel like home.',
     browseByCategory: 'Browse by Category',
     allCategories: 'All',
     priceAll: 'All',
@@ -377,6 +380,12 @@ export const en = {
 
   // ── Events (public browsing / RSVP) ────────────────────────
   events: {
+    allEventsTitle: 'Discover Events',
+    allEventsHeroTagline: 'Turn your weekends into stories worth telling.',
+    allEventsHeroBody:
+      'From sunrise runs and live gigs to workshops and pop-up meetups — find things happening near you, RSVP in a tap, and show up for something real.',
+    noEventsAvailable:
+      'No events match your search yet. Try a different keyword or check back soon.',
     freeLabel: 'FREE',
     goingCount: (n: number) => `${n} going`,
     interestedCount: (n: number) => `${n} interested`,
@@ -506,24 +515,23 @@ export const en = {
   // ── Home marketing (guest-only) ─────────────────────────────
   marketing: {
     heroEyebrow: 'Communities That Connect',
-    heroHeadlineLine1: 'Find Your People.',
-    heroHeadlineHighlight: 'Join',
-    heroHeadlineLine2Suffix: 'the Circle.',
-    heroHeadline: 'Find your people. Build your circle.',
+    heroHeadlineLine1: 'Real Connections.',
+    heroHeadlineHighlight: 'Stronger Communities.',
+    heroHeadlineLine2Suffix: 'Better Together.',
     heroSubheadline:
-      'Discover amazing clubs, join exciting events, chat with like-minded people and be part of communities that inspire you every day.',
+      'Discover clubs, join communities, and connect with people who share your passions.',
     heroExploreCta: 'Explore Clubs',
     heroBrowseEventsCta: 'Browse Events',
     heroCreateClubCta: 'Create a Club',
-    heroSearchPlaceholder: 'Search for clubs (e.g. Running, Books, Tech)...',
-    heroSearchAllCategories: 'All Categories',
-    heroSearchAllLocations: 'All Locations',
-    heroSearchCta: 'Search Clubs',
     trustBadges: [
-      { icon: 'ShieldCheck', title: 'Verified Clubs', subtitle: 'Trusted communities' },
-      { icon: 'Vault', title: 'Secure Payments', subtitle: '100% secure & safe' },
-      { icon: 'Users', title: 'Active Members', subtitle: 'Thousands of members' },
-      { icon: 'CircleDot', title: 'Easy to Use', subtitle: 'Simple & intuitive' },
+      {
+        icon: 'Compass',
+        title: 'Discover Communities',
+        subtitle: 'Explore clubs that inspire you',
+      },
+      { icon: 'Calendar', title: 'Join & Participate', subtitle: 'Attend events and activities' },
+      { icon: 'Heart', title: 'Share & Connect', subtitle: 'Meet people and build bonds' },
+      { icon: 'Globe', title: 'Make a Difference', subtitle: 'Grow together and create impact' },
     ],
     featuresEyebrow: 'Explore. Connect. Belong.',
     featuresTitle: 'Everything You Need in One Platform',
@@ -574,11 +582,29 @@ export const en = {
     statsHappyValue: '98%',
     statsHappyLabel: 'Happy Members',
     howItWorksTitle: 'How it works',
+    howItWorksStepsEyebrow: 'Four simple steps',
+    howItWorksStepLabel: (n: number) => `Step ${n}`,
     howItWorksSteps: [
-      { title: 'Browse', body: 'Explore clubs and events picked around your interests.' },
-      { title: 'Sign Up', body: 'Create a free account in under a minute.' },
-      { title: 'Join / RSVP', body: 'Join a club or RSVP to an event that excites you.' },
-      { title: 'Connect', body: 'Meet your people, online and in person.' },
+      {
+        icon: 'Compass',
+        title: 'Browse',
+        body: 'Explore clubs and events picked around your interests, from hiking crews to book clubs to weekend meetups near you.',
+      },
+      {
+        icon: 'UserPlus',
+        title: 'Sign Up',
+        body: 'Create a free account in under a minute — just your name, email, and a password. No credit card required.',
+      },
+      {
+        icon: 'Users',
+        title: 'Join',
+        body: 'Request to join a club or RSVP to an event that excites you. Club owners approve new members, so every circle stays genuine.',
+      },
+      {
+        icon: 'MessageCircle',
+        title: 'Connect',
+        body: 'Chat in your club channels, show up to the next meetup, and start building real friendships — online and in person.',
+      },
     ],
     testimonialsEyebrow: 'What Members Say',
     testimonialsTitle: 'Loved by Thousands of Members',
@@ -653,26 +679,20 @@ export const en = {
     newsletterSuccess: "You're subscribed! Keep an eye on your inbox.",
     footerTagline:
       'A platform to discover, connect and engage with communities that inspire you. Your circle, your people, your world.',
+    footerAppHeading: 'Get the App',
+    footerAppGooglePlayLabel: 'Google Play',
+    footerAppAppStoreLabel: 'App Store',
+    footerAppComingSoon: 'The mobile app is launching soon — stay tuned!',
     footerExploreHeading: 'Quick Links',
     footerAccountHeading: 'For Members',
-    footerContactHeading: 'For Club Owners',
     footerNewsletterHeading: 'Newsletter',
     footerNewsletterBody: 'Subscribe to get the latest updates and new club recommendations.',
     footerCopyright: (year: number) => `© ${year} Social Circle. All rights reserved.`,
     footerLinkAboutUs: 'About Us',
-    footerLinkHowItWorks: 'How It Works',
-    footerLinkPricing: 'Pricing',
     footerLinkFaqs: 'FAQs',
     footerLinkOurClubs: 'Browse Clubs',
     footerLinkUpcomingEvents: 'Upcoming Events',
-    footerLinkCreateClub: 'Create a Club',
     footerLinkMembershipPlans: 'Membership Plans',
-    footerLinkHelpCenter: 'Help Center',
-    footerLinkClubFeatures: 'Club Features',
-    footerLinkManageClub: 'Manage Club',
-    footerLinkResources: 'Resources',
-    footerLinkSuccessStories: 'Success Stories',
-    footerLinkClubGuidelines: 'Club Guidelines',
     footerLinkContactUs: 'Contact Us',
     footerLinkPrivacyPolicy: 'Privacy Policy',
     footerLinkTermsOfService: 'Terms of Service',
@@ -820,6 +840,40 @@ export const en = {
       'Start a free club today, or explore how existing circles use Social Circle.',
     servicesCtaPrimaryCta: 'Create a Club',
     servicesCtaSecondaryCta: 'Explore Clubs',
+
+    // ── How It Works page ────────────────────────────────────────
+    howItWorksPageTitle: 'How It Works',
+    howItWorksMetaDescription:
+      'See exactly how Social Circle works — browse clubs and events, sign up, join, and start connecting with your circle in minutes.',
+    howItWorksHeroEyebrow: 'The Process',
+    howItWorksHeroSubtitle:
+      'From your first visit to your first meetup — here is exactly how Social Circle takes you there.',
+    howItWorksWhyEyebrow: 'Why it works',
+    howItWorksWhyTitle: 'Built so every circle feels like home',
+    howItWorksWhyBody:
+      "Social Circle isn't just a directory of clubs — every step is designed to make sure the people you meet are genuine, the plans you make actually happen, and the community you build lasts.",
+    howItWorksWhyFeatures: [
+      {
+        icon: 'ShieldCheck',
+        title: 'Verified clubs',
+        body: 'Every club is reviewed before it goes live, so you always know who you are joining.',
+      },
+      {
+        icon: 'BellRing',
+        title: 'Timely reminders',
+        body: 'RSVP once and we will remind you before every meetup — nothing slips through the cracks.',
+      },
+      {
+        icon: 'Lock',
+        title: 'Secure payments',
+        body: 'Membership fees and event tickets are processed securely, every single time.',
+      },
+      {
+        icon: 'Image',
+        title: 'Shared memories',
+        body: 'Photos from every meetup land in a shared album your whole circle can revisit.',
+      },
+    ],
 
     // ── Contact page ───────────────────────────────────────────
     contactPageTitle: 'Contact Us',

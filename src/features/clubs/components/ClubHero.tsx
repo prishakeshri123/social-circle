@@ -49,7 +49,15 @@ export function ClubHero({ club }: ClubHeroProps) {
   return (
     <div>
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface sm:aspect-[21/9]">
-        {club.bannerUrl && <img src={club.bannerUrl} alt="" className="size-full object-cover" />}
+        {club.bannerUrl && (
+          <img
+            src={club.bannerUrl}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            className="size-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
 
         <div className="absolute right-4 top-4 flex items-center gap-2 sm:right-6 sm:top-6">

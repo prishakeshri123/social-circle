@@ -1,9 +1,6 @@
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { en } from '@/shared/constants/locales/en';
 import { RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
-
-const iconMap = Icons as unknown as Record<string, LucideIcon>;
+import { getIcon } from '@/shared/utils/iconRegistry';
 
 export function FeaturesSection() {
   return (
@@ -19,7 +16,7 @@ export function FeaturesSection() {
 
       <RevealGroup className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
         {en.marketing.features.map((feature) => {
-          const Icon = iconMap[feature.icon] ?? Icons.Circle;
+          const Icon = getIcon(feature.icon);
           return (
             <RevealItem key={feature.title} className="space-y-3">
               <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-primary-50 text-primary-600">

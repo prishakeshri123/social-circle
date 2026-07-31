@@ -1,6 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { CalendarCheck, Heart, MessageCircle, ShieldCheck, Users } from 'lucide-react';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
 import { Reveal, RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
@@ -9,9 +7,8 @@ import { MarketingFooter } from '@/features/discovery/components/MarketingFooter
 import { useAuth } from '@/shared/hooks/useAuth';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
+import { getIcon } from '@/shared/utils/iconRegistry';
 import aboutIllustration from '@/assets/images/about-us.svg';
-
-const iconMap = Icons as unknown as Record<string, LucideIcon>;
 
 const HERO_STATS = [
   { icon: Users, value: en.marketing.statsMembersValue, label: en.marketing.statsMembersLabel },
@@ -75,6 +72,8 @@ export function AboutPage() {
             <img
               src={aboutIllustration}
               alt=""
+              fetchPriority="high"
+              decoding="async"
               className="aspect-square w-full rounded-[1.6rem] bg-primary-50 object-contain p-6"
             />
 
@@ -116,7 +115,7 @@ export function AboutPage() {
 
         <RevealGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {en.marketing.missionFeatures.map((feature) => {
-            const Icon = iconMap[feature.icon] ?? Icons.Circle;
+            const Icon = getIcon(feature.icon);
             return (
               <RevealItem
                 key={feature.title}
@@ -151,7 +150,7 @@ export function AboutPage() {
           />
           <RevealGroup className="relative grid grid-cols-2 gap-8 sm:grid-cols-4">
             {en.marketing.storyTimeline.map((step) => {
-              const Icon = iconMap[step.icon] ?? Icons.Circle;
+              const Icon = getIcon(step.icon);
               return (
                 <RevealItem
                   key={step.title}
@@ -183,7 +182,7 @@ export function AboutPage() {
         </div>
         <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {en.marketing.values.map((value) => {
-            const Icon = iconMap[value.icon] ?? Icons.Circle;
+            const Icon = getIcon(value.icon);
             return (
               <RevealItem
                 key={value.title}

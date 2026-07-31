@@ -1,37 +1,120 @@
+import { lazy, Suspense, type ReactNode } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { ROUTES } from '@/shared/constants/routes';
 import { AuthLayout } from '@/shared/components/layout/AuthLayout';
 import { AppShell } from '@/shared/components/layout/AppShell';
 import { ErrorFallback } from '@/shared/components/feedback/ErrorFallback';
 import { PlaceholderPage } from '@/shared/components/feedback/PlaceholderPage';
+import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
 import { AuthGuard, OnboardingGuard } from '@/app/guards';
-import { LoginPage } from '@/features/auth/pages/LoginPage';
-import { SignupPage } from '@/features/auth/pages/SignupPage';
-import { OtpVerificationPage } from '@/features/auth/pages/OtpVerificationPage';
-import { ForgotPasswordPage } from '@/features/auth/pages/ForgotPasswordPage';
-import { SocialCallbackPage } from '@/features/auth/pages/SocialCallbackPage';
-import { ProfileSetupStep1Page } from '@/features/onboarding/pages/ProfileSetupStep1Page';
-import { ProfileSetupStep2Page } from '@/features/onboarding/pages/ProfileSetupStep2Page';
-import { HomePage } from '@/features/discovery/pages/HomePage';
-import { AboutPage } from '@/features/discovery/pages/AboutPage';
-import { ServicesPage } from '@/features/discovery/pages/ServicesPage';
-import { ContactPage } from '@/features/discovery/pages/ContactPage';
-import { TermsPage } from '@/features/discovery/pages/TermsPage';
-import { PrivacyPolicyPage } from '@/features/discovery/pages/PrivacyPolicyPage';
-import { RefundPolicyPage } from '@/features/discovery/pages/RefundPolicyPage';
-import { CookiePolicyPage } from '@/features/discovery/pages/CookiePolicyPage';
-import { SearchPage } from '@/features/search/pages/SearchPage';
-import { ClubsPage } from '@/features/discovery/pages/ClubsPage';
-import { EventsPage } from '@/features/discovery/pages/EventsPage';
-import { ClubLandingPage } from '@/features/clubs/pages/ClubLandingPage';
-import { PublicEventDetailPage } from '@/features/events/pages/PublicEventDetailPage';
-import { ConversationsHubPage } from '@/features/chat/pages/ConversationsHubPage';
-import { ClubDashboardLayout } from '@/features/clubs/components/ClubDashboardLayout';
+
+// --- Route-level code splitting -----------------------------------------
+// Every page below is fetched only when its route is visited, keeping the
+// initial bundle limited to the app shell + whichever route loads first.
+const LoginPage = lazy(() =>
+  import('@/features/auth/pages/LoginPage').then((m) => ({ default: m.LoginPage })),
+);
+const SignupPage = lazy(() =>
+  import('@/features/auth/pages/SignupPage').then((m) => ({ default: m.SignupPage })),
+);
+const OtpVerificationPage = lazy(() =>
+  import('@/features/auth/pages/OtpVerificationPage').then((m) => ({
+    default: m.OtpVerificationPage,
+  })),
+);
+const ForgotPasswordPage = lazy(() =>
+  import('@/features/auth/pages/ForgotPasswordPage').then((m) => ({
+    default: m.ForgotPasswordPage,
+  })),
+);
+const SocialCallbackPage = lazy(() =>
+  import('@/features/auth/pages/SocialCallbackPage').then((m) => ({
+    default: m.SocialCallbackPage,
+  })),
+);
+const ProfileSetupStep1Page = lazy(() =>
+  import('@/features/onboarding/pages/ProfileSetupStep1Page').then((m) => ({
+    default: m.ProfileSetupStep1Page,
+  })),
+);
+const ProfileSetupStep2Page = lazy(() =>
+  import('@/features/onboarding/pages/ProfileSetupStep2Page').then((m) => ({
+    default: m.ProfileSetupStep2Page,
+  })),
+);
+const HomePage = lazy(() =>
+  import('@/features/discovery/pages/HomePage').then((m) => ({ default: m.HomePage })),
+);
+const AboutPage = lazy(() =>
+  import('@/features/discovery/pages/AboutPage').then((m) => ({ default: m.AboutPage })),
+);
+const ServicesPage = lazy(() =>
+  import('@/features/discovery/pages/ServicesPage').then((m) => ({ default: m.ServicesPage })),
+);
+const HowItWorksPage = lazy(() =>
+  import('@/features/discovery/pages/HowItWorksPage').then((m) => ({
+    default: m.HowItWorksPage,
+  })),
+);
+const ContactPage = lazy(() =>
+  import('@/features/discovery/pages/ContactPage').then((m) => ({ default: m.ContactPage })),
+);
+const TermsPage = lazy(() =>
+  import('@/features/discovery/pages/TermsPage').then((m) => ({ default: m.TermsPage })),
+);
+const PrivacyPolicyPage = lazy(() =>
+  import('@/features/discovery/pages/PrivacyPolicyPage').then((m) => ({
+    default: m.PrivacyPolicyPage,
+  })),
+);
+const RefundPolicyPage = lazy(() =>
+  import('@/features/discovery/pages/RefundPolicyPage').then((m) => ({
+    default: m.RefundPolicyPage,
+  })),
+);
+const CookiePolicyPage = lazy(() =>
+  import('@/features/discovery/pages/CookiePolicyPage').then((m) => ({
+    default: m.CookiePolicyPage,
+  })),
+);
+const SearchPage = lazy(() =>
+  import('@/features/search/pages/SearchPage').then((m) => ({ default: m.SearchPage })),
+);
+const ClubsPage = lazy(() =>
+  import('@/features/discovery/pages/ClubsPage').then((m) => ({ default: m.ClubsPage })),
+);
+const EventsPage = lazy(() =>
+  import('@/features/discovery/pages/EventsPage').then((m) => ({ default: m.EventsPage })),
+);
+const ClubLandingPage = lazy(() =>
+  import('@/features/clubs/pages/ClubLandingPage').then((m) => ({ default: m.ClubLandingPage })),
+);
+const PublicEventDetailPage = lazy(() =>
+  import('@/features/events/pages/PublicEventDetailPage').then((m) => ({
+    default: m.PublicEventDetailPage,
+  })),
+);
+const ConversationsHubPage = lazy(() =>
+  import('@/features/chat/pages/ConversationsHubPage').then((m) => ({
+    default: m.ConversationsHubPage,
+  })),
+);
+const ClubDashboardLayout = lazy(() =>
+  import('@/features/clubs/components/ClubDashboardLayout').then((m) => ({
+    default: m.ClubDashboardLayout,
+  })),
+);
+
+// Wraps a lazily-loaded page element in its own Suspense boundary so
+// navigating to it shows a spinner instead of blocking on the whole tree.
+function suspended(element: ReactNode) {
+  return <Suspense fallback={<LoadingSpinner className="min-h-[50vh]" />}>{element}</Suspense>;
+}
 
 export const router = createBrowserRouter([
   // --- Login/Signup: bespoke full-page split layout, no shared AuthLayout shell ---
-  { path: ROUTES.login, element: <LoginPage />, errorElement: <ErrorFallback /> },
-  { path: ROUTES.signup, element: <SignupPage />, errorElement: <ErrorFallback /> },
+  { path: ROUTES.login, element: suspended(<LoginPage />), errorElement: <ErrorFallback /> },
+  { path: ROUTES.signup, element: suspended(<SignupPage />), errorElement: <ErrorFallback /> },
 
   // --- Public auth routes ---------------------------------------------
   {
@@ -52,6 +135,7 @@ export const router = createBrowserRouter([
       { path: ROUTES.home, element: <HomePage /> },
       { path: ROUTES.about, element: <AboutPage /> },
       { path: ROUTES.services, element: <ServicesPage /> },
+      { path: ROUTES.howItWorks, element: <HowItWorksPage /> },
       { path: ROUTES.contact, element: <ContactPage /> },
       { path: ROUTES.terms, element: <TermsPage /> },
       { path: ROUTES.privacyPolicy, element: <PrivacyPolicyPage /> },

@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { CalendarDays, ShieldCheck } from 'lucide-react';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
 import { Reveal, RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
@@ -11,8 +9,7 @@ import { useAuth } from '@/shared/hooks/useAuth';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { cn } from '@/shared/utils/cn';
-
-const iconMap = Icons as unknown as Record<string, LucideIcon>;
+import { getIcon } from '@/shared/utils/iconRegistry';
 
 interface LegalSection {
   readonly heading: string;
@@ -99,7 +96,13 @@ export function LegalPageTemplate({ content, illustration }: LegalPageTemplatePr
 
         {illustration && (
           <Reveal className="mx-auto w-full max-w-[10rem] sm:max-w-[13rem]">
-            <img src={illustration} alt="" className="w-full object-contain" />
+            <img
+              src={illustration}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="w-full object-contain"
+            />
           </Reveal>
         )}
       </section>
@@ -145,7 +148,7 @@ export function LegalPageTemplate({ content, illustration }: LegalPageTemplatePr
 
         <RevealGroup className="space-y-8 rounded-2xl border border-border bg-surface p-6 sm:p-10">
           {content.sections.map((section, index) => {
-            const Icon = iconMap[section.icon ?? 'Circle'] ?? Icons.Circle;
+            const Icon = getIcon(section.icon);
             return (
               <RevealItem
                 key={section.heading}

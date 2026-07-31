@@ -1,9 +1,6 @@
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { CATEGORIES } from '@/shared/constants/categories';
 import { cn } from '@/shared/utils/cn';
-
-const iconMap = Icons as unknown as Record<string, LucideIcon>;
+import { getIcon } from '@/shared/utils/iconRegistry';
 
 interface InterestChipsProps {
   selected: string[];
@@ -14,7 +11,7 @@ export function InterestChips({ selected, onToggle }: InterestChipsProps) {
   return (
     <div className="flex flex-wrap justify-center gap-2" role="group">
       {CATEGORIES.map((category) => {
-        const Icon = iconMap[category.icon] ?? Icons.Circle;
+        const Icon = getIcon(category.icon);
         const isSelected = selected.includes(category.slug);
 
         return (

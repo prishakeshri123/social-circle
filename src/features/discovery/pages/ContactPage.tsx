@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
-import { CheckCircle2, MapPin, Send } from 'lucide-react';
+import { CheckCircle2, LifeBuoy, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
 import type { z } from 'zod';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
 import { Button } from '@/shared/components/ui/Button';
@@ -18,9 +16,8 @@ import { useAuth } from '@/shared/hooks/useAuth';
 import { en } from '@/shared/constants/locales/en';
 import { contactSchema } from '@/shared/utils/validators';
 import { MOCK_API_DELAY_MS } from '@/shared/constants/app.constants';
+import { getIcon } from '@/shared/utils/iconRegistry';
 import contactIllustration from '@/assets/images/contact-us.svg';
-
-const iconMap = Icons as unknown as Record<string, LucideIcon>;
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
@@ -78,7 +75,7 @@ export function ContactPage() {
 
           <div className="flex flex-wrap items-center gap-6 pt-2">
             {en.marketing.contactQuickInfo.map((item) => {
-              const Icon = iconMap[item.icon] ?? Icons.Circle;
+              const Icon = getIcon(item.icon);
               return (
                 <div key={item.title} className="flex items-center gap-3">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
@@ -100,13 +97,15 @@ export function ContactPage() {
           <img
             src={contactIllustration}
             alt=""
+            fetchPriority="high"
+            decoding="async"
             className="aspect-square w-full rounded-[2rem] bg-primary-50 object-contain p-6 shadow-modal"
           />
           <span className="absolute -left-4 top-8 flex size-11 items-center justify-center rounded-2xl bg-surface text-primary-600 shadow-modal">
-            <Icons.Mail className="size-5" aria-hidden="true" />
+            <Mail className="size-5" aria-hidden="true" />
           </span>
           <span className="absolute right-6 -top-4 flex size-11 items-center justify-center rounded-2xl bg-surface text-primary-600 shadow-modal">
-            <Icons.MessageCircle className="size-5" aria-hidden="true" />
+            <MessageCircle className="size-5" aria-hidden="true" />
           </span>
         </Reveal>
       </section>
@@ -228,7 +227,7 @@ export function ContactPage() {
             </h3>
             <div className="space-y-4 pt-2">
               {en.marketing.contactChannels.map((channel) => {
-                const Icon = iconMap[channel.icon] ?? Icons.Circle;
+                const Icon = getIcon(channel.icon);
                 return (
                   <RevealItem key={channel.title} className="flex items-start gap-3">
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
@@ -277,7 +276,7 @@ export function ContactPage() {
       >
         <Reveal className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
           <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white/15">
-            <Icons.LifeBuoy className="size-5" aria-hidden="true" />
+            <LifeBuoy className="size-5" aria-hidden="true" />
           </span>
           <div>
             <h2 className="text-lg font-bold tracking-tight sm:text-xl">

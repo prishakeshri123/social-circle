@@ -27,12 +27,18 @@ export function EventCard({ event }: EventCardProps) {
   }
 
   return (
-    <Card className="relative overflow-hidden p-0 transition-shadow duration-fast hover:shadow-card-hover">
+    <Card className="relative isolate overflow-hidden p-0 transition-shadow duration-fast hover:shadow-card-hover">
       <Link to={detailUrl} className="absolute inset-0 z-10" aria-label={event.title} />
 
       <div className="relative z-0 aspect-video w-full bg-surface">
         {event.coverImageUrl && (
-          <img src={event.coverImageUrl} alt="" className="size-full object-cover" />
+          <img
+            src={event.coverImageUrl}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="size-full object-cover"
+          />
         )}
       </div>
 

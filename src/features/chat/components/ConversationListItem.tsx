@@ -46,7 +46,13 @@ export function ConversationListItem({
         {isSquare ? (
           <div className="gradient-bg flex size-11 items-center justify-center overflow-hidden rounded-2xl text-text-inverse">
             {avatarUrl ? (
-              <img src={avatarUrl} alt="" className="size-full object-cover" />
+              <img
+                src={avatarUrl}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="size-full object-cover"
+              />
             ) : (
               <KindIcon className="size-5" aria-hidden="true" />
             )}

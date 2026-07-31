@@ -20,6 +20,8 @@ export const AvatarImage = forwardRef<
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Image
     ref={ref}
+    loading="lazy"
+    decoding="async"
     className={cn('aspect-square size-full', className)}
     {...props}
   />

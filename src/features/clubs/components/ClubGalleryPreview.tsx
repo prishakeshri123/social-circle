@@ -31,7 +31,13 @@ export function ClubGalleryPreview({ images }: ClubGalleryPreviewProps) {
             key={url}
             className="aspect-square overflow-hidden rounded-xl bg-surface-raised transition-transform duration-normal hover:-translate-y-0.5"
           >
-            <img src={url} alt={`Gallery photo ${index + 1}`} className="size-full object-cover" />
+            <img
+              src={url}
+              alt={`Gallery photo ${index + 1}`}
+              loading="lazy"
+              decoding="async"
+              className="size-full object-cover"
+            />
           </div>
         ))}
       </div>
