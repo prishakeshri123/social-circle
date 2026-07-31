@@ -44,34 +44,32 @@ export function MarketingFaqSection() {
           {/* Right: Accordion list */}
           <div className="lg:col-span-2">
             <Reveal className="rounded-2xl border border-border bg-surface px-6 py-6">
-              <div className="space-y-4">
-                <Accordion type="single" collapsible>
-                  {en.marketing.faqs.map((faq, index) => {
-                    const number = String(index + 1).padStart(2, '0');
-                    return (
-                      <AccordionItem
-                        key={index}
-                        value={`marketing-faq-${index}`}
-                        className="border-0"
-                      >
-                        <div className="rounded-xl bg-white shadow-sm overflow-hidden">
-                          <AccordionTrigger className="px-6 py-4">
-                            <div className="flex items-center gap-4 w-full">
-                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-purple-50 text-primary-600 font-semibold">
-                                {number}
-                              </div>
-                              <div className="flex-1 text-left font-medium">{faq.question}</div>
+              <Accordion type="single" collapsible className="space-y-4">
+                {en.marketing.faqs.map((faq, index) => {
+                  const number = String(index + 1).padStart(2, '0');
+                  return (
+                    <AccordionItem
+                      key={index}
+                      value={`marketing-faq-${index}`}
+                      className="border-0"
+                    >
+                      <div className="rounded-xl bg-white shadow-sm overflow-hidden">
+                        <AccordionTrigger className="px-6 py-5">
+                          <div className="flex items-center gap-4 w-full">
+                            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-purple-50 text-primary-600 font-semibold">
+                              {number}
                             </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="bg-purple-50 border-l-4 border-primary-500 px-6 py-4">
-                            <p className="text-text-secondary">{faq.answer}</p>
-                          </AccordionContent>
-                        </div>
-                      </AccordionItem>
-                    );
-                  })}
-                </Accordion>
-              </div>
+                            <div className="flex-1 text-left font-medium">{faq.question}</div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="bg-purple-50 border-l-4 border-primary-500 px-6 py-4">
+                          <p className="text-text-secondary">{faq.answer}</p>
+                        </AccordionContent>
+                      </div>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
             </Reveal>
           </div>
         </div>

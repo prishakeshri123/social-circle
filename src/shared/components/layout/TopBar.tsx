@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, Settings, User as UserIcon } from 'lucide-react';
+import { Bell, LogOut, Menu, Settings, User as UserIcon } from 'lucide-react';
 import { ROUTES } from '@/shared/constants/routes';
 import { en } from '@/shared/constants/locales/en';
 import { TRANSPARENT_HEADER_SCROLL_THRESHOLD_PX } from '@/shared/constants/app.constants';
@@ -18,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/DropdownMenu';
+import { Sheet, SheetContent, SheetTitle } from '@/shared/components/ui/Sheet';
 
 const GUEST_NAV_LINKS = [
   { to: ROUTES.home, label: en.nav.home },
@@ -38,6 +40,7 @@ function GuestTopBar() {
   // NavLink's isActive ignores the hash, which would make both "Home" (/) and
   // "Clubs" (/#browse-clubs) light up together — so match path+hash manually.
   const currentPath = `${pathname}${hash}`;
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <header
@@ -85,18 +88,68 @@ function GuestTopBar() {
           <Button
             variant="outline"
             className={cn(
-              'rounded-md',
+              'hidden rounded-md sm:inline-flex',
               transparent && 'border-white/40 bg-transparent text-white hover:bg-white/10',
             )}
             asChild
           >
             <Link to={ROUTES.login}>{en.nav.signIn}</Link>
           </Button>
-          <Button className="rounded-md" asChild>
+          <Button className="hidden rounded-md sm:inline-flex" asChild>
             <Link to={ROUTES.signup}>{en.nav.joinCreateAccount}</Link>
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className={cn('rounded-full sm:hidden', transparent && 'text-white hover:bg-white/10')}
+            aria-label={en.nav.openMenu}
+            onClick={() => setMobileNavOpen(true)}
+          >
+            <Menu className="size-5" />
           </Button>
         </div>
       </div>
+
+      <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+        <SheetContent side="right" className="flex flex-col gap-6">
+          <SheetTitle className="sr-only">{en.nav.openMenu}</SheetTitle>
+          <Logo />
+
+          <nav className="flex flex-col gap-1 text-base font-medium text-text-secondary">
+            {GUEST_NAV_LINKS.map((link) => {
+              const isActive =
+                link.to === ROUTES.home ? currentPath === ROUTES.home : currentPath === link.to;
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileNavOpen(false)}
+                  className={cn(
+                    'rounded-md px-3 py-2 transition-colors duration-fast hover:bg-surface-raised hover:text-text-primary',
+                    isActive && 'bg-primary-50 text-primary-600',
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mt-auto flex flex-col gap-2">
+            <Button variant="outline" className="rounded-md" asChild>
+              <Link to={ROUTES.login} onClick={() => setMobileNavOpen(false)}>
+                {en.nav.signIn}
+              </Link>
+            </Button>
+            <Button className="rounded-md" asChild>
+              <Link to={ROUTES.signup} onClick={() => setMobileNavOpen(false)}>
+                {en.nav.joinCreateAccount}
+              </Link>
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 }

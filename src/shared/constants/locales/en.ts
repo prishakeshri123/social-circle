@@ -271,6 +271,8 @@ export const en = {
     contact: 'Contact',
     signIn: 'Login',
     joinCreateAccount: 'Sign Up',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
   },
 
   // ── Club dashboard tab labels ──────────────────────────────
