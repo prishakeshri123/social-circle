@@ -57,41 +57,45 @@ export function PublicEventDetailPage() {
           onError: (error) => toast.error(getApiErrorMessage(error)),
         });
       },
-      { communitySlug: event.club.category },
+      { communitySlug: event?.club?.category },
     );
   }
 
   return (
     <div className="pb-20 md:pb-8">
       <Helmet>
-        <title>{`${event.title} — ${event.club.name} | Social Circle`}</title>
+        <title>{`${event?.title} — ${event?.club?.name} | Social Circle`}</title>
         <meta name="description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={event.title} />
+        <meta property="og:title" content={event?.title} />
         <meta property="og:description" content={description} />
-        {event.coverImageUrl && <meta property="og:image" content={event.coverImageUrl} />}
+        {event?.coverImageUrl && <meta property="og:image" content={event?.coverImageUrl} />}
         <meta property="og:url" content={url} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Event',
-            name: event.title,
-            startDate: event.startAt,
-            endDate: event.endAt,
+            name: event?.title,
+            startDate: event?.startAt,
+            endDate: event?.endAt,
             eventAttendanceMode:
-              event.locationType === 'virtual'
+              event?.locationType === 'virtual'
                 ? 'https://schema.org/OnlineEventAttendanceMode'
                 : 'https://schema.org/OfflineEventAttendanceMode',
             location:
-              event.locationType === 'virtual'
+              event?.locationType === 'virtual'
                 ? { '@type': 'VirtualLocation', url }
-                : { '@type': 'Place', name: event.physicalAddress, address: event.physicalAddress },
-            image: event.coverImageUrl,
+                : {
+                    '@type': 'Place',
+                    name: event?.physicalAddress,
+                    address: event?.physicalAddress,
+                  },
+            image: event?.coverImageUrl,
             description,
             offers: {
               '@type': 'Offer',
-              price: event.ticketType === 'paid' ? event.ticketPrice : 0,
+              price: event?.ticketType === 'paid' ? event?.ticketPrice : 0,
               priceCurrency: 'INR',
               availability: 'https://schema.org/InStock',
               url,
