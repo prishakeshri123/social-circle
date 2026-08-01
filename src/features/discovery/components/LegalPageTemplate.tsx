@@ -76,7 +76,7 @@ export function LegalPageTemplate({ content, illustration }: LegalPageTemplatePr
         )}
       >
         <Reveal className={cn('space-y-3', !illustration && 'mx-auto max-w-2xl text-center')}>
-          <p className="text-xs font-bold uppercase tracking-wider text-primary-600">
+          <p className="text-xs font-bold uppercase tracking-wider gradient-text">
             {content.eyebrow}
           </p>
           <h1 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
@@ -113,7 +113,7 @@ export function LegalPageTemplate({ content, illustration }: LegalPageTemplatePr
             aria-label={en.legal.sidebarHeading}
             className="rounded-2xl border border-border bg-surface p-4"
           >
-            <p className="px-3 text-xs font-bold uppercase tracking-wide text-primary-600">
+            <p className="px-3 text-xs font-bold uppercase tracking-wide gradient-text">
               {en.legal.sidebarHeading}
             </p>
             <ul className="mt-2 space-y-1">
@@ -125,7 +125,7 @@ export function LegalPageTemplate({ content, illustration }: LegalPageTemplatePr
                     className={cn(
                       'block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors duration-fast',
                       activeIndex === index
-                        ? 'bg-primary-50 font-semibold text-primary-600'
+                        ? 'bg-primary-50 font-semibold gradient-text'
                         : 'text-text-secondary hover:bg-primary-50/60 hover:text-text-primary',
                     )}
                   >

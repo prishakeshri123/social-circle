@@ -62,6 +62,10 @@ export const NEW_CLUB_THRESHOLD_DAYS = 30;
 // ── Onboarding ─────────────────────────────────────────────
 export const ONBOARDING_TOTAL_STEPS = 2;
 
+// ── Phone (India-only mobile numbers) ───────────────────────
+// Longest acceptable input: +91 (3 chars) + 10-digit subscriber number.
+export const MAX_INDIA_PHONE_LENGTH = 13;
+
 // ── Signup (password mode step wizard) ──────────────────────
 export const SIGNUP_TOTAL_STEPS = 6;
 export const MAX_ADDRESS_LENGTH = 200;

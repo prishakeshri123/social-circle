@@ -220,7 +220,7 @@ export const en = {
     fullName: 'e.g. Priya Sharma',
     email: 'you@example.com',
     emailOrPhone: 'Enter your email or phone number',
-    phone: '+91 98765 43210',
+    phone: '9876543210',
     password: 'At least 8 characters',
     currentPassword: 'Enter your password',
     bio: 'Tell people a little about yourself...',

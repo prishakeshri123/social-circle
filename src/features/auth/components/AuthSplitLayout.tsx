@@ -78,12 +78,15 @@ export function AuthSplitLayout({
             card's right edge lines up with the header's auth button above it */}
         <div
           className={cn(
-            'relative mx-auto flex w-full max-w-6xl items-start gap-8',
+            'relative mx-auto flex w-full max-w-6xl items-center gap-8',
             PAGE_GUTTER_CLASS,
           )}
         >
-          {/* Left: branding + marketing content, narrow single column */}
-          <div className="hidden w-72 shrink-0 flex-col gap-6 py-6 lg:flex xl:w-80">
+          {/* Left: branding + marketing content, narrow single column. Sticky
+              + self-start so it tracks the viewport instead of floating with
+              dead space when the right card (a multi-step form) grows taller
+              than the panel's own content. */}
+          <div className="hidden w-72 shrink-0 flex-col gap-6 lg:sticky lg:top-[70px] lg:flex lg:self-start xl:w-80">
             <div className="space-y-2">
               <h1 className="font-display text-2xl font-bold text-text-primary">{heading}</h1>
               <p className="text-sm text-text-secondary">{subtitle}</p>
@@ -130,7 +133,7 @@ export function AuthSplitLayout({
           </div>
 
           {/* Right: auth card */}
-          <div className="flex w-full flex-1 items-center justify-center py-4 sm:py-6">
+          <div className="flex w-full flex-1 items-center justify-center">
             <div
               className={cn(
                 'w-full space-y-5 rounded-2xl border border-border bg-surface-raised/80 p-7 shadow-[0_0_60px_-15px_var(--color-glow-primary)] backdrop-blur-2xl sm:p-8 lg:p-10',

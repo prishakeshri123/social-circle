@@ -18,19 +18,18 @@ const e = en.errors;
 // ── Primitives ────────────────────────────────────────────
 export const emailSchema = z.string().min(1, e.required).email(e.emailInvalid);
 
-export const phoneSchema = z
-  .string()
-  .min(1, e.required)
-  .regex(/^\+?[1-9]\d{9,14}$/, e.phoneInvalid);
-
 // India-only mobile numbers: optional +91/91/0 prefix, then a 10-digit
 // number starting 6-9 (the range TRAI allocates to mobile subscribers).
+// e.g. 9876543210, +919876543210, 919876543210, 09876543210 are all valid;
+// with the +91 prefix the longest valid input is 13 characters.
 const INDIA_PHONE_REGEX = /^(?:\+91|91|0)?[6-9]\d{9}$/;
 
 export const indiaPhoneSchema = z
   .string()
   .min(1, e.required)
-  .regex(INDIA_PHONE_REGEX, e.indiaPhoneInvalid);
+  .refine((value) => INDIA_PHONE_REGEX.test(value.trim().replace(/[\s-]/g, '')), {
+    message: e.indiaPhoneInvalid,
+  });
 
 export const emailOrPhoneSchema = z
   .string()
@@ -64,7 +63,7 @@ export const signupSchema = z.object({
   // Step 1 — account & contact
   fullName: fullNameSchema,
   email: emailSchema,
-  phone: phoneSchema,
+  phone: indiaPhoneSchema,
 
   // Step 2 — community & personal info
   community: z.string().min(1, e.required),
@@ -99,7 +98,7 @@ export const contactSchema = z.object({
 });
 
 export const forgotPasswordSchema = z.object({
-  target: z.union([emailSchema, phoneSchema]),
+  target: emailOrPhoneSchema,
 });
 
 export const resetPasswordSchema = z

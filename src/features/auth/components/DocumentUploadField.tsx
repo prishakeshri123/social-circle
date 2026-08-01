@@ -48,14 +48,14 @@ export function DocumentUploadField({
   }
 
   return (
-    <div className="space-y-1.5">
+    <div className="space-y-1">
       <Label htmlFor={id} className="text-sm">
         {label}
         {required && <span className="text-error-500"> *</span>}
       </Label>
       <div
         className={cn(
-          'flex items-center gap-3 rounded-xl border px-3 py-2.5 transition-colors duration-200',
+          'flex items-center gap-3 rounded-xl border px-3 py-2 transition-colors duration-200',
           file ? 'border-primary-500/40 bg-primary-500/5' : 'border-border-strong bg-background',
         )}
       >
@@ -65,10 +65,11 @@ export function DocumentUploadField({
           size="sm"
           disabled={disabled}
           onClick={() => inputRef.current?.click()}
-          className="shrink-0 transition-transform duration-200 hover:scale-[1.03] active:scale-[0.96]"
+          title={en.auth.signupChooseFile}
+          aria-label={en.auth.signupChooseFile}
+          className="shrink-0 px-2.5 transition-transform duration-200 hover:scale-[1.03] active:scale-[0.96]"
         >
           <Upload className="size-3.5" aria-hidden="true" />
-          {en.auth.signupChooseFile}
         </Button>
         <span className="flex min-w-0 items-center gap-1.5 text-sm text-text-secondary">
           {file && <FileCheck2 className="size-4 shrink-0 text-success-500" aria-hidden="true" />}

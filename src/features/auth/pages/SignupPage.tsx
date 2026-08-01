@@ -11,6 +11,7 @@ import {
   SIGNUP_TOTAL_STEPS,
   SIGNUP_COMMUNITY_SLUGS,
   LS_SIGNUP_SUBMISSION_KEY,
+  MAX_INDIA_PHONE_LENGTH,
 } from '@/shared/constants/app.constants';
 import { CATEGORIES } from '@/shared/constants/categories';
 import { signupSchema } from '@/shared/utils/validators';
@@ -331,8 +332,10 @@ export function SignupPage() {
                       <Input
                         id="phone"
                         type="tel"
+                        inputMode="tel"
                         autoComplete="tel"
                         placeholder={en.placeholders.phone}
+                        maxLength={MAX_INDIA_PHONE_LENGTH}
                         disabled={busy}
                         className="pl-9"
                         {...register('phone')}
@@ -457,7 +460,7 @@ export function SignupPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                   <Button
                     type="button"
                     variant="outline"
@@ -476,7 +479,7 @@ export function SignupPage() {
             )}
 
             {step === 3 && (
-              <motion.div key="step-3" {...STEP_MOTION} className="space-y-4 sm:space-y-5">
+              <motion.div key="step-3" {...STEP_MOTION} className="space-y-3 sm:space-y-4">
                 <div>
                   <h3 className="font-display text-base font-semibold text-text-primary">
                     {en.auth.signupStep3Heading}
@@ -485,7 +488,7 @@ export function SignupPage() {
                   <p className="text-xs text-text-muted">{en.auth.signupOptionalFieldsNote}</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-3">
                   <div className="space-y-1">
                     <Label htmlFor="fatherName" className="text-sm">
                       {en.labels.fatherName}
@@ -509,9 +512,7 @@ export function SignupPage() {
                       {...register('motherName')}
                     />
                   </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <Label htmlFor="occupation" className="text-sm">
                       {en.labels.occupation}
@@ -535,9 +536,7 @@ export function SignupPage() {
                       {...register('fieldOfOccupation')}
                     />
                   </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <Label htmlFor="spouseName" className="text-sm">
                       {en.labels.spouseName}
@@ -561,21 +560,21 @@ export function SignupPage() {
                       {...register('marriageDate')}
                     />
                   </div>
+
+                  <div className="col-span-2 space-y-1 lg:col-span-3">
+                    <Label htmlFor="childrenNames" className="text-sm">
+                      {en.labels.childrenNames}
+                    </Label>
+                    <Input
+                      id="childrenNames"
+                      placeholder={en.placeholders.childrenNames}
+                      disabled={busy}
+                      {...register('childrenNames')}
+                    />
+                  </div>
                 </div>
 
-                <div className="space-y-1">
-                  <Label htmlFor="childrenNames" className="text-sm">
-                    {en.labels.childrenNames}
-                  </Label>
-                  <Input
-                    id="childrenNames"
-                    placeholder={en.placeholders.childrenNames}
-                    disabled={busy}
-                    {...register('childrenNames')}
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                   <Button
                     type="button"
                     variant="outline"
@@ -627,7 +626,7 @@ export function SignupPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                   <Button
                     type="button"
                     variant="outline"
@@ -646,7 +645,7 @@ export function SignupPage() {
             )}
 
             {step === 5 && (
-              <motion.div key="step-5" {...STEP_MOTION} className="space-y-4 sm:space-y-5">
+              <motion.div key="step-5" {...STEP_MOTION} className="space-y-3 sm:space-y-4">
                 <div>
                   <h3 className="font-display text-base font-semibold text-text-primary">
                     {en.auth.signupStep5Heading}
@@ -654,67 +653,69 @@ export function SignupPage() {
                   <p className="text-sm text-text-secondary">{en.auth.signupStep5Subheading}</p>
                 </div>
 
-                <DocumentUploadField
-                  id="aadharFile"
-                  label={en.labels.aadharCard}
-                  required
-                  file={documents.aadharFile}
-                  onChange={(file) => updateDocument('aadharFile', file)}
-                  disabled={busy}
-                  error={documentErrors.aadharFile}
-                />
-                <DocumentUploadField
-                  id="panFile"
-                  label={en.labels.panCard}
-                  required
-                  file={documents.panFile}
-                  onChange={(file) => updateDocument('panFile', file)}
-                  disabled={busy}
-                  error={documentErrors.panFile}
-                />
-                <DocumentUploadField
-                  id="passportFile"
-                  label={en.labels.passport}
-                  file={documents.passportFile}
-                  onChange={(file) => updateDocument('passportFile', file)}
-                  disabled={busy}
-                />
-                <DocumentUploadField
-                  id="referenceId1File"
-                  label={en.labels.referenceId1}
-                  required
-                  file={documents.referenceId1File}
-                  onChange={(file) => updateDocument('referenceId1File', file)}
-                  disabled={busy}
-                  error={documentErrors.referenceId1File}
-                />
-                <DocumentUploadField
-                  id="referenceId2File"
-                  label={en.labels.referenceId2}
-                  required
-                  file={documents.referenceId2File}
-                  onChange={(file) => updateDocument('referenceId2File', file)}
-                  disabled={busy}
-                  error={documentErrors.referenceId2File}
-                />
-                <DocumentUploadField
-                  id="photoFile"
-                  label={en.labels.photo}
-                  required
-                  file={documents.photoFile}
-                  onChange={(file) => updateDocument('photoFile', file)}
-                  disabled={busy}
-                  error={documentErrors.photoFile}
-                />
-                <DocumentUploadField
-                  id="familyPhotoFile"
-                  label={en.labels.familyPhoto}
-                  file={documents.familyPhotoFile}
-                  onChange={(file) => updateDocument('familyPhotoFile', file)}
-                  disabled={busy}
-                />
+                <div className="grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <DocumentUploadField
+                    id="aadharFile"
+                    label={en.labels.aadharCard}
+                    required
+                    file={documents.aadharFile}
+                    onChange={(file) => updateDocument('aadharFile', file)}
+                    disabled={busy}
+                    error={documentErrors.aadharFile}
+                  />
+                  <DocumentUploadField
+                    id="panFile"
+                    label={en.labels.panCard}
+                    required
+                    file={documents.panFile}
+                    onChange={(file) => updateDocument('panFile', file)}
+                    disabled={busy}
+                    error={documentErrors.panFile}
+                  />
+                  <DocumentUploadField
+                    id="passportFile"
+                    label={en.labels.passport}
+                    file={documents.passportFile}
+                    onChange={(file) => updateDocument('passportFile', file)}
+                    disabled={busy}
+                  />
+                  <DocumentUploadField
+                    id="referenceId1File"
+                    label={en.labels.referenceId1}
+                    required
+                    file={documents.referenceId1File}
+                    onChange={(file) => updateDocument('referenceId1File', file)}
+                    disabled={busy}
+                    error={documentErrors.referenceId1File}
+                  />
+                  <DocumentUploadField
+                    id="referenceId2File"
+                    label={en.labels.referenceId2}
+                    required
+                    file={documents.referenceId2File}
+                    onChange={(file) => updateDocument('referenceId2File', file)}
+                    disabled={busy}
+                    error={documentErrors.referenceId2File}
+                  />
+                  <DocumentUploadField
+                    id="photoFile"
+                    label={en.labels.photo}
+                    required
+                    file={documents.photoFile}
+                    onChange={(file) => updateDocument('photoFile', file)}
+                    disabled={busy}
+                    error={documentErrors.photoFile}
+                  />
+                  <DocumentUploadField
+                    id="familyPhotoFile"
+                    label={en.labels.familyPhoto}
+                    file={documents.familyPhotoFile}
+                    onChange={(file) => updateDocument('familyPhotoFile', file)}
+                    disabled={busy}
+                  />
+                </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                   <Button
                     type="button"
                     variant="outline"
@@ -855,7 +856,7 @@ export function SignupPage() {
                   {errors.terms && <p className="text-xs text-error-500">{errors.terms.message}</p>}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                   <Button
                     type="button"
                     variant="outline"
