@@ -46,7 +46,9 @@ export function AboutPage() {
             {en.marketing.aboutHeroTitleLine1}
             <br />
             {en.marketing.aboutHeroTitleLine2Prefix}
-            <span className="text-primary-600">{en.marketing.aboutHeroTitleHighlight}</span>
+            <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-pink-500 bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl">
+              {en.marketing.aboutHeroTitleHighlight}
+            </span>
           </h1>
           <p className="max-w-lg text-base text-text-secondary sm:text-lg">
             {en.marketing.aboutHeroSubtitle}

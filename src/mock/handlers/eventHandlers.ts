@@ -16,7 +16,13 @@ const rsvpsByUser = new Map<string, RsvpStatus>();
 
 function clubSummary(clubId: string): EventClubSummary {
   const club = clubs.find((c) => c.id === clubId);
-  return { id: clubId, slug: club?.slug ?? '', name: club?.name ?? '', logoUrl: club?.logoUrl };
+  return {
+    id: clubId,
+    slug: club?.slug ?? '',
+    name: club?.name ?? '',
+    category: club?.category ?? '',
+    logoUrl: club?.logoUrl,
+  };
 }
 
 function withClub(event: Event): EventWithClub {

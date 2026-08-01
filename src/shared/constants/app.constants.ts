@@ -15,6 +15,12 @@ export const MAX_VIDEO_SIZE_MB = 50;
 export const MAX_DOC_SIZE_MB = 20;
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const;
 export const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/webm'] as const;
+export const ALLOWED_DOCUMENT_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'application/pdf',
+] as const;
 
 // ── Character limits ──────────────────────────────────────
 export const MAX_BIO_LENGTH = 160;
@@ -42,6 +48,7 @@ export const REFRESH_TOKEN_KEY = 'refreshToken';
 // ── Local storage keys ────────────────────────────────────
 export const LS_RECENT_SEARCHES_KEY = 'sc_recent_searches';
 export const LS_HOME_WELCOME_DISMISSED_KEY = 'sc_home_welcome_dismissed';
+export const LS_SIGNUP_SUBMISSION_KEY = 'sc_signup_submission';
 export const MAX_RECENT_SEARCHES = 10;
 
 // ── Discovery / Search ─────────────────────────────────────
@@ -54,6 +61,22 @@ export const NEW_CLUB_THRESHOLD_DAYS = 30;
 
 // ── Onboarding ─────────────────────────────────────────────
 export const ONBOARDING_TOTAL_STEPS = 2;
+
+// ── Signup (password mode step wizard) ──────────────────────
+export const SIGNUP_TOTAL_STEPS = 6;
+export const MAX_ADDRESS_LENGTH = 200;
+export const MAX_SHORT_FIELD_LENGTH = 100;
+export const MAX_REFERENCE_CONTACT_LENGTH = 150;
+export const SIGNUP_COMMUNITY_SLUGS = [
+  'business-promotion',
+  'chit-chat',
+  'foundation',
+  'investors',
+  'startup-idea',
+  'mentor',
+  'competitors-organisation',
+  'users-wellness',
+] as const;
 
 // ── Avatar crop ────────────────────────────────────────────
 export const AVATAR_CROP_OUTPUT_PX = 400;

@@ -1,39 +1,115 @@
 [
   {
-    "id": "ch_mt_general",
-    "clubId": "clu_mumtrail01",
+    "id": "ch_bp_general",
+    "clubId": "clu_bizpromo01",
     "name": "general",
     "type": "group",
-    "pinnedMessageId": "msg_gen_001",
-    "createdAt": "2025-06-01T09:00:00.000Z"
+    "createdAt": "2026-01-01T09:00:00.000Z"
+  },
+  {
+    "id": "ch_bp_announcements",
+    "clubId": "clu_bizpromo01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2026-01-01T09:00:00.000Z"
+  },
+  {
+    "id": "ch_fo_general",
+    "clubId": "clu_foundation01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2026-02-04T09:00:00.000Z"
+  },
+  {
+    "id": "ch_fo_announcements",
+    "clubId": "clu_foundation01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2026-02-04T09:00:00.000Z"
+  },
+  {
+    "id": "ch_inv_general",
+    "clubId": "clu_investors01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2026-03-07T09:00:00.000Z"
+  },
+  {
+    "id": "ch_inv_announcements",
+    "clubId": "clu_investors01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2026-03-07T09:00:00.000Z"
+  },
+  {
+    "id": "ch_si_general",
+    "clubId": "clu_startupidea01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2026-04-10T09:00:00.000Z"
+  },
+  {
+    "id": "ch_si_announcements",
+    "clubId": "clu_startupidea01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2026-04-10T09:00:00.000Z"
+  },
+  {
+    "id": "ch_mt_general",
+    "clubId": "clu_mentor01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2026-05-13T09:00:00.000Z"
   },
   {
     "id": "ch_mt_announcements",
-    "clubId": "clu_mumtrail01",
+    "clubId": "clu_mentor01",
     "name": "announcements",
     "type": "announcement",
-    "createdAt": "2025-06-01T09:00:00.000Z"
+    "createdAt": "2026-05-13T09:00:00.000Z"
   },
   {
-    "id": "ch_mt_eventplanning",
-    "clubId": "clu_mumtrail01",
-    "name": "event-planning",
-    "type": "group",
-    "createdAt": "2025-06-05T09:00:00.000Z"
-  },
-  {
-    "id": "ch_bt_general",
-    "clubId": "clu_blrtech01",
+    "id": "ch_co_general",
+    "clubId": "clu_competorg01",
     "name": "general",
     "type": "group",
-    "createdAt": "2025-05-01T09:00:00.000Z"
+    "createdAt": "2026-06-16T09:00:00.000Z"
   },
   {
-    "id": "ch_bt_announcements",
-    "clubId": "clu_blrtech01",
+    "id": "ch_co_announcements",
+    "clubId": "clu_competorg01",
     "name": "announcements",
     "type": "announcement",
-    "createdAt": "2025-05-01T09:00:00.000Z"
+    "createdAt": "2026-06-16T09:00:00.000Z"
+  },
+  {
+    "id": "ch_cc_general",
+    "clubId": "clu_chitchat01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2026-01-19T09:00:00.000Z"
+  },
+  {
+    "id": "ch_cc_announcements",
+    "clubId": "clu_chitchat01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2026-01-19T09:00:00.000Z"
+  },
+  {
+    "id": "ch_uw_general",
+    "clubId": "clu_userswell01",
+    "name": "general",
+    "type": "group",
+    "createdAt": "2026-02-22T09:00:00.000Z"
+  },
+  {
+    "id": "ch_uw_announcements",
+    "clubId": "clu_userswell01",
+    "name": "announcements",
+    "type": "announcement",
+    "createdAt": "2026-02-22T09:00:00.000Z"
   },
   {
     "id": "ch_dm_mod_member01",

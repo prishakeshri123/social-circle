@@ -1,92 +1,180 @@
 [
   {
-    "id": "mem_mt_owner",
-    "clubId": "clu_mumtrail01",
+    "id": "mem_bp_owner",
+    "clubId": "clu_bizpromo01",
     "userId": "usr_owner01",
     "role": "owner",
     "status": "active",
-    "joinedAt": "2025-06-01T09:00:00.000Z"
+    "joinedAt": "2026-02-05T09:00:00.000Z"
   },
   {
-    "id": "mem_mt_mod",
-    "clubId": "clu_mumtrail01",
-    "userId": "usr_mod01",
-    "role": "member",
-    "status": "active",
-    "joinedAt": "2025-06-03T09:00:00.000Z"
-  },
-  {
-    "id": "mem_mt_member01",
-    "clubId": "clu_mumtrail01",
-    "userId": "usr_member01",
-    "role": "member",
-    "status": "active",
-    "joinedAt": "2025-06-10T09:00:00.000Z"
-  },
-  {
-    "id": "mem_mt_member02",
-    "clubId": "clu_mumtrail01",
+    "id": "mem_bp_member02",
+    "clubId": "clu_bizpromo01",
     "userId": "usr_member02",
     "role": "member",
     "status": "active",
-    "joinedAt": "2025-06-12T09:00:00.000Z"
+    "joinedAt": "2026-03-09T09:00:00.000Z"
   },
   {
-    "id": "mem_mt_member03",
-    "clubId": "clu_mumtrail01",
-    "userId": "usr_member03",
-    "role": "member",
-    "status": "active",
-    "joinedAt": "2025-06-15T09:00:00.000Z"
-  },
-  {
-    "id": "mem_mt_member04",
-    "clubId": "clu_mumtrail01",
-    "userId": "usr_member04",
-    "role": "member",
-    "status": "active",
-    "joinedAt": "2025-06-20T09:00:00.000Z"
-  },
-  {
-    "id": "mem_mt_member06",
-    "clubId": "clu_mumtrail01",
-    "userId": "usr_member06",
-    "role": "member",
-    "status": "active",
-    "joinedAt": "2025-07-01T09:00:00.000Z"
-  },
-  {
-    "id": "mem_mt_member07",
-    "clubId": "clu_mumtrail01",
-    "userId": "usr_member07",
-    "role": "member",
-    "status": "active",
-    "joinedAt": "2025-07-05T09:00:00.000Z"
-  },
-  {
-    "id": "mem_bt_owner",
-    "clubId": "clu_blrtech01",
+    "id": "mem_fo_owner",
+    "clubId": "clu_foundation01",
     "userId": "usr_owner01",
     "role": "owner",
     "status": "active",
-    "joinedAt": "2025-05-01T09:00:00.000Z"
+    "joinedAt": "2026-04-13T09:00:00.000Z"
   },
   {
-    "id": "mem_bt_member01",
-    "clubId": "clu_blrtech01",
+    "id": "mem_fo_mod01",
+    "clubId": "clu_foundation01",
+    "userId": "usr_mod01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-05-17T09:00:00.000Z"
+  },
+  {
+    "id": "mem_fo_member03",
+    "clubId": "clu_foundation01",
+    "userId": "usr_member03",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-06-21T09:00:00.000Z"
+  },
+  {
+    "id": "mem_inv_owner",
+    "clubId": "clu_investors01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2026-01-25T09:00:00.000Z"
+  },
+  {
+    "id": "mem_inv_member01",
+    "clubId": "clu_investors01",
     "userId": "usr_member01",
     "role": "member",
     "status": "active",
-    "joinedAt": "2025-06-01T09:00:00.000Z",
+    "joinedAt": "2026-02-02T09:00:00.000Z",
     "subscriptionId": "sub_001",
     "expiresAt": "2027-06-01T09:00:00.000Z"
   },
   {
-    "id": "mem_bt_pending01",
-    "clubId": "clu_blrtech01",
+    "id": "mem_inv_pending01",
+    "clubId": "clu_investors01",
     "userId": "usr_member05",
     "role": "member",
     "status": "pending_approval",
-    "joinedAt": "2026-07-24T09:00:00.000Z"
+    "joinedAt": "2026-03-06T09:00:00.000Z"
+  },
+  {
+    "id": "mem_si_owner",
+    "clubId": "clu_startupidea01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2026-04-10T09:00:00.000Z"
+  },
+  {
+    "id": "mem_si_member04",
+    "clubId": "clu_startupidea01",
+    "userId": "usr_member04",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-05-14T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_owner",
+    "clubId": "clu_mentor01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2026-06-18T09:00:00.000Z"
+  },
+  {
+    "id": "mem_mt_member06",
+    "clubId": "clu_mentor01",
+    "userId": "usr_member06",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-01-22T09:00:00.000Z"
+  },
+  {
+    "id": "mem_co_owner",
+    "clubId": "clu_competorg01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2026-02-26T09:00:00.000Z"
+  },
+  {
+    "id": "mem_co_member07",
+    "clubId": "clu_competorg01",
+    "userId": "usr_member07",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-03-03T09:00:00.000Z"
+  },
+  {
+    "id": "mem_cc_owner",
+    "clubId": "clu_chitchat01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2026-04-07T09:00:00.000Z"
+  },
+  {
+    "id": "mem_cc_mod01",
+    "clubId": "clu_chitchat01",
+    "userId": "usr_mod01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-05-11T09:00:00.000Z"
+  },
+  {
+    "id": "mem_cc_member02",
+    "clubId": "clu_chitchat01",
+    "userId": "usr_member02",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-06-15T09:00:00.000Z"
+  },
+  {
+    "id": "mem_cc_member03",
+    "clubId": "clu_chitchat01",
+    "userId": "usr_member03",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-01-19T09:00:00.000Z"
+  },
+  {
+    "id": "mem_uw_owner",
+    "clubId": "clu_userswell01",
+    "userId": "usr_owner01",
+    "role": "owner",
+    "status": "active",
+    "joinedAt": "2026-02-23T09:00:00.000Z"
+  },
+  {
+    "id": "mem_uw_member01",
+    "clubId": "clu_userswell01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-03-27T09:00:00.000Z"
+  },
+  {
+    "id": "mem_uw_member04",
+    "clubId": "clu_userswell01",
+    "userId": "usr_member04",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-04-04T09:00:00.000Z"
+  },
+  {
+    "id": "mem_uw_member06",
+    "clubId": "clu_userswell01",
+    "userId": "usr_member06",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-05-08T09:00:00.000Z"
   }
 ]

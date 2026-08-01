@@ -15,6 +15,14 @@ export const CATEGORIES = [
   { slug: 'fitness', label: 'Fitness', icon: 'Activity' },
   { slug: 'films', label: 'Films', icon: 'Film' },
   { slug: 'social', label: 'Social', icon: 'Users' },
+  { slug: 'business-promotion', label: 'Business Promotion', icon: 'Megaphone' },
+  { slug: 'foundation', label: 'Foundation', icon: 'HeartHandshake' },
+  { slug: 'investors', label: 'Investors', icon: 'TrendingUp' },
+  { slug: 'startup-idea', label: 'Startup & Idea', icon: 'Lightbulb' },
+  { slug: 'mentor', label: 'Mentor', icon: 'Compass' },
+  { slug: 'competitors-organisation', label: 'Competitors & Organisation', icon: 'Building2' },
+  { slug: 'chit-chat', label: 'Chit Chat', icon: 'MessageCircle' },
+  { slug: 'users-wellness', label: 'Users', icon: 'HeartPulse' },
 ] as const;
 
 export type CategorySlug = (typeof CATEGORIES)[number]['slug'];

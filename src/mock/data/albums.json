@@ -1,10 +1,10 @@
 [
   {
     "id": "alb_annualmeet",
-    "clubId": "clu_mumtrail01",
-    "eventId": "evt_005",
+    "clubId": "clu_userswell01",
+    "eventId": "evt_040",
     "title": "Annual Meetup Photos",
-    "description": "Highlights from our 2026 Annual Meetup at Sanjay Gandhi National Park.",
+    "description": "Highlights from our 2026 Annual Meetup at Kite Beach Wellness Pavilion.",
     "coverUrl": "https://picsum.photos/seed/alb-annualmeet-cover/600/450",
     "mediaCount": 5,
     "visibility": "members_only",
@@ -13,11 +13,11 @@
     "createdAt": "2026-07-12T08:00:00.000Z"
   },
   {
-    "id": "alb_trailscenic",
-    "clubId": "clu_mumtrail01",
-    "title": "Scenic Trail Shots",
-    "description": "Our favourite views from weekend runs.",
-    "coverUrl": "https://picsum.photos/seed/alb-trailscenic-cover/600/450",
+    "id": "alb_wellnessmoments",
+    "clubId": "clu_userswell01",
+    "title": "Wellness Moments",
+    "description": "Our favourite moments from daily meditations and retreats.",
+    "coverUrl": "https://picsum.photos/seed/alb-wellnessmoments-cover/600/450",
     "mediaCount": 3,
     "visibility": "public",
     "allowMemberUploads": false,

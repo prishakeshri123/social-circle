@@ -2,8 +2,8 @@
   {
     "id": "sub_001",
     "userId": "usr_member01",
-    "clubId": "clu_blrtech01",
-    "planId": "plan_blrtech_annual",
+    "clubId": "clu_investors01",
+    "planId": "plan_investors_annual",
     "status": "active",
     "currentPeriodStart": "2026-06-01T09:00:00.000Z",
     "currentPeriodEnd": "2027-06-01T09:00:00.000Z",

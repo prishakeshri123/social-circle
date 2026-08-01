@@ -155,6 +155,39 @@
     -webkit-mask-image: radial-gradient(ellipse 70% 90% at 50% 40%, black 40%, transparent 100%);
     mask-image: radial-gradient(ellipse 70% 90% at 50% 40%, black 40%, transparent 100%);
   }
+
+  /* Neon accent scope for the Login/Signup experience — sits on the site's
+     normal light background (bg-background is left untouched here on
+     purpose), but brightens the brand/accent colors and glow variables so
+     the gradient stepper, glow rings, and focus glow read as vivid rather
+     than washed out. */
+  .auth-neon {
+    --color-primary-500: #6d6ef5;
+    --color-accent-500: #8b5cf6;
+    --color-info-500: #0ea5c4;
+
+    --gradient-brand: linear-gradient(135deg, #6366f1, #0ea5c4);
+    --color-glow-primary: rgb(99 102 241 / 0.4);
+    --color-glow-accent: rgb(14 165 196 / 0.35);
+  }
+
+  /* Extra glow ring layered on top of the standard focus ring for form controls
+     inside the neon auth scope — the "focus glow" micro-interaction. */
+  .auth-neon input:focus-visible,
+  .auth-neon [role='combobox']:focus-visible {
+    box-shadow:
+      0 0 0 3px var(--color-glow-primary),
+      0 0 20px var(--color-glow-accent);
+  }
+
+  /* Faint dot-grid texture, drawn in the theme's own border color so it works
+     on any background. */
+  .auth-neon-grid {
+    background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 20%, black 30%, transparent 90%);
+    mask-image: radial-gradient(ellipse 85% 65% at 50% 20%, black 30%, transparent 90%);
+  }
 }
 
 @layer utilities {
@@ -165,5 +198,48 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Slow ambient drift + breathing opacity for the neon auth background orbs. */
+  @keyframes auth-orb-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-4%, 5%) scale(1.08);
+    }
+  }
+  @keyframes auth-orb-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+  .auth-orb {
+    animation:
+      auth-orb-float 14s ease-in-out infinite,
+      auth-orb-pulse 7s ease-in-out infinite;
+  }
+
+  /* Pulsing glow ring for the active step indicator. */
+  @keyframes neon-pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 var(--color-glow-primary),
+        0 0 0 0 var(--color-glow-accent);
+    }
+    50% {
+      box-shadow:
+        0 0 0 5px var(--color-glow-primary),
+        0 0 16px 4px var(--color-glow-accent);
+    }
+  }
+  .neon-pulse {
+    animation: neon-pulse 2.2s ease-in-out infinite;
   }
 }

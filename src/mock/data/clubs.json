@@ -1,393 +1,328 @@
 [
   {
-    "id": "clu_mumtrail01",
-    "slug": "mumbai-trail-runners",
-    "name": "Mumbai Trail Runners",
-    "tagline": "Weekend trails, weekday grit — runners of every pace welcome.",
-    "category": "sports",
-    "tags": ["running", "trail", "fitness"],
-    "city": "Mumbai",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "free",
-    "ownerId": "usr_owner01",
-    "memberCount": 542,
-    "logoUrl": "https://picsum.photos/seed/mumtrail-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/mumtrail-banner/1200/675",
-    "brandColor": "#22c55e",
-    "galleryImages": [
-      "https://picsum.photos/seed/mumtrail-1/600/600",
-      "https://picsum.photos/seed/mumtrail-2/600/600",
-      "https://picsum.photos/seed/mumtrail-3/600/600",
-      "https://picsum.photos/seed/mumtrail-4/600/600",
-      "https://picsum.photos/seed/mumtrail-5/600/600"
-    ],
-    "about": "We are Mumbai's largest weekend trail running community. Every Saturday morning we meet at Sanjay Gandhi National Park for guided group runs ranging from 5K to 21K, suited to every fitness level. Beyond the runs, we host monthly trail maintenance days, nutrition workshops, and an annual trail marathon that draws runners from across Maharashtra.\n\nWhether you're training for your first 10K or your tenth ultramarathon, you'll find a pace group and a support crew here.",
-    "mission": "To make trail running accessible, safe, and fun for every Mumbaikar, regardless of experience level.",
-    "codeOfConduct": "Respect the trails, respect each other. No littering, no headphones on group runs, and always run within your pace group.",
-    "highlights": ["Weekly guided runs", "500+ members", "Founded 2021", "Annual trail marathon"],
-    "faqs": [
-      {
-        "question": "Do I need trail running shoes?",
-        "answer": "Recommended but not required for beginner routes."
-      },
-      { "question": "Is this club free to join?", "answer": "Yes, membership is completely free." }
-    ],
-    "membershipApproval": "auto",
-    "featured": true,
-    "createdAt": "2025-06-01T09:00:00.000Z",
-    "updatedAt": "2026-07-20T09:00:00.000Z"
-  },
-  {
-    "id": "clu_blrtech01",
-    "slug": "bengaluru-tech-circle",
-    "name": "Bengaluru Tech Circle",
-    "tagline": "Deep-dive talks and hands-on workshops for working engineers.",
-    "category": "tech",
-    "tags": ["engineering", "startups", "ai"],
-    "city": "Bengaluru",
+    "id": "clu_bizpromo01",
+    "slug": "business-promotion",
+    "name": "Business Promotion",
+    "tagline": "Helping businesses reach their audience and hit their marketing goals.",
+    "category": "business-promotion",
+    "tags": ["marketing", "branding", "advertising"],
+    "city": "Dubai",
     "language": "en",
     "privacy": "public",
     "status": "live",
     "type": "paid",
     "ownerId": "usr_owner01",
-    "memberCount": 1280,
-    "logoUrl": "https://picsum.photos/seed/blrtech-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/blrtech-banner/1200/675",
-    "brandColor": "#6366f1",
+    "memberCount": 410,
+    "logoUrl": "https://picsum.photos/seed/business-promotion-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/business-promotion-banner/1200/675",
+    "brandColor": "#f97316",
     "galleryImages": [
-      "https://picsum.photos/seed/blrtech-1/600/600",
-      "https://picsum.photos/seed/blrtech-2/600/600",
-      "https://picsum.photos/seed/blrtech-3/600/600",
-      "https://picsum.photos/seed/blrtech-4/600/600"
+      "https://picsum.photos/seed/business-promotion-1/600/600",
+      "https://picsum.photos/seed/business-promotion-2/600/600",
+      "https://picsum.photos/seed/business-promotion-3/600/600"
     ],
-    "about": "Bengaluru Tech Circle brings together backend engineers, ML practitioners, and startup founders for monthly deep-dive talks and quarterly hands-on workshops. Past sessions have covered distributed systems, LLM fine-tuning, and scaling Postgres to a billion rows.\n\nMembership includes access to our private Slack, a searchable talk archive, and discounted tickets to our annual TechCircle Summit.",
-    "mission": "Raise the technical bar for engineering teams in Bengaluru through peer-led learning.",
-    "codeOfConduct": "Be kind, no recruiting spam in the community channels, credit your sources when presenting.",
+    "about": "We are specialized in assisting businesses with their promotional efforts, helping them effectively reach their target audience and achieve their marketing goals.",
+    "mission": "Help every member business get seen by the audience that matters most to them.",
+    "codeOfConduct": "Share generously, no spamming other members with unsolicited pitches, credit collaborators.",
+    "highlights": ["Monthly promotion clinics", "410+ members", "Shared marketing playbooks"],
+    "faqs": [
+      {
+        "question": "Is this only for marketers?",
+        "answer": "No — founders, business owners, and marketers are all welcome."
+      }
+    ],
+    "membershipApproval": "auto",
+    "featured": false,
+    "createdAt": "2026-01-01T09:00:00.000Z",
+    "updatedAt": "2026-07-20T09:00:00.000Z"
+  },
+  {
+    "id": "clu_foundation01",
+    "slug": "foundation",
+    "name": "Foundation",
+    "tagline": "Social welfare programs for disadvantaged communities.",
+    "category": "foundation",
+    "tags": ["welfare", "education", "healthcare"],
+    "city": "Dubai",
+    "language": "en",
+    "privacy": "public",
+    "status": "live",
+    "type": "paid",
+    "ownerId": "usr_owner01",
+    "memberCount": 860,
+    "logoUrl": "https://picsum.photos/seed/foundation-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/foundation-banner/1200/675",
+    "brandColor": "#16a34a",
+    "galleryImages": [
+      "https://picsum.photos/seed/foundation-1/600/600",
+      "https://picsum.photos/seed/foundation-2/600/600",
+      "https://picsum.photos/seed/foundation-3/600/600"
+    ],
+    "about": "We design and implement social welfare programs that directly benefit disadvantaged communities. These programs may include providing access to healthcare, education, clean water, etc.",
+    "mission": "Widen access to healthcare, education, and opportunity for underserved communities.",
+    "codeOfConduct": "Lead with dignity and respect for the communities we serve; report volunteering hours honestly.",
     "highlights": [
-      "Monthly deep-dive talks",
-      "1200+ members",
-      "Private Slack access",
-      "Annual summit"
+      "Healthcare & education access drives",
+      "860+ members",
+      "Vocational training programs"
     ],
     "faqs": [
       {
+        "question": "How can I contribute if I cannot volunteer in person?",
+        "answer": "You can support fundraising campaigns or remote skill-sharing initiatives."
+      }
+    ],
+    "membershipApproval": "auto",
+    "featured": true,
+    "createdAt": "2026-02-04T09:00:00.000Z",
+    "updatedAt": "2026-07-21T09:00:00.000Z"
+  },
+  {
+    "id": "clu_investors01",
+    "slug": "investors",
+    "name": "Investors",
+    "tagline": "Connecting capital allocators with investment opportunities and emerging ventures.",
+    "category": "investors",
+    "tags": ["investment", "finance", "startups"],
+    "city": "Dubai",
+    "language": "en",
+    "privacy": "public",
+    "status": "live",
+    "type": "paid",
+    "ownerId": "usr_owner01",
+    "memberCount": 320,
+    "logoUrl": "https://picsum.photos/seed/investors-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/investors-banner/1200/675",
+    "brandColor": "#0ea5e9",
+    "galleryImages": [
+      "https://picsum.photos/seed/investors-1/600/600",
+      "https://picsum.photos/seed/investors-2/600/600",
+      "https://picsum.photos/seed/investors-3/600/600"
+    ],
+    "about": "We understand that investors face the challenge of identifying the right ventures to allocate their capital, and our role is to offer insights and recommendations that align with their investment goals.",
+    "mission": "Match capital with the ventures best positioned to use it well.",
+    "codeOfConduct": "No unsolicited pitching outside designated deal-flow threads; respect confidentiality of shared materials.",
+    "highlights": ["Curated deal flow", "320+ members", "Quarterly sector briefings"],
+    "faqs": [
+      {
         "question": "What does membership include?",
-        "answer": "Slack access, talk archive, and summit discounts."
+        "answer": "Deal flow access, sector briefings, and the founder directory."
       },
-      { "question": "Can I get a refund?", "answer": "Yes, within 7 days of purchase if unused." }
+      {
+        "question": "Can I get a refund?",
+        "answer": "Yes, within 7 days of purchase if unused."
+      }
     ],
     "pricingPlans": [
       {
-        "id": "plan_blrtech_annual",
+        "id": "plan_investors_annual",
         "name": "Annual Membership",
         "price": 1499,
         "currency": "INR",
         "billingCycle": "yearly",
         "trialDays": 7,
-        "description": "Full access to talks, Slack, and the summit."
+        "description": "Full access to deal flow, briefings, and the founder directory."
       }
     ],
     "membershipApproval": "manual",
     "featured": true,
-    "createdAt": "2025-03-15T09:00:00.000Z",
-    "updatedAt": "2026-07-18T09:00:00.000Z"
-  },
-  {
-    "id": "clu_delfood01",
-    "slug": "delhi-foodies-collective",
-    "name": "Delhi Foodies Collective",
-    "tagline": "Chasing the best street food and hidden gems across the capital.",
-    "category": "food",
-    "tags": ["street-food", "reviews", "meetups"],
-    "city": "Delhi",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "free",
-    "ownerId": "usr_owner01",
-    "memberCount": 890,
-    "logoUrl": "https://picsum.photos/seed/delfood-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/delfood-banner/1200/675",
-    "brandColor": "#f59e0b",
-    "galleryImages": [
-      "https://picsum.photos/seed/delfood-1/600/600",
-      "https://picsum.photos/seed/delfood-2/600/600",
-      "https://picsum.photos/seed/delfood-3/600/600"
-    ],
-    "about": "Delhi Foodies Collective is a community of people obsessed with the capital's food scene — from Chandni Chowk chaat stalls to the newest fine-dining pop-ups. We organise monthly food walks, do crowd-sourced restaurant reviews, and run an annual 'Golden Paratha' awards for the city's best hole-in-the-wall eateries.",
-    "highlights": ["Monthly food walks", "900+ members", "Founded 2022"],
-    "faqs": [
-      {
-        "question": "Are food walks free?",
-        "answer": "Club membership is free; food walks may have a small per-head cost."
-      }
-    ],
-    "membershipApproval": "auto",
-    "featured": false,
-    "createdAt": "2025-07-01T09:00:00.000Z",
-    "updatedAt": "2026-07-15T09:00:00.000Z"
-  },
-  {
-    "id": "clu_punegam01",
-    "slug": "pune-indie-gamers",
-    "name": "Pune Indie Gamers",
-    "tagline": "LAN nights, indie game jams, and co-op squads.",
-    "category": "gaming",
-    "tags": ["gaming", "esports", "indie-dev"],
-    "city": "Pune",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "free",
-    "ownerId": "usr_owner01",
-    "memberCount": 375,
-    "logoUrl": "https://picsum.photos/seed/punegam-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/punegam-banner/1200/675",
-    "brandColor": "#8b5cf6",
-    "galleryImages": [
-      "https://picsum.photos/seed/punegam-1/600/600",
-      "https://picsum.photos/seed/punegam-2/600/600"
-    ],
-    "about": "Pune Indie Gamers hosts monthly LAN nights, seasonal 48-hour game jams, and matchmaking for co-op squads across Valorant, Apex, and indie multiplayer titles. We also showcase member-built indie games at our quarterly Demo Day.",
-    "highlights": ["Monthly LAN nights", "375+ members", "Quarterly Demo Day"],
-    "faqs": [
-      {
-        "question": "Do I need my own PC?",
-        "answer": "Yes, LAN nights are BYOD (bring your own device)."
-      }
-    ],
-    "membershipApproval": "auto",
-    "featured": false,
-    "createdAt": "2025-08-10T09:00:00.000Z",
-    "updatedAt": "2026-07-10T09:00:00.000Z"
-  },
-  {
-    "id": "clu_chnmusic01",
-    "slug": "chennai-classical-music-circle",
-    "name": "Chennai Classical Music Circle",
-    "tagline": "Carnatic music appreciation, lec-dems, and the December season.",
-    "category": "music",
-    "tags": ["carnatic", "classical", "concerts"],
-    "city": "Chennai",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "paid",
-    "ownerId": "usr_owner01",
-    "memberCount": 610,
-    "logoUrl": "https://picsum.photos/seed/chnmusic-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/chnmusic-banner/1200/675",
-    "brandColor": "#ec4899",
-    "galleryImages": [
-      "https://picsum.photos/seed/chnmusic-1/600/600",
-      "https://picsum.photos/seed/chnmusic-2/600/600",
-      "https://picsum.photos/seed/chnmusic-3/600/600"
-    ],
-    "about": "A community for Carnatic music lovers in Chennai. We organise lecture-demonstrations with visiting artists, curate group outings during the December music season, and maintain a members-only recording archive of live concerts going back a decade.",
-    "highlights": ["Season concert outings", "600+ members", "Members-only archive"],
-    "faqs": [
-      {
-        "question": "Is prior music knowledge required?",
-        "answer": "No, all appreciation levels are welcome."
-      }
-    ],
-    "pricingPlans": [
-      {
-        "id": "plan_chnmusic_annual",
-        "name": "Season Pass",
-        "price": 799,
-        "currency": "INR",
-        "billingCycle": "yearly",
-        "trialDays": 0,
-        "description": "Access to the recording archive and season outings."
-      }
-    ],
-    "membershipApproval": "manual",
-    "featured": false,
-    "createdAt": "2025-05-20T09:00:00.000Z",
-    "updatedAt": "2026-07-05T09:00:00.000Z"
-  },
-  {
-    "id": "clu_hydphoto01",
-    "slug": "hyderabad-photography-club",
-    "name": "Hyderabad Photography Club",
-    "tagline": "Street, portrait, and astrophotography walks every month.",
-    "category": "photography",
-    "tags": ["photography", "street", "astro"],
-    "city": "Hyderabad",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "free",
-    "ownerId": "usr_owner01",
-    "memberCount": 428,
-    "logoUrl": "https://picsum.photos/seed/hydphoto-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/hydphoto-banner/1200/675",
-    "brandColor": "#3b82f6",
-    "galleryImages": [
-      "https://picsum.photos/seed/hydphoto-1/600/600",
-      "https://picsum.photos/seed/hydphoto-2/600/600",
-      "https://picsum.photos/seed/hydphoto-3/600/600",
-      "https://picsum.photos/seed/hydphoto-4/600/600"
-    ],
-    "about": "Hyderabad Photography Club runs themed photo walks every month — Old City street photography, Golconda astrophotography nights, and portrait sessions with amateur models. Members get feedback on their shots in weekly critique threads.",
-    "highlights": ["Monthly photo walks", "428+ members", "Weekly critique threads"],
-    "faqs": [
-      { "question": "Do I need a DSLR?", "answer": "Smartphone photographers are welcome too." }
-    ],
-    "membershipApproval": "auto",
-    "featured": false,
-    "createdAt": "2025-09-01T09:00:00.000Z",
-    "updatedAt": "2026-06-28T09:00:00.000Z"
-  },
-  {
-    "id": "clu_jaiheritage01",
-    "slug": "jaipur-heritage-walks",
-    "name": "Jaipur Heritage Walks",
-    "tagline": "Rediscovering the Pink City, one alley at a time.",
-    "category": "travel",
-    "tags": ["heritage", "walks", "history"],
-    "city": "Jaipur",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "free",
-    "ownerId": "usr_owner01",
-    "memberCount": 265,
-    "logoUrl": "https://picsum.photos/seed/jaiheritage-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/jaiheritage-banner/1200/675",
-    "brandColor": "#f59e0b",
-    "galleryImages": [
-      "https://picsum.photos/seed/jaiheritage-1/600/600",
-      "https://picsum.photos/seed/jaiheritage-2/600/600"
-    ],
-    "about": "We lead early-morning heritage walks through Jaipur's old city, uncovering stories behind its havelis, step-wells, and bazaars with local historians. New routes are added every season.",
-    "highlights": ["Weekend heritage walks", "265+ members", "Local historian guides"],
-    "faqs": [
-      {
-        "question": "Are walks suitable for kids?",
-        "answer": "Yes, most routes are family-friendly."
-      }
-    ],
-    "membershipApproval": "auto",
-    "featured": false,
-    "createdAt": "2025-10-05T09:00:00.000Z",
-    "updatedAt": "2026-06-20T09:00:00.000Z"
-  },
-  {
-    "id": "clu_kocbooks01",
-    "slug": "kochi-books-and-brews",
-    "name": "Kochi Books & Brews",
-    "tagline": "One book a month, one coffee shop at a time.",
-    "category": "books",
-    "tags": ["book-club", "coffee", "fiction"],
-    "city": "Kochi",
-    "language": "en",
-    "privacy": "private",
-    "status": "live",
-    "type": "free",
-    "ownerId": "usr_owner01",
-    "memberCount": 96,
-    "logoUrl": "https://picsum.photos/seed/kocbooks-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/kocbooks-banner/1200/675",
-    "brandColor": "#22c55e",
-    "galleryImages": ["https://picsum.photos/seed/kocbooks-1/600/600"],
-    "about": "A cosy, members-only book club that meets on the first Sunday of every month at a rotating Kochi coffee shop. We alternate between fiction and non-fiction picks, voted on by members.",
-    "highlights": ["Monthly book pick", "96 members", "Rotating venues"],
-    "faqs": [
-      {
-        "question": "How do I join a private club?",
-        "answer": "Requests are approved manually by the club owner."
-      }
-    ],
-    "membershipApproval": "manual",
-    "featured": false,
-    "createdAt": "2025-11-01T09:00:00.000Z",
-    "updatedAt": "2026-06-15T09:00:00.000Z"
-  },
-  {
-    "id": "clu_goayoga01",
-    "slug": "goa-beach-yoga-collective",
-    "name": "Goa Beach Yoga Collective",
-    "tagline": "Sunrise yoga on the sand, every single day.",
-    "category": "fitness",
-    "tags": ["yoga", "wellness", "beach"],
-    "city": "Goa",
-    "language": "en",
-    "privacy": "public",
-    "status": "live",
-    "type": "paid",
-    "ownerId": "usr_owner01",
-    "memberCount": 733,
-    "logoUrl": "https://picsum.photos/seed/goayoga-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/goayoga-banner/1200/675",
-    "brandColor": "#3b82f6",
-    "galleryImages": [
-      "https://picsum.photos/seed/goayoga-1/600/600",
-      "https://picsum.photos/seed/goayoga-2/600/600",
-      "https://picsum.photos/seed/goayoga-3/600/600"
-    ],
-    "about": "Daily sunrise yoga sessions on Ashwem beach, led by certified instructors. Monthly membership includes unlimited daily classes, a welcome kit, and discounted retreat weekends.",
-    "highlights": ["Daily sunrise sessions", "733+ members", "Certified instructors"],
-    "faqs": [
-      {
-        "question": "Is this suitable for beginners?",
-        "answer": "Yes, all levels are welcome with modifications offered."
-      }
-    ],
-    "pricingPlans": [
-      {
-        "id": "plan_goayoga_monthly",
-        "name": "Monthly Membership",
-        "price": 2499,
-        "currency": "INR",
-        "billingCycle": "monthly",
-        "trialDays": 7,
-        "description": "Unlimited daily sunrise sessions."
-      }
-    ],
-    "membershipApproval": "auto",
-    "featured": true,
-    "createdAt": "2025-04-12T09:00:00.000Z",
+    "createdAt": "2026-03-07T09:00:00.000Z",
     "updatedAt": "2026-07-22T09:00:00.000Z"
   },
   {
-    "id": "clu_chdstartup01",
-    "slug": "chandigarh-startup-founders",
-    "name": "Chandigarh Startup Founders",
-    "tagline": "Founders supporting founders in the tricity region.",
-    "category": "professional",
-    "tags": ["startups", "networking", "fundraising"],
-    "city": "Chandigarh",
+    "id": "clu_startupidea01",
+    "slug": "startup-idea",
+    "name": "Startup / Idea",
+    "tagline": "Funding connections and business guidance for early-stage entrepreneurs.",
+    "category": "startup-idea",
+    "tags": ["startups", "funding", "pitching"],
+    "city": "Dubai",
     "language": "en",
-    "privacy": "invite_only",
+    "privacy": "public",
     "status": "live",
     "type": "paid",
     "ownerId": "usr_owner01",
-    "memberCount": 0,
-    "logoUrl": "https://picsum.photos/seed/chdstartup-logo/200/200",
-    "bannerUrl": "https://picsum.photos/seed/chdstartup-banner/1200/675",
-    "brandColor": "#6366f1",
-    "galleryImages": [],
-    "about": "A private, invite-only network for early-stage startup founders in the Chandigarh tricity region to share fundraising advice, swap intros, and run peer mastermind sessions.",
-    "highlights": ["Peer mastermind sessions", "Founder-only network"],
-    "faqs": [],
+    "memberCount": 540,
+    "logoUrl": "https://picsum.photos/seed/startup-idea-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/startup-idea-banner/1200/675",
+    "brandColor": "#8b5cf6",
+    "galleryImages": [
+      "https://picsum.photos/seed/startup-idea-1/600/600",
+      "https://picsum.photos/seed/startup-idea-2/600/600",
+      "https://picsum.photos/seed/startup-idea-3/600/600"
+    ],
+    "about": "We understand the challenges that entrepreneur of start-up faces in the early stages of their businesses and recognise the crucial role that funding plays in their growth and development.",
+    "mission": "Turn early-stage ideas into fundable, scalable businesses.",
+    "codeOfConduct": "Give constructive feedback, respect confidentiality of unreleased ideas.",
+    "highlights": ["Weekly founder office hours", "540+ members", "Pitch development support"],
+    "faqs": [
+      {
+        "question": "Do I need a registered company to join?",
+        "answer": "No, an idea-stage concept is enough to get started."
+      }
+    ],
+    "membershipApproval": "auto",
+    "featured": false,
+    "createdAt": "2026-04-10T09:00:00.000Z",
+    "updatedAt": "2026-07-23T09:00:00.000Z"
+  },
+  {
+    "id": "clu_mentor01",
+    "slug": "mentor",
+    "name": "Mentor",
+    "tagline": "Personalized guidance that fosters independence and resilience.",
+    "category": "mentor",
+    "tags": ["mentorship", "guidance", "growth"],
+    "city": "Dubai",
+    "language": "en",
+    "privacy": "public",
+    "status": "live",
+    "type": "paid",
+    "ownerId": "usr_owner01",
+    "memberCount": 210,
+    "logoUrl": "https://picsum.photos/seed/mentor-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/mentor-banner/1200/675",
+    "brandColor": "#ec4899",
+    "galleryImages": [
+      "https://picsum.photos/seed/mentor-1/600/600",
+      "https://picsum.photos/seed/mentor-2/600/600",
+      "https://picsum.photos/seed/mentor-3/600/600"
+    ],
+    "about": "We understand that each person's path is unique, and we tailor our guidance to their specific needs and goals.",
+    "mission": "Help every member build the judgement and resilience to navigate their own path.",
+    "codeOfConduct": "Sessions are confidential; show up prepared and on time.",
+    "highlights": ["Monthly 1:1 mentor sessions", "210+ members", "Group reflection circles"],
+    "faqs": [
+      {
+        "question": "How are mentors matched?",
+        "answer": "Based on your stated goals and the mentor pool’s areas of expertise."
+      }
+    ],
     "pricingPlans": [
       {
-        "id": "plan_chdstartup_quarterly",
-        "name": "Founding Member",
+        "id": "plan_mentor_monthly",
+        "name": "Monthly Membership",
         "price": 999,
         "currency": "INR",
-        "billingCycle": "quarterly",
-        "trialDays": 0,
-        "description": "Access to mastermind sessions and founder directory."
+        "billingCycle": "monthly",
+        "trialDays": 7,
+        "description": "Includes a monthly 1:1 mentor session and reflection circles."
       }
     ],
     "membershipApproval": "manual",
     "featured": false,
-    "createdAt": "2026-07-24T09:30:00.000Z",
-    "updatedAt": "2026-07-24T10:00:00.000Z"
+    "createdAt": "2026-05-13T09:00:00.000Z",
+    "updatedAt": "2026-07-24T09:00:00.000Z"
+  },
+  {
+    "id": "clu_competorg01",
+    "slug": "competitors-organisation",
+    "name": "Competitors / Organisation",
+    "tagline": "A community for people who share the same trait or interest.",
+    "category": "competitors-organisation",
+    "tags": ["networking", "peer-support", "collaboration"],
+    "city": "Dubai",
+    "language": "en",
+    "privacy": "public",
+    "status": "live",
+    "type": "paid",
+    "ownerId": "usr_owner01",
+    "memberCount": 175,
+    "logoUrl": "https://picsum.photos/seed/competitors-organisation-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/competitors-organisation-banner/1200/675",
+    "brandColor": "#6366f1",
+    "galleryImages": [
+      "https://picsum.photos/seed/competitors-organisation-1/600/600",
+      "https://picsum.photos/seed/competitors-organisation-2/600/600",
+      "https://picsum.photos/seed/competitors-organisation-3/600/600"
+    ],
+    "about": "We aim to build a community of individuals sharing the same trait or interest. This can help in the development of powerful support system and a sense of belonging.",
+    "mission": "Turn shared circumstance into shared strength.",
+    "codeOfConduct": "Keep roundtable discussions confidential to the group unless everyone agrees to share externally.",
+    "highlights": ["Peer roundtables", "175+ members", "Shared resource library"],
+    "faqs": [
+      {
+        "question": "What kinds of groups form here?",
+        "answer": "Anything from industry peers to people navigating similar personal circumstances."
+      }
+    ],
+    "membershipApproval": "auto",
+    "featured": false,
+    "createdAt": "2026-06-16T09:00:00.000Z",
+    "updatedAt": "2026-07-25T09:00:00.000Z"
+  },
+  {
+    "id": "clu_chitchat01",
+    "slug": "chit-chat",
+    "name": "Chit Chat",
+    "tagline": "Issue-resolution discussions with expert facilitation.",
+    "category": "chit-chat",
+    "tags": ["discussion", "support", "community"],
+    "city": "Dubai",
+    "language": "en",
+    "privacy": "public",
+    "status": "live",
+    "type": "paid",
+    "ownerId": "usr_owner01",
+    "memberCount": 690,
+    "logoUrl": "https://picsum.photos/seed/chit-chat-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/chit-chat-banner/1200/675",
+    "brandColor": "#f59e0b",
+    "galleryImages": [
+      "https://picsum.photos/seed/chit-chat-1/600/600",
+      "https://picsum.photos/seed/chit-chat-2/600/600",
+      "https://picsum.photos/seed/chit-chat-3/600/600"
+    ],
+    "about": "Our chat system is dedicated to issue resolution. Experts could play a role in facilitating the conversation, ensuring that discussions remain respectful and focused on problem resolution.",
+    "mission": "Give people a safe, well-facilitated space to talk through what they are facing.",
+    "codeOfConduct": "Respectful dialogue only; no judgement of others’ experiences.",
+    "highlights": ["Weekly facilitated discussions", "690+ members", "Expert-moderated threads"],
+    "faqs": [
+      {
+        "question": "Is participation anonymous?",
+        "answer": "You can use a display name; full anonymity isn’t supported."
+      }
+    ],
+    "membershipApproval": "auto",
+    "featured": false,
+    "createdAt": "2026-01-19T09:00:00.000Z",
+    "updatedAt": "2026-07-26T09:00:00.000Z"
+  },
+  {
+    "id": "clu_userswell01",
+    "slug": "users-wellness",
+    "name": "Users",
+    "tagline": "Support and guidance for your emotional, mental, or physical well-being journey.",
+    "category": "users-wellness",
+    "tags": ["wellness", "healing", "meditation"],
+    "city": "Dubai",
+    "language": "en",
+    "privacy": "public",
+    "status": "live",
+    "type": "paid",
+    "ownerId": "usr_owner01",
+    "memberCount": 980,
+    "logoUrl": "https://picsum.photos/seed/users-wellness-logo/200/200",
+    "bannerUrl": "https://picsum.photos/seed/users-wellness-banner/1200/675",
+    "brandColor": "#14b8a6",
+    "galleryImages": [
+      "https://picsum.photos/seed/users-wellness-1/600/600",
+      "https://picsum.photos/seed/users-wellness-2/600/600",
+      "https://picsum.photos/seed/users-wellness-3/600/600"
+    ],
+    "about": "Global Soul Healing, dedicated to healing services. Here user can seeking support and guidance in their journey towards emotional, mental, or physical well-being.",
+    "mission": "Support every member’s journey toward holistic well-being.",
+    "codeOfConduct": "Be kind and non-judgemental; this is a support space, not a debate space.",
+    "highlights": ["Daily guided meditations", "980+ members", "Members-only well-being library"],
+    "faqs": [
+      {
+        "question": "Do I need prior meditation experience?",
+        "answer": "No, all levels are welcome."
+      }
+    ],
+    "membershipApproval": "auto",
+    "featured": true,
+    "createdAt": "2026-02-22T09:00:00.000Z",
+    "updatedAt": "2026-07-27T09:00:00.000Z"
   }
 ]

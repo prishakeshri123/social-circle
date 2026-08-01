@@ -46,7 +46,12 @@ export function CommunityCtaSection({
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3 sm:shrink-0">
-          <Button asChild size="lg" className="bg-white text-neutral-900 hover:bg-neutral-200">
+          <Button
+            variant="primary"
+            asChild
+            size="lg"
+            className="bg-white text-neutral-900 hover:bg-neutral-200"
+          >
             <Link to={primaryTo}>{primaryCta}</Link>
           </Button>
           <Button

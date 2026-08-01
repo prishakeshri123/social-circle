@@ -8,7 +8,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary-600 text-text-inverse hover:bg-primary-700',
+        // Single source of truth for every primary/CTA button in the app
+        // (Submit, Next, Join, Continue, Sign Up, …). Change the look of a
+        // primary button here — every default-variant Button picks it up.
+        default:
+          'gradient-bg text-text-inverse transition-all duration-200 hover:scale-[1.02] hover:brightness-110 active:scale-[0.97]',
+        primary: 'bg-primary-600 text-text-inverse hover:bg-primary-700',
         destructive: 'bg-error-500 text-text-inverse hover:bg-error-500/90',
         outline: 'border border-border-strong bg-transparent hover:bg-surface',
         secondary: 'bg-surface text-text-primary hover:bg-gray-200',

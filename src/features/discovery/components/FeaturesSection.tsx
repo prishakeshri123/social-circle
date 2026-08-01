@@ -6,7 +6,7 @@ export function FeaturesSection() {
   return (
     <section className="space-y-10 py-6 text-center">
       <div className="space-y-2">
-        <p className="text-xs font-bold uppercase tracking-wider text-primary-600">
+        <p className="text-xs font-bold uppercase tracking-wider gradient-text">
           {en.marketing.featuresEyebrow}
         </p>
         <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">

@@ -27,6 +27,7 @@ export const ROUTES = {
   checkoutFailure: '/checkout/failure',
   login: '/login',
   signup: '/signup',
+  signupSuccess: '/signup/success',
   verifyOtp: '/verify-otp',
   forgotPassword: '/forgot-password',
   authCallback: '/auth/callback',

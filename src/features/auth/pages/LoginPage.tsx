@@ -15,14 +15,11 @@ import { Label } from '@/shared/components/ui/Label';
 import { Checkbox } from '@/shared/components/ui/Checkbox';
 import { PasswordInput } from '@/features/auth/components/PasswordInput';
 import { OtpInput } from '@/features/auth/components/OtpInput';
-import { SocialLoginButtons } from '@/features/auth/components/SocialLoginButtons';
-import { AuthDivider } from '@/features/auth/components/AuthDivider';
 import { AUTH_FEATURES, AuthSplitLayout } from '@/features/auth/components/AuthSplitLayout';
 import { useLogin } from '@/features/auth/hooks/useLogin';
 import { useResendOtp } from '@/features/auth/hooks/useResendOtp';
 import { useVerifyOtp } from '@/features/auth/hooks/useVerifyOtp';
 import { cn } from '@/shared/utils/cn';
-import type { SocialProvider } from '@/types/auth.types';
 import type { z } from 'zod';
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -124,13 +121,6 @@ export function LoginPage() {
     );
   };
 
-  const handleSocialSelect = (provider: SocialProvider) => {
-    const next = searchParams.get('next');
-    const params = new URLSearchParams({ provider });
-    if (next) params.set('next', next);
-    navigate(`${ROUTES.authCallback}?${params.toString()}`);
-  };
-
   const busy = login.isPending || resendOtp.isPending || verifyOtp.isPending;
 
   return (
@@ -142,7 +132,7 @@ export function LoginPage() {
       bottomPrompt={
         <>
           {en.auth.newToSocialCircle}{' '}
-          <Link to={ROUTES.signup} className="font-medium text-primary-600 hover:underline">
+          <Link to={ROUTES.signup} className="font-medium gradient-text hover:underline">
             {en.auth.createAccountLink}
           </Link>
         </>
@@ -153,7 +143,7 @@ export function LoginPage() {
         noValidate
         className="space-y-3.5 sm:space-y-4"
       >
-        <div className="rounded-xl border border-border bg-surface-subtle p-1">
+        <div className="rounded-xl border border-border bg-surface p-1">
           <div className="grid grid-cols-2 gap-1">
             <button
               type="button"
@@ -164,7 +154,7 @@ export function LoginPage() {
               className={cn(
                 'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                 mode === 'password'
-                  ? 'bg-primary-600 text-white shadow-sm'
+                  ? 'gradient-bg text-white shadow-sm'
                   : 'text-text-secondary hover:bg-surface-raised hover:text-text-primary',
               )}
             >
@@ -179,7 +169,7 @@ export function LoginPage() {
               className={cn(
                 'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                 mode === 'otp'
-                  ? 'bg-primary-600 text-white shadow-sm'
+                  ? 'gradient-bg text-white shadow-sm'
                   : 'text-text-secondary hover:bg-surface-raised hover:text-text-primary',
               )}
             >
@@ -251,7 +241,7 @@ export function LoginPage() {
               <div className="flex justify-end">
                 <Link
                   to={ROUTES.forgotPassword}
-                  className="text-sm font-medium text-primary-600 hover:underline"
+                  className="text-sm font-medium gradient-text hover:underline"
                 >
                   {en.auth.forgotPassword}
                 </Link>
@@ -364,17 +354,13 @@ export function LoginPage() {
         </Button>
       </form>
 
-      <AuthDivider />
-
-      <SocialLoginButtons disabled={busy} onSelect={handleSocialSelect} />
-
       <p className="text-center text-xs text-text-muted">
         {en.auth.legalConsentPrefix}{' '}
-        <Link to={ROUTES.terms} className="font-medium text-primary-600 hover:underline">
+        <Link to={ROUTES.terms} className="font-medium gradient-text hover:underline">
           {en.marketing.footerLinkTermsOfService}
         </Link>{' '}
         {en.auth.legalConsentAnd}{' '}
-        <Link to={ROUTES.privacyPolicy} className="font-medium text-primary-600 hover:underline">
+        <Link to={ROUTES.privacyPolicy} className="font-medium gradient-text hover:underline">
           {en.marketing.footerLinkPrivacyPolicy}
         </Link>
         .

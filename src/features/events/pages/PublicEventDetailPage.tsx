@@ -44,17 +44,21 @@ export function PublicEventDetailPage() {
       : null;
 
   function handleCta() {
-    requireAuth(isPaid ? 'buy' : 'rsvp', () => {
-      if (!event) return;
-      if (isPaid) {
-        navigate(ROUTES.checkout(event.id));
-        return;
-      }
-      rsvpMutation.mutate('going', {
-        onSuccess: () => toast.success(en.events.rsvpSuccess),
-        onError: (error) => toast.error(getApiErrorMessage(error)),
-      });
-    });
+    requireAuth(
+      isPaid ? 'buy' : 'rsvp',
+      () => {
+        if (!event) return;
+        if (isPaid) {
+          navigate(ROUTES.checkout(event.id));
+          return;
+        }
+        rsvpMutation.mutate('going', {
+          onSuccess: () => toast.success(en.events.rsvpSuccess),
+          onError: (error) => toast.error(getApiErrorMessage(error)),
+        });
+      },
+      { communitySlug: event.club.category },
+    );
   }
 
   return (

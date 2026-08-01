@@ -7,6 +7,9 @@ import {
   MIN_POLL_OPTIONS,
   MAX_POLL_OPTIONS,
   MAX_CAPTION_LENGTH,
+  MAX_ADDRESS_LENGTH,
+  MAX_SHORT_FIELD_LENGTH,
+  MAX_REFERENCE_CONTACT_LENGTH,
 } from '@/shared/constants/app.constants';
 import { en } from '@/shared/constants/locales/en';
 
@@ -57,23 +60,34 @@ export const loginSchema = z.object({
 
 export const fullNameSchema = z.string().min(2, e.nameTooShort).max(100, e.nameTooLong);
 
-export const signupSchema = z
-  .object({
-    fullName: fullNameSchema,
-    email: emailSchema,
-    phone: phoneSchema.optional().or(z.literal('')),
-    password: passwordSchema,
-    confirmPassword: z.string(),
-    terms: z.boolean().refine((v) => v === true, { message: e.termsRequired }),
-  })
-  .refine((d) => d.password === d.confirmPassword, {
-    message: e.passwordMatch,
-    path: ['confirmPassword'],
-  });
-
-export const otpSignupSchema = z.object({
+export const signupSchema = z.object({
+  // Step 1 — account & contact
   fullName: fullNameSchema,
-  target: emailOrPhoneSchema,
+  email: emailSchema,
+  phone: phoneSchema,
+
+  // Step 2 — community & personal info
+  community: z.string().min(1, e.required),
+  address: z.string().max(MAX_ADDRESS_LENGTH).optional().or(z.literal('')),
+  dateOfBirth: z.string().optional().or(z.literal('')),
+  religion: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  nationality: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  residentStatus: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+
+  // Step 3 — family & occupation (all optional)
+  fatherName: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  motherName: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  occupation: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  fieldOfOccupation: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  spouseName: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  childrenNames: z.string().max(MAX_ADDRESS_LENGTH).optional().or(z.literal('')),
+  marriageDate: z.string().optional().or(z.literal('')),
+
+  // Step 4 — references (optional)
+  referenceContact1: z.string().max(MAX_REFERENCE_CONTACT_LENGTH).optional().or(z.literal('')),
+  referenceContact2: z.string().max(MAX_REFERENCE_CONTACT_LENGTH).optional().or(z.literal('')),
+
+  // Step 6 — terms
   terms: z.boolean().refine((v) => v === true, { message: e.termsRequired }),
 });
 

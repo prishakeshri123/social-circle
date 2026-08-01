@@ -13,7 +13,7 @@ export function MarketingFaqSection() {
     <section id="faqs" className="scroll-mt-20 py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center">
-          <p className="text-sm font-semibold tracking-wider text-primary-600">
+          <p className="text-sm font-semibold tracking-wider gradient-text uppercase">
             FREQUENTLY ASKED QUESTIONS
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-text-primary">
@@ -56,7 +56,7 @@ export function MarketingFaqSection() {
                       <div className="rounded-xl bg-white shadow-sm overflow-hidden">
                         <AccordionTrigger className="px-6 py-5">
                           <div className="flex items-center gap-4 w-full">
-                            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-purple-50 text-primary-600 font-semibold">
+                            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-purple-50 gradient-text font-semibold">
                               {number}
                             </div>
                             <div className="flex-1 text-left font-medium">{faq.question}</div>

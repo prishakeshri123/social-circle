@@ -17,6 +17,11 @@ const LoginPage = lazy(() =>
 const SignupPage = lazy(() =>
   import('@/features/auth/pages/SignupPage').then((m) => ({ default: m.SignupPage })),
 );
+const SignupSuccessPage = lazy(() =>
+  import('@/features/auth/pages/SignupSuccessPage').then((m) => ({
+    default: m.SignupSuccessPage,
+  })),
+);
 const OtpVerificationPage = lazy(() =>
   import('@/features/auth/pages/OtpVerificationPage').then((m) => ({
     default: m.OtpVerificationPage,
@@ -115,6 +120,11 @@ export const router = createBrowserRouter([
   // --- Login/Signup: bespoke full-page split layout, no shared AuthLayout shell ---
   { path: ROUTES.login, element: suspended(<LoginPage />), errorElement: <ErrorFallback /> },
   { path: ROUTES.signup, element: suspended(<SignupPage />), errorElement: <ErrorFallback /> },
+  {
+    path: ROUTES.signupSuccess,
+    element: suspended(<SignupSuccessPage />),
+    errorElement: <ErrorFallback />,
+  },
 
   // --- Public auth routes ---------------------------------------------
   {

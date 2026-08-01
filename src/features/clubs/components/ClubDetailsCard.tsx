@@ -66,7 +66,9 @@ export function ClubDetailsCard({ club, isMember }: ClubDetailsCardProps) {
     if (club.type === 'free') {
       requireAuth('join', () => joinMutation.mutate(club.id));
     } else {
-      requireAuth('buy', () => navigate(ROUTES.checkout(plan?.id ?? '')));
+      requireAuth('buy', () => navigate(ROUTES.checkout(plan?.id ?? '')), {
+        communitySlug: club.category,
+      });
     }
   }
 

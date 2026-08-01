@@ -45,7 +45,7 @@ export function HomePage() {
     <>
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary-600">
+          <p className="text-xs font-semibold uppercase tracking-wider gradient-text">
             {en.marketing.popularClubsEyebrow}
           </p>
           <h2 className="mt-1 text-2xl font-bold text-primary-900 sm:text-3xl">
@@ -54,7 +54,7 @@ export function HomePage() {
         </div>
         <Link
           to={ROUTES.search}
-          className="hidden shrink-0 items-center gap-1 text-sm font-medium text-primary-600 transition-colors duration-fast hover:text-primary-700 sm:flex"
+          className="hidden shrink-0 items-center gap-1 text-sm font-medium gradient-text transition-colors duration-fast hover:text-primary-700 sm:flex"
         >
           {en.marketing.viewAllClubsCta}
           <ArrowRight className="size-4" aria-hidden="true" />
