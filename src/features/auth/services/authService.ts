@@ -1,5 +1,4 @@
 import { apiClient } from '@/services/apiClient';
-import { API_ENDPOINTS } from '@/shared/constants/apiEndpoints';
 import { SOCIAL_LOGIN_MOCK_DELAY_MS } from '@/shared/constants/app.constants';
 import type {
   AuthSuccessResponse,
@@ -20,37 +19,34 @@ function wait(ms: number) {
 
 export const authService = {
   login: (data: LoginRequest) =>
-    apiClient.post<AuthSuccessResponse>(API_ENDPOINTS.auth.login, data).then((r) => r.data),
+    apiClient.post<AuthSuccessResponse>('/auth/login', data).then((r) => r.data),
 
   signup: (data: SignupRequest) =>
-    apiClient.post<SignupResponse>(API_ENDPOINTS.auth.signup, data).then((r) => r.data),
+    apiClient.post<SignupResponse>('/auth/signup', data).then((r) => r.data),
 
   verifyOtp: (data: VerifyOtpRequest) =>
     apiClient
-      .post<AuthSuccessResponse | { verified: true }>(API_ENDPOINTS.auth.verifyOtp, data)
+      .post<AuthSuccessResponse | { verified: true }>('/auth/verify-otp', data)
       .then((r) => r.data),
 
   resendOtp: (target: string, purpose: OtpPurpose) =>
     apiClient
-      .post<{ message: string }>(API_ENDPOINTS.auth.resendOtp, { target, purpose })
+      .post<{ message: string }>('/auth/resend-otp', { target, purpose })
       .then((r) => r.data),
 
   forgotPassword: (data: ForgotPasswordRequest) =>
     apiClient
-      .post<{ message: string; maskedTarget: string }>(API_ENDPOINTS.auth.forgotPassword, data)
+      .post<{ message: string; maskedTarget: string }>('/auth/forgot-password', data)
       .then((r) => r.data),
 
   resetPassword: (data: ResetPasswordRequest) =>
-    apiClient.post<{ message: string }>(API_ENDPOINTS.auth.resetPassword, data).then((r) => r.data),
+    apiClient.post<{ message: string }>('/auth/reset-password', data).then((r) => r.data),
 
-  logout: () => apiClient.post<{ message: string }>(API_ENDPOINTS.auth.logout).then((r) => r.data),
+  logout: () => apiClient.post<{ message: string }>('/auth/logout').then((r) => r.data),
 
   socialLogin: async (provider: SocialProvider) => {
     const [response] = await Promise.all([
-      apiClient.post<SocialLoginResponse>(API_ENDPOINTS.auth.socialLogin, {
-        provider,
-        code: 'mock-code',
-      }),
+      apiClient.post<SocialLoginResponse>('/auth/social-login', { provider, code: 'mock-code' }),
       wait(SOCIAL_LOGIN_MOCK_DELAY_MS),
     ]);
     return response.data;
