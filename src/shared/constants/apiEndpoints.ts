@@ -1,0 +1,42 @@
+// Every real-backend URL path used by services/*.ts, in one place.
+// Paths are relative to apiClient's baseURL (VITE_API_BASE_URL).
+export const API_ENDPOINTS = {
+  auth: {
+    login: '/auth/login',
+    signup: '/auth/signup',
+    verifyOtp: '/auth/verify-otp',
+    resendOtp: '/auth/resend-otp',
+    forgotPassword: '/auth/forgot-password',
+    resetPassword: '/auth/reset-password',
+    logout: '/auth/logout',
+    socialLogin: '/auth/social-login',
+    refresh: '/auth/refresh',
+  },
+  users: {
+    byId: (userId: string) => `/users/${userId}`,
+    me: '/users/me',
+    dmChannel: (userId: string) => `/users/${userId}/dm-channel`,
+  },
+  clubs: {
+    myClubs: '/me/clubs',
+    list: '/clubs',
+    bySlug: (slug: string) => `/clubs/${slug}`,
+    join: (clubId: string) => `/clubs/${clubId}/join`,
+    myMembership: (clubId: string) => `/clubs/${clubId}/members/me`,
+    events: (clubId: string) => `/clubs/${clubId}/events`,
+    channels: (clubId: string) => `/clubs/${clubId}/channels`,
+  },
+  events: {
+    list: '/events',
+    byId: (eventId: string) => `/events/${eventId}`,
+    rsvp: (eventId: string) => `/events/${eventId}/rsvp`,
+  },
+  chat: {
+    myConversations: '/me/conversations',
+    messages: (channelId: string) => `/channels/${channelId}/messages`,
+    message: (messageId: string) => `/messages/${messageId}`,
+    reactions: (messageId: string) => `/messages/${messageId}/reactions`,
+    vote: (messageId: string) => `/messages/${messageId}/vote`,
+    pin: (channelId: string) => `/channels/${channelId}/pin`,
+  },
+} as const;

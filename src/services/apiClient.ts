@@ -1,10 +1,13 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/shared/constants/app.constants';
+import { API_ENDPOINTS } from '@/shared/constants/apiEndpoints';
 import { ROUTES } from '@/shared/constants/routes';
 import type { AuthTokens } from '@/types/auth.types';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+
 export const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -22,7 +25,9 @@ async function refreshAccessToken(): Promise<string> {
   const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
   if (!refreshToken) throw new Error('No refresh token available');
 
-  const { data } = await axios.post<AuthTokens>('/api/auth/refresh', { refreshToken });
+  const { data } = await axios.post<AuthTokens>(`${API_BASE_URL}${API_ENDPOINTS.auth.refresh}`, {
+    refreshToken,
+  });
   localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
   localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
   return data.accessToken;
