@@ -5,7 +5,9 @@ import '@/styles/globals.css';
 import '@/styles/animations.css';
 
 async function bootstrap() {
-  await import('@/services/mockAdapter');
+  if (import.meta.env.VITE_USE_MOCK !== 'false') {
+    await import('@/services/mockAdapter');
+  }
 
   const rootElement = document.getElementById('root');
   if (!rootElement) throw new Error('Root element not found');
