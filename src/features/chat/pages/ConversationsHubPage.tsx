@@ -15,13 +15,17 @@ import {
   buildHubItems,
   countUnreadConversations,
   filterBySearch,
+  humanizeChannelName,
+  sortHubItems,
   type HubFilter,
   type HubItem,
+  type HubSortMode,
 } from '@/features/chat/utils/hubItems';
 import { ClubOverviewPanel } from '@/features/chat/components/ClubOverviewPanel';
 import { ConversationEmptyState } from '@/features/chat/components/ConversationEmptyState';
 import { ConversationListPanel } from '@/features/chat/components/ConversationListPanel';
 import { ConversationThreadPanel } from '@/features/chat/components/ConversationThreadPanel';
+import { GroupChatView } from '@/features/chat/components/GroupChatView';
 
 const EMPTY_MESSAGES: Record<HubFilter, string> = {
   all: en.hub.emptyListAll,
@@ -38,6 +42,7 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
   const navigate = useNavigate();
   const { userId: dmUserId } = useParams<{ userId: string }>();
   const [filter, setFilter] = useState<HubFilter>(dmUserId ? 'chats' : defaultFilter);
+  const [sortMode, setSortMode] = useState<HubSortMode>('recent');
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebouncedValue(search, SEARCH_DEBOUNCE_MS);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
@@ -51,8 +56,8 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
   );
 
   const visibleItems = useMemo(
-    () => filterBySearch(itemsByFilter[filter], debouncedSearch),
-    [itemsByFilter, filter, debouncedSearch],
+    () => sortHubItems(filterBySearch(itemsByFilter[filter], debouncedSearch), sortMode),
+    [itemsByFilter, filter, debouncedSearch, sortMode],
   );
 
   const unreadConversationCount = useMemo(
@@ -96,28 +101,24 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
   );
   const isDetailOpen = Boolean(selectedItem) || hasDeepLinkFallback;
 
+  const groupClub = selectedItem?.clubId
+    ? (myClubsQuery.data ?? []).find((c) => c.id === selectedItem.clubId)
+    : undefined;
+
   let detailPanel: ReactNode;
   if (selectedItem && selectedItem.kind === 'club' && selectedItem.club) {
     detailPanel = <ClubOverviewPanel club={selectedItem.club} onBack={handleBack} />;
-  } else if (selectedItem && selectedItem.kind === 'group' && selectedItem.channelId) {
-    const clubSlug = selectedItem.clubSlug;
+  } else if (selectedItem && selectedItem.kind === 'group' && selectedItem.channelId && groupClub) {
+    const channelSubtitle = selectedItem.channelName
+      ? humanizeChannelName(selectedItem.channelName)
+      : en.tabs.chat;
     detailPanel = (
-      <ConversationThreadPanel
+      <GroupChatView
+        club={groupClub}
         channelId={selectedItem.channelId}
-        title={selectedItem.title}
-        subtitle={en.tabs.chat}
-        avatarUrl={selectedItem.avatarUrl}
-        avatarFallback={selectedItem.avatarFallback}
-        isSquareAvatar
+        channelSubtitle={channelSubtitle}
+        category={selectedItem.category}
         onBack={handleBack}
-        secondaryAction={
-          clubSlug
-            ? {
-                label: en.hub.openDashboardCta,
-                onClick: () => navigate(ROUTES.clubDashboard(clubSlug)),
-              }
-            : undefined
-        }
       />
     );
   } else if (selectedItem && selectedItem.kind === 'direct' && selectedItem.channelId) {
@@ -156,6 +157,8 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
         filter={filter}
         onFilterChange={handleFilterChange}
         unreadConversationCount={unreadConversationCount}
+        sortMode={sortMode}
+        onSortModeChange={setSortMode}
         search={search}
         onSearchChange={setSearch}
         selectedKey={selectedKey}

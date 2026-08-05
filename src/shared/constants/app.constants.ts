@@ -47,9 +47,11 @@ export const REFRESH_TOKEN_KEY = 'refreshToken';
 
 // ── Local storage keys ────────────────────────────────────
 export const LS_RECENT_SEARCHES_KEY = 'sc_recent_searches';
-export const LS_HOME_WELCOME_DISMISSED_KEY = 'sc_home_welcome_dismissed';
 export const LS_SIGNUP_SUBMISSION_KEY = 'sc_signup_submission';
 export const MAX_RECENT_SEARCHES = 10;
+
+// ── Member home dashboard ───────────────────────────────────
+export const CONTINUE_COMMUNITIES_CARD_LIMIT = 3;
 
 // ── Discovery / Search ─────────────────────────────────────
 export const CLUB_SORT_OPTIONS = ['recommended', 'newest', 'most_members'] as const;
@@ -57,6 +59,8 @@ export const GALLERY_PREVIEW_COUNT = 9;
 export const MEMBERS_PREVIEW_COUNT = 12;
 export const SEARCH_MIN_CHARS = 2;
 export const POPULAR_CLUBS_STRIP_LIMIT = 8;
+export const RECOMMENDED_CLUBS_STRIP_LIMIT = 4;
+export const MY_CLUBS_EVENTS_SCAN_LIMIT = 200;
 export const NEW_CLUB_THRESHOLD_DAYS = 30;
 
 // ── Onboarding ─────────────────────────────────────────────

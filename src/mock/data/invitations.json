@@ -1,0 +1,26 @@
+[
+  {
+    "id": "inv_001",
+    "clubId": "clu_kocbooks01",
+    "invitedUserId": "usr_member01",
+    "invitedByUserId": "usr_member06",
+    "status": "pending",
+    "createdAt": "2026-07-28T10:00:00.000Z"
+  },
+  {
+    "id": "inv_002",
+    "clubId": "clu_goayoga01",
+    "invitedUserId": "usr_member01",
+    "invitedByUserId": "usr_member05",
+    "status": "pending",
+    "createdAt": "2026-07-26T09:00:00.000Z"
+  },
+  {
+    "id": "inv_003",
+    "clubId": "clu_chdstartup01",
+    "invitedUserId": "usr_member01",
+    "invitedByUserId": "usr_member04",
+    "status": "pending",
+    "createdAt": "2026-07-21T14:00:00.000Z"
+  }
+]

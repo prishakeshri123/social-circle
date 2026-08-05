@@ -109,6 +109,9 @@ const ClubDashboardLayout = lazy(() =>
     default: m.ClubDashboardLayout,
   })),
 );
+const MyClubsPage = lazy(() =>
+  import('@/features/clubs/pages/MyClubsPage').then((m) => ({ default: m.MyClubsPage })),
+);
 
 // Wraps a lazily-loaded page element in its own Suspense boundary so
 // navigating to it shows a spinner instead of blocking on the whole tree.
@@ -182,7 +185,12 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorFallback />,
     children: [
-      { path: ROUTES.myClubs, element: <ConversationsHubPage defaultFilter="clubs" /> },
+      { path: ROUTES.myClubs, element: <MyClubsPage /> },
+      { path: ROUTES.myEvents, element: <PlaceholderPage title="Events & Meetings" /> },
+      { path: ROUTES.albums, element: <PlaceholderPage title="Albums" /> },
+      { path: ROUTES.members, element: <PlaceholderPage title="Members" /> },
+      { path: ROUTES.invitations, element: <PlaceholderPage title="Invitations" /> },
+      { path: ROUTES.savedClubs, element: <PlaceholderPage title="Saved Clubs" /> },
       { path: ROUTES.notifications, element: <PlaceholderPage title="Notifications" /> },
       { path: ROUTES.messages, element: <ConversationsHubPage defaultFilter="all" /> },
       {

@@ -1,7 +1,14 @@
 import { apiClient } from '@/services/apiClient';
 import { API_ENDPOINTS } from '@/shared/constants/apiEndpoints';
+import { PAGE_SIZE_TABLE } from '@/shared/constants/app.constants';
 import type { PaginatedResponse } from '@/types/api.types';
-import type { Club, ClubFilters, ClubMembership, MyClub } from '@/types/club.types';
+import type {
+  Club,
+  ClubFilters,
+  ClubMembership,
+  ClubMemberWithUser,
+  MyClub,
+} from '@/types/club.types';
 
 // Club creation and settings editing happen entirely in the separate Admin
 // Dashboard -- this app only reads clubs and joins them.
@@ -22,4 +29,11 @@ export const clubService = {
 
   getMyMembership: (clubId: string) =>
     apiClient.get<ClubMembership>(API_ENDPOINTS.clubs.myMembership(clubId)).then((r) => r.data),
+
+  listMembers: (clubId: string, limit: number = PAGE_SIZE_TABLE) =>
+    apiClient
+      .get<PaginatedResponse<ClubMemberWithUser>>(API_ENDPOINTS.clubs.members(clubId), {
+        params: { limit },
+      })
+      .then((r) => r.data),
 };

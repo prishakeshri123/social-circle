@@ -1,13 +1,14 @@
-import { Building2, Users } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/Avatar';
 import { Badge } from '@/shared/components/ui/Badge';
 import { CONVERSATION_LIST_BADGE_MAX } from '@/shared/constants/app.constants';
 import { cn } from '@/shared/utils/cn';
+import { CategoryIconBadge } from '@/features/clubs/components/CategoryIconBadge';
 
 interface ConversationListItemProps {
   kind: 'direct' | 'group' | 'club';
   avatarUrl?: string;
   avatarFallback: string;
+  category?: string;
   title: string;
   subtitle: string;
   timestamp?: string;
@@ -21,6 +22,7 @@ export function ConversationListItem({
   kind,
   avatarUrl,
   avatarFallback,
+  category,
   title,
   subtitle,
   timestamp,
@@ -30,7 +32,6 @@ export function ConversationListItem({
   onClick,
 }: ConversationListItemProps) {
   const isSquare = kind !== 'direct';
-  const KindIcon = kind === 'club' ? Building2 : Users;
 
   return (
     <button
@@ -44,19 +45,21 @@ export function ConversationListItem({
     >
       <div className="relative shrink-0">
         {isSquare ? (
-          <div className="gradient-bg flex size-11 items-center justify-center overflow-hidden rounded-2xl text-text-inverse">
-            {avatarUrl ? (
-              <img
-                src={avatarUrl}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                className="size-full object-cover"
-              />
-            ) : (
-              <KindIcon className="size-5" aria-hidden="true" />
-            )}
-          </div>
+          category ? (
+            <CategoryIconBadge category={category} className="size-11 ring-0" />
+          ) : (
+            <div className="gradient-bg flex size-11 items-center justify-center overflow-hidden rounded-2xl text-text-inverse">
+              {avatarUrl && (
+                <img
+                  src={avatarUrl}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="size-full object-cover"
+                />
+              )}
+            </div>
+          )
         ) : (
           <Avatar className="size-11 rounded-2xl">
             <AvatarImage src={avatarUrl} alt="" className="rounded-2xl" />

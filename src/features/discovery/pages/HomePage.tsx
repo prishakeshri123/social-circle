@@ -12,7 +12,7 @@ import { useAuth } from '@/shared/hooks/useAuth';
 import { useClubsFeed } from '@/features/discovery/hooks/useClubsFeed';
 import { ClubCardSkeleton } from '@/features/discovery/components/ClubCardSkeleton';
 import { PopularClubCard } from '@/features/discovery/components/PopularClubCard';
-import { WelcomeBanner } from '@/features/discovery/components/WelcomeBanner';
+import { MemberHomeDashboard } from '@/features/discovery/components/home/MemberHomeDashboard';
 import { HeroSection } from '@/features/discovery/components/HeroSection';
 import { FeaturesSection } from '@/features/discovery/components/FeaturesSection';
 import { StatsStrip } from '@/features/discovery/components/StatsStrip';
@@ -28,7 +28,7 @@ export function HomePage() {
   const [type, setType] = useState<ClubFilters['type']>();
   const [sort] = useState<(typeof CLUB_SORT_OPTIONS)[number]>('recommended');
 
-  const { data, isPending, isError, refetch } = useClubsFeed({ type, sort });
+  const { data, isPending, isError, refetch } = useClubsFeed({ type, sort }, !user);
 
   const clubs = data?.pages.flatMap((page) => page.data) ?? [];
   const hasFilters = Boolean(type);
@@ -103,6 +103,18 @@ export function HomePage() {
     </>
   );
 
+  if (user) {
+    return (
+      <>
+        <Helmet>
+          <title>{en.discovery.title} | Social Circle</title>
+          <meta name="description" content={en.discovery.subtitle} />
+        </Helmet>
+        <MemberHomeDashboard user={user} />
+      </>
+    );
+  }
+
   return (
     <>
       <Helmet>
@@ -112,35 +124,24 @@ export function HomePage() {
 
       {/* Rendered outside PageContainer so it sits flush at y=0, flush behind the
           fixed transparent header, with no padding gap above it. */}
-      {!user && <HeroSection />}
+      <HeroSection />
 
       <PageContainer className="space-y-6">
-        {!user && <FeaturesSection />}
+        <FeaturesSection />
 
-        {user && <WelcomeBanner fullName={user.fullName} />}
+        <section
+          id="browse-clubs"
+          className="scroll-mt-20 space-y-6 rounded-3xl bg-primary-50 px-4 py-6 sm:px-6"
+        >
+          {guestDiscoveryContent}
+        </section>
 
-        {user && (
-          <div>
-            <h1 className="text-2xl font-semibold text-text-primary">{en.discovery.title}</h1>
-            <p className="text-sm text-text-secondary">{en.discovery.subtitle}</p>
-          </div>
-        )}
-
-        {!user && (
-          <section
-            id="browse-clubs"
-            className="scroll-mt-20 space-y-6 rounded-3xl bg-primary-50 px-4 py-6 sm:px-6"
-          >
-            {guestDiscoveryContent}
-          </section>
-        )}
-
-        {!user && <UpcomingEventsStrip />}
-        {!user && <StatsStrip variant="banner" />}
-        {!user && <TestimonialsSection />}
-        {!user && <MarketingFaqSection />}
-        {!user && <CommunityCtaSection />}
-        {!user && <MarketingFooter />}
+        <UpcomingEventsStrip />
+        <StatsStrip variant="banner" />
+        <TestimonialsSection />
+        <MarketingFaqSection />
+        <CommunityCtaSection />
+        <MarketingFooter />
       </PageContainer>
     </>
   );

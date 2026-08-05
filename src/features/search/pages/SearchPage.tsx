@@ -1,6 +1,6 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Search as SearchIcon, Users as PeopleIcon } from 'lucide-react';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
@@ -31,8 +31,9 @@ export function SearchPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const [searchParams] = useSearchParams();
   const [tab, setTab] = useState('clubs');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(searchParams.get('q') ?? '');
   const [recentSearches, setRecentSearches] = useLocalStorage<string[]>(LS_RECENT_SEARCHES_KEY, []);
   const debouncedQuery = useDebouncedValue(query.trim(), SEARCH_DEBOUNCE_MS);
   const hasQuery = debouncedQuery.length >= SEARCH_MIN_CHARS;

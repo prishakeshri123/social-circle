@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ntf_001",
+    "userId": "usr_member01",
+    "type": "event_reminder_24h",
+    "title": "Reminder",
+    "body": "Reminder: \"Circle Weekend Meetup\" is happening tomorrow at 6:00 AM.",
+    "deepLink": "/clubs/bengaluru-tech-circle/dashboard/events/evt_006",
+    "read": false,
+    "createdAt": "2026-07-31T08:00:00.000Z"
+  },
+  {
+    "id": "ntf_002",
+    "userId": "usr_member01",
+    "type": "chat_mention",
+    "title": "New mention",
+    "body": "Rahul Mehta mentioned you in a message in \"Bengaluru Tech Circle\".",
+    "deepLink": "/clubs/bengaluru-tech-circle/dashboard/chat",
+    "read": false,
+    "createdAt": "2026-07-31T05:00:00.000Z"
+  },
+  {
+    "id": "ntf_003",
+    "userId": "usr_member01",
+    "type": "system",
+    "title": "New member",
+    "body": "New member Kabir Singh joined \"Hyderabad Photography Club\".",
+    "deepLink": "/clubs/hyderabad-photography-club/dashboard/members",
+    "read": false,
+    "createdAt": "2026-07-31T04:00:00.000Z"
+  },
+  {
+    "id": "ntf_004",
+    "userId": "usr_member01",
+    "type": "payment_success",
+    "title": "Payment successful",
+    "body": "Payment of ₹499 for your \"Bengaluru Tech Circle\" monthly membership was successful.",
+    "deepLink": "/clubs/bengaluru-tech-circle/dashboard/payments",
+    "read": true,
+    "createdAt": "2026-07-30T10:00:00.000Z"
+  },
+  {
+    "id": "ntf_005",
+    "userId": "usr_member01",
+    "type": "event_updated",
+    "title": "Event updated",
+    "body": "\"Runners Monthly Planning Call\" details were updated.",
+    "deepLink": "/clubs/mumbai-trail-runners/dashboard/events/evt_003",
+    "read": true,
+    "createdAt": "2026-07-29T09:00:00.000Z"
+  },
+  {
+    "id": "ntf_006",
+    "userId": "usr_member01",
+    "type": "event_rsvp",
+    "title": "RSVP confirmed",
+    "body": "Your RSVP for \"Circle Members Social Night\" is confirmed.",
+    "deepLink": "/clubs/bengaluru-tech-circle/dashboard/events/evt_007",
+    "read": true,
+    "createdAt": "2026-07-27T12:00:00.000Z"
+  },
+  {
+    "id": "ntf_007",
+    "userId": "usr_member01",
+    "type": "subscription_renewal",
+    "title": "Membership renews soon",
+    "body": "Your \"Bengaluru Tech Circle\" membership renews on Jun 1, 2027.",
+    "deepLink": "/subscriptions",
+    "read": true,
+    "createdAt": "2026-07-24T09:00:00.000Z"
+  },
+  {
+    "id": "ntf_008",
+    "userId": "usr_member01",
+    "type": "system",
+    "title": "Welcome to Social Circle",
+    "body": "Complete your profile to get better club recommendations.",
+    "deepLink": "/profile/edit",
+    "read": true,
+    "createdAt": "2025-04-18T09:00:00.000Z"
+  }
+]

@@ -23,6 +23,7 @@ export const API_ENDPOINTS = {
     bySlug: (slug: string) => `/clubs/${slug}`,
     join: (clubId: string) => `/clubs/${clubId}/join`,
     myMembership: (clubId: string) => `/clubs/${clubId}/members/me`,
+    members: (clubId: string) => `/clubs/${clubId}/members`,
     events: (clubId: string) => `/clubs/${clubId}/events`,
     channels: (clubId: string) => `/clubs/${clubId}/channels`,
   },

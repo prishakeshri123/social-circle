@@ -21,6 +21,8 @@ export interface HubItem {
   channelId?: string;
   clubId?: string;
   clubSlug?: string;
+  category?: string;
+  channelName?: string;
   otherUserId?: string;
   club?: MyClub;
 }
@@ -44,6 +46,7 @@ export function buildHubItems(
 ): HubItemsByFilter {
   const groupConversations = conversations.filter((c) => c.kind === 'group');
   const directConversations = conversations.filter((c) => c.kind === 'direct');
+  const clubById = new Map(myClubs.map((club) => [club.id, club]));
 
   const groupItems: HubItem[] = groupConversations.map((c) => ({
     key: `group:${c.channelId}`,
@@ -58,6 +61,8 @@ export function buildHubItems(
     channelId: c.channelId,
     clubId: c.clubId,
     clubSlug: c.clubSlug,
+    category: c.clubId ? clubById.get(c.clubId)?.category : undefined,
+    channelName: c.channelName,
   }));
 
   const directItems: HubItem[] = directConversations.map((c) => ({
@@ -93,6 +98,7 @@ export function buildHubItems(
       sortAt: latestRelated,
       clubId: club.id,
       clubSlug: club.slug,
+      category: club.category,
       club,
     };
   });
@@ -105,6 +111,20 @@ export function buildHubItems(
     groups: [...groupItems].sort(byRecency),
     clubs: [...clubItems].sort(byRecency),
   };
+}
+
+export function humanizeChannelName(name: string): string {
+  return name
+    .split('-')
+    .map((word) => (word ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+    .join(' ');
+}
+
+export type HubSortMode = 'recent' | 'unread';
+
+export function sortHubItems(items: HubItem[], mode: HubSortMode): HubItem[] {
+  if (mode === 'recent') return items;
+  return [...items].sort((a, b) => Number(b.unreadCount > 0) - Number(a.unreadCount > 0));
 }
 
 export function filterBySearch(items: HubItem[], search: string): HubItem[] {

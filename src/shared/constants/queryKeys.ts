@@ -34,6 +34,9 @@ export const queryKeys = {
     list: (userId: string) => ['notifications', userId] as const,
     count: (userId: string) => ['notifications', userId, 'count'] as const,
   },
+  invitations: {
+    list: (userId: string) => ['invitations', userId] as const,
+  },
   users: {
     me: ['users', 'me'] as const,
     detail: (userId: string) => ['users', userId] as const,

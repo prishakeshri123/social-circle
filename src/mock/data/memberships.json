@@ -166,15 +166,47 @@
     "clubId": "clu_userswell01",
     "userId": "usr_member04",
     "role": "member",
-    "status": "active",
-    "joinedAt": "2026-04-04T09:00:00.000Z"
+    "status": "pending_approval",
+    "joinedAt": "2026-07-24T09:00:00.000Z"
   },
   {
-    "id": "mem_uw_member06",
-    "clubId": "clu_userswell01",
-    "userId": "usr_member06",
+    "id": "mem_hp_member01",
+    "clubId": "clu_hydphoto01",
+    "userId": "usr_member01",
     "role": "member",
     "status": "active",
-    "joinedAt": "2026-05-08T09:00:00.000Z"
+    "joinedAt": "2026-05-15T09:00:00.000Z"
+  },
+  {
+    "id": "mem_df_member01",
+    "clubId": "clu_delfood01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-04-10T09:00:00.000Z"
+  },
+  {
+    "id": "mem_pg_member01",
+    "clubId": "clu_punegam01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-03-22T09:00:00.000Z"
+  },
+  {
+    "id": "mem_cm_member01",
+    "clubId": "clu_chnmusic01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-02-18T09:00:00.000Z"
+  },
+  {
+    "id": "mem_jh_member01",
+    "clubId": "clu_jaiheritage01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-01-30T09:00:00.000Z"
   }
 ]

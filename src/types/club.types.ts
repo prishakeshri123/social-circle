@@ -1,3 +1,5 @@
+import type { User } from '@/types/user.types';
+
 // Clubs are created/onboarded via the separate Admin Dashboard, so they
 // always arrive into this app's data already-live.
 export type ClubStatus = 'live' | 'suspended' | 'archived';
@@ -59,6 +61,11 @@ export interface MyClub extends Club {
   myRole: ClubMembership['role'];
 }
 
+export interface ClubMemberWithUser extends ClubMembership {
+  isOnline: boolean;
+  user: User;
+}
+
 export interface Album {
   id: string;
   clubId: string;
@@ -96,6 +103,20 @@ export interface MediaComment {
   userId: string;
   text: string;
   createdAt: string;
+}
+
+export interface ClubInvitation {
+  id: string;
+  clubId: string;
+  invitedUserId: string;
+  invitedByUserId: string;
+  status: 'pending' | 'accepted' | 'declined';
+  createdAt: string;
+}
+
+export interface ClubInvitationWithClub extends ClubInvitation {
+  club: { id: string; slug: string; name: string; logoUrl?: string };
+  invitedBy: { id: string; fullName: string; avatarUrl?: string };
 }
 
 export interface ClubFilters {

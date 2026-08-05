@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, Menu, Settings, User as UserIcon } from 'lucide-react';
+import {
+  Bell,
+  LogOut,
+  Menu,
+  MessageCircle,
+  Search,
+  Settings,
+  User as UserIcon,
+} from 'lucide-react';
 import { ROUTES } from '@/shared/constants/routes';
 import { en } from '@/shared/constants/locales/en';
 import { TRANSPARENT_HEADER_SCROLL_THRESHOLD_PX } from '@/shared/constants/app.constants';
 import { useAuthStore } from '@/store/authSlice';
-import { useUiStore } from '@/store/uiSlice';
 import { useScrolled } from '@/shared/hooks/useScrolled';
+import { useConversations } from '@/features/chat/hooks/useConversations';
+import { useNotifications } from '@/features/notifications/hooks/useNotifications';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/Avatar';
 import { Badge } from '@/shared/components/ui/Badge';
 import { Button } from '@/shared/components/ui/Button';
+import { Input } from '@/shared/components/ui/Input';
 import { Logo } from '@/shared/components/layout/Logo';
 import { cn } from '@/shared/utils/cn';
 import {
@@ -158,17 +168,49 @@ function MemberTopBar() {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const clearAuth = useAuthStore((state) => state.clearAuth);
-  const badgeCount = useUiStore((state) => state.notificationBadgeCount);
+  const [searchValue, setSearchValue] = useState('');
+
+  const conversationsQuery = useConversations();
+  const unreadChatsCount = (conversationsQuery.data ?? []).reduce(
+    (sum, c) => sum + c.unreadCount,
+    0,
+  );
+
+  const notificationsQuery = useNotifications();
+  const unreadNotificationsCount = (notificationsQuery.data ?? []).filter((n) => !n.read).length;
 
   const handleLogout = () => {
     clearAuth();
     navigate(ROUTES.login);
   };
 
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault();
+    const trimmed = searchValue.trim();
+    navigate(trimmed ? `${ROUTES.search}?q=${encodeURIComponent(trimmed)}` : ROUTES.search);
+  }
+
   return (
     <header className={cn(HEADER_BASE_CLASS, 'border-b border-border bg-background')}>
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
+      <div className="flex w-full items-center justify-between gap-4">
         <Logo />
+
+        <form onSubmit={handleSearchSubmit} className="hidden max-w-md flex-1 sm:block">
+          <label className="relative block">
+            <span className="sr-only">{en.home.searchPlaceholder}</span>
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
+              aria-hidden="true"
+            />
+            <Input
+              type="search"
+              placeholder={en.home.searchPlaceholder}
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              className="rounded-full pl-9"
+            />
+          </label>
+        </form>
 
         <div className="flex items-center gap-1">
           <Button
@@ -180,12 +222,32 @@ function MemberTopBar() {
           >
             <Link to={ROUTES.notifications} className="relative">
               <Bell className="size-5" />
-              {badgeCount > 0 && (
+              {unreadNotificationsCount > 0 && (
                 <Badge
                   variant="error"
                   className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full p-0 text-[10px]"
                 >
-                  {badgeCount > 9 ? '9+' : badgeCount}
+                  {unreadNotificationsCount > 9 ? '9+' : unreadNotificationsCount}
+                </Badge>
+              )}
+            </Link>
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+            asChild
+            aria-label={en.nav.chats}
+          >
+            <Link to={ROUTES.messages} className="relative">
+              <MessageCircle className="size-5" />
+              {unreadChatsCount > 0 && (
+                <Badge
+                  variant="error"
+                  className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full p-0 text-[10px]"
+                >
+                  {unreadChatsCount > 9 ? '9+' : unreadChatsCount}
                 </Badge>
               )}
             </Link>
@@ -195,13 +257,19 @@ function MemberTopBar() {
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="ml-1 rounded-full ring-offset-2 ring-offset-background transition-shadow duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                className="ml-1 flex items-center gap-2 rounded-full ring-offset-2 ring-offset-background transition-shadow duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                 aria-label={en.nav.profile}
               >
                 <Avatar>
                   <AvatarImage src={user?.avatarUrl} alt={user?.fullName ?? ''} />
                   <AvatarFallback>{user?.fullName?.charAt(0) ?? '?'}</AvatarFallback>
                 </Avatar>
+                <span className="hidden text-left leading-tight lg:block">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {user?.fullName}
+                  </span>
+                  <span className="block text-xs text-text-muted">{en.nav.profile}</span>
+                </span>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

@@ -1,13 +1,20 @@
-import { Search, UserPlus } from 'lucide-react';
+import { Plus, Search, SlidersHorizontal } from 'lucide-react';
 import { Badge } from '@/shared/components/ui/Badge';
 import { Button } from '@/shared/components/ui/Button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@/shared/components/ui/DropdownMenu';
 import { Input } from '@/shared/components/ui/Input';
 import { ScrollArea } from '@/shared/components/ui/ScrollArea';
 import { Skeleton } from '@/shared/components/ui/Skeleton';
 import { EmptyState } from '@/shared/components/feedback/EmptyState';
 import { en } from '@/shared/constants/locales/en';
 import { cn } from '@/shared/utils/cn';
-import type { HubFilter, HubItem } from '@/features/chat/utils/hubItems';
+import type { HubFilter, HubItem, HubSortMode } from '@/features/chat/utils/hubItems';
 import { ConversationListItem } from '@/features/chat/components/ConversationListItem';
 
 const FILTERS: { value: HubFilter; label: string }[] = [
@@ -24,6 +31,8 @@ interface ConversationListPanelProps {
   filter: HubFilter;
   onFilterChange: (filter: HubFilter) => void;
   unreadConversationCount: number;
+  sortMode: HubSortMode;
+  onSortModeChange: (mode: HubSortMode) => void;
   search: string;
   onSearchChange: (value: string) => void;
   selectedKey: string | null;
@@ -39,6 +48,8 @@ export function ConversationListPanel({
   filter,
   onFilterChange,
   unreadConversationCount,
+  sortMode,
+  onSortModeChange,
   search,
   onSearchChange,
   selectedKey,
@@ -49,24 +60,43 @@ export function ConversationListPanel({
   return (
     <div className={cn('flex flex-col border-r border-border bg-surface-raised', className)}>
       <div className="shrink-0 space-y-4 border-b border-border p-4">
-        <div className="flex items-start justify-between gap-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">
-              {en.hub.eyebrow}
-            </p>
-            <h1 className="text-xl font-bold text-text-primary">{en.app.name}</h1>
-          </div>
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-xl font-bold text-text-primary">{en.nav.chats}</h1>
           <div className="flex items-center gap-1.5">
             <Button
-              variant="outline"
+              variant="ghost"
               size="icon"
               className="rounded-full"
               onClick={onFindMember}
               aria-label={en.hub.findMemberTooltip}
               title={en.hub.findMemberTooltip}
             >
-              <UserPlus className="size-4" aria-hidden="true" />
+              <Plus className="size-5" aria-hidden="true" />
             </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full"
+                  aria-label={en.hub.sortTooltip}
+                  title={en.hub.sortTooltip}
+                >
+                  <SlidersHorizontal className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuRadioGroup
+                  value={sortMode}
+                  onValueChange={(value) => onSortModeChange(value as HubSortMode)}
+                >
+                  <DropdownMenuRadioItem value="recent">{en.hub.sortRecent}</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="unread">
+                    {en.hub.sortUnreadFirst}
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
@@ -82,7 +112,7 @@ export function ConversationListPanel({
         </div>
 
         <div
-          className="flex flex-wrap items-center gap-2"
+          className="flex items-center gap-4 border-b border-border"
           role="group"
           aria-label={en.actions.filter}
         >
@@ -95,16 +125,16 @@ export function ConversationListPanel({
                 onClick={() => onFilterChange(value)}
                 aria-pressed={isActive}
                 className={cn(
-                  'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-fast',
+                  'flex items-center gap-1.5 border-b-2 pb-2 text-sm font-medium transition-colors duration-fast',
                   isActive
-                    ? 'bg-primary-600 text-text-inverse'
-                    : 'bg-surface text-text-secondary hover:bg-gray-200',
+                    ? 'border-primary-600 text-text-primary'
+                    : 'border-transparent text-text-secondary hover:text-text-primary',
                 )}
               >
                 {label}
                 {value === 'all' && unreadConversationCount > 0 && (
                   <Badge
-                    variant={isActive ? 'secondary' : 'default'}
+                    variant={isActive ? 'default' : 'secondary'}
                     className="flex size-4 items-center justify-center rounded-full p-0 text-[10px]"
                   >
                     {unreadConversationCount}
@@ -138,6 +168,7 @@ export function ConversationListPanel({
                 kind={item.kind}
                 avatarUrl={item.avatarUrl}
                 avatarFallback={item.avatarFallback}
+                category={item.category}
                 title={item.title}
                 subtitle={item.subtitle}
                 timestamp={item.timestamp}

@@ -23,5 +23,30 @@
     "allowMemberUploads": false,
     "createdById": "usr_owner01",
     "createdAt": "2026-06-20T08:00:00.000Z"
+  },
+  {
+    "id": "alb_techmeetup2026",
+    "clubId": "clu_blrtech01",
+    "eventId": "evt_010",
+    "title": "Tech Meetup 2026",
+    "description": "Highlights from our biggest annual meetup yet.",
+    "coverUrl": "https://picsum.photos/seed/alb-techmeetup2026-cover/600/450",
+    "mediaCount": 18,
+    "visibility": "members_only",
+    "allowMemberUploads": true,
+    "createdById": "usr_owner01",
+    "createdAt": "2026-07-18T08:00:00.000Z"
+  },
+  {
+    "id": "alb_photowalk",
+    "clubId": "clu_hydphoto01",
+    "title": "Photography Walk",
+    "description": "Shots from our heritage street photography walk.",
+    "coverUrl": "https://picsum.photos/seed/alb-photowalk-cover/600/450",
+    "mediaCount": 32,
+    "visibility": "public",
+    "allowMemberUploads": true,
+    "createdById": "usr_member07",
+    "createdAt": "2026-07-29T08:00:00.000Z"
   }
 ]
