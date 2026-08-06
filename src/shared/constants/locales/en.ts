@@ -456,6 +456,15 @@ export const en = {
     recommendedSubtitle: 'Discover more amazing communities',
   },
 
+  // ── Events & Meetings hub (cross-club) ──────────────────────
+  myEvents: {
+    title: 'Events & Meetings',
+    subtitle: 'Every event and meeting from your clubs, in one place.',
+    searchPlaceholder: 'Search events and meetings',
+    emptyPast: "You haven't attended any events yet.",
+    emptyCancelled: 'No cancelled events.',
+  },
+
   // ── Search ───────────────────────────────────────────────
   search: {
     title: 'Search',
@@ -1384,6 +1393,19 @@ export const en = {
     todayDivider: 'Today',
     yesterdayDivider: 'Yesterday',
     playVoiceNoteCta: 'Play voice note',
+    messageStatusSent: 'Sent',
+    messageStatusDelivered: 'Delivered',
+    messageStatusRead: 'Read',
+    messageCopied: 'Message copied.',
+    messageReported: 'Message reported. Our team will review it.',
+    messageHidden: 'Message removed from this device.',
+    addReaction: 'Add reaction',
+    micPermissionDenied: 'Microphone access denied. Please allow microphone access to record.',
+    recordingInProgress: 'Recording…',
+    stopRecording: 'Stop recording',
+    mediaPreview: 'Media preview',
+    documentsHeading: 'Documents',
+    mediaSessionOnly: "This file is large, so it won't survive a page refresh in this demo.",
   },
 
   // ── Club dashboard: Albums tab ──────────────────────────────
@@ -1438,6 +1460,13 @@ export const en = {
     languageLabel: 'Language',
     cityLabel: 'City',
     privacyLabel: 'Privacy',
+  },
+
+  // ── Notifications (mock-generated, e.g. chat @mentions) ─────
+  notifications: {
+    mentionTitle: 'New mention',
+    mentionBody: (senderName: string, clubName: string) =>
+      `${senderName} mentioned you in a message in "${clubName}".`,
   },
 
   // ── Club dashboard: shell ───────────────────────────────────

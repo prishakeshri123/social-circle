@@ -39,6 +39,7 @@ export const SEARCH_DEBOUNCE_MS = 300;
 export const SETTINGS_DEBOUNCE_MS = 500;
 export const MESSAGE_EDIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 export const NOTIFICATION_POLL_MS = 30_000;
+export const MESSAGE_POLL_MS = 4_000;
 export const MOCK_API_DELAY_MS = 400;
 
 // ── Token / auth ──────────────────────────────────────────
@@ -48,6 +49,8 @@ export const REFRESH_TOKEN_KEY = 'refreshToken';
 // ── Local storage keys ────────────────────────────────────
 export const LS_RECENT_SEARCHES_KEY = 'sc_recent_searches';
 export const LS_SIGNUP_SUBMISSION_KEY = 'sc_signup_submission';
+export const LS_MOCK_CHAT_DB_KEY = 'sc_mock_chat_db';
+export const LS_BLOCKED_USERS_KEY = 'sc_blocked_users';
 export const MAX_RECENT_SEARCHES = 10;
 
 // ── Member home dashboard ───────────────────────────────────
@@ -143,6 +146,12 @@ export const BREAKPOINTS = {
 } as const;
 
 // ── Chat ───────────────────────────────────────────────────
+// The mock has no real file storage. Attachments at or under this size are
+// inlined as base64 data URLs so they round-trip through localStorage and
+// survive a reload; larger ones fall back to a session-only blob URL (lost
+// on refresh) since embedding them risks blowing the shared ~5-10MB
+// localStorage quota for the whole app, not just chat.
+export const MAX_PERSISTABLE_MEDIA_MB = 3;
 export const MAX_MESSAGE_LENGTH = 2000;
 export const MIN_POLL_OPTIONS = 2;
 export const MAX_POLL_OPTIONS = 10;

@@ -83,4 +83,6 @@ export const chatService = {
     apiClient
       .post<{ data: ChatChannel }>(API_ENDPOINTS.users.dmChannel(userId), {})
       .then((r) => r.data.data),
+
+  markRead: (channelId: string) => apiClient.post(API_ENDPOINTS.chat.read(channelId), {}),
 };

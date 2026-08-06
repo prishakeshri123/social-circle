@@ -2,6 +2,12 @@ import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/shared/constants/app.constants';
 import { API_ENDPOINTS } from '@/shared/constants/apiEndpoints';
 import { ROUTES } from '@/shared/constants/routes';
+import {
+  getStoredToken,
+  setStoredToken,
+  clearStoredToken,
+  isTokenRemembered,
+} from '@/shared/utils/authTokenStorage';
 import type { AuthTokens } from '@/types/auth.types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
@@ -12,7 +18,7 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+  const token = getStoredToken(ACCESS_TOKEN_KEY);
   if (token) {
     config.headers.set('Authorization', `Bearer ${token}`);
   }
@@ -22,14 +28,15 @@ apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 let refreshPromise: Promise<string> | null = null;
 
 async function refreshAccessToken(): Promise<string> {
-  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+  const refreshToken = getStoredToken(REFRESH_TOKEN_KEY);
   if (!refreshToken) throw new Error('No refresh token available');
 
+  const remember = isTokenRemembered(REFRESH_TOKEN_KEY);
   const { data } = await axios.post<AuthTokens>(`${API_BASE_URL}${API_ENDPOINTS.auth.refresh}`, {
     refreshToken,
   });
-  localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-  localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
+  setStoredToken(ACCESS_TOKEN_KEY, data.accessToken, remember);
+  setStoredToken(REFRESH_TOKEN_KEY, data.refreshToken, remember);
   return data.accessToken;
 }
 
@@ -57,8 +64,8 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
       } catch {
         refreshPromise = null;
-        localStorage.removeItem(ACCESS_TOKEN_KEY);
-        localStorage.removeItem(REFRESH_TOKEN_KEY);
+        clearStoredToken(ACCESS_TOKEN_KEY);
+        clearStoredToken(REFRESH_TOKEN_KEY);
         window.location.href = ROUTES.login;
         return Promise.reject(error);
       }

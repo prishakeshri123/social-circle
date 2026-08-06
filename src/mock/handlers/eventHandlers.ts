@@ -94,6 +94,13 @@ function handleList(
   if (String(filters.upcoming) === 'true') {
     results = results.filter(isUpcoming);
   }
+  if (filters.status === 'upcoming') {
+    results = results.filter(isUpcoming);
+  } else if (filters.status === 'past') {
+    results = results.filter((ev) => ev.status === 'concluded');
+  } else if (filters.status === 'cancelled') {
+    results = results.filter((ev) => ev.status === 'cancelled');
+  }
   if (filters.search) {
     const query = filters.search.toLowerCase();
     results = results.filter(

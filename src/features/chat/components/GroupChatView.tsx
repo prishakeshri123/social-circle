@@ -10,6 +10,7 @@ import { useMessages } from '@/features/chat/hooks/useMessages';
 import { useTypingSimulation } from '@/features/chat/hooks/useTypingSimulation';
 import { ConversationThreadPanel } from '@/features/chat/components/ConversationThreadPanel';
 import { GroupInfoPanel } from '@/features/chat/components/GroupInfoPanel';
+import { MemberProfileDrawer } from '@/features/chat/components/MemberProfileDrawer';
 import type { MyClub } from '@/types/club.types';
 
 interface GroupChatViewProps {
@@ -33,6 +34,8 @@ export function GroupChatView({
   const [pinnedVisible, setPinnedVisible] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [pollComposerOpen, setPollComposerOpen] = useState(false);
+  const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
   const membersQuery = useClubMembers(club.id, club.memberCount);
   const channelsQuery = useChannels(club.id);
@@ -40,6 +43,7 @@ export function GroupChatView({
 
   const members = membersQuery.data?.data ?? [];
   const onlineCount = members.filter((m) => m.isOnline).length;
+  const mentionCandidates = members.map((m) => ({ id: m.userId, fullName: m.user.fullName }));
   const otherMemberNames = members
     .filter((m) => m.userId !== currentUserId)
     .map((m) => m.user.fullName.split(' ')[0]);
@@ -94,6 +98,10 @@ export function GroupChatView({
         searchQuery={searchQuery}
         onToggleSearch={() => setSearchOpen((v) => !v)}
         onSearchQueryChange={setSearchQuery}
+        pollComposerOpen={pollComposerOpen}
+        onPollComposerOpenChange={setPollComposerOpen}
+        mentionCandidates={mentionCandidates}
+        onOpenProfile={setProfileUserId}
       />
       <GroupInfoPanel
         club={club}
@@ -105,7 +113,13 @@ export function GroupChatView({
         onToggleNotifications={handleToggleNotifications}
         onInvite={handleInvite}
         onOpenSearch={() => setSearchOpen(true)}
+        onCreatePoll={() => setPollComposerOpen(true)}
         onExit={handleExit}
+      />
+
+      <MemberProfileDrawer
+        userId={profileUserId}
+        onOpenChange={(open) => !open && setProfileUserId(null)}
       />
     </div>
   );

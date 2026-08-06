@@ -8,9 +8,12 @@ import { ROUTES } from '@/shared/constants/routes';
 import { useDebouncedValue } from '@/shared/hooks/useDebouncedValue';
 import { useUsersByIds } from '@/shared/hooks/useUsersByIds';
 import { cn } from '@/shared/utils/cn';
+import { Sidebar } from '@/shared/components/layout/Sidebar';
 import { chatService } from '@/features/chat/services/chatService';
 import { useConversations } from '@/features/chat/hooks/useConversations';
 import { useMyClubs } from '@/features/clubs/hooks/useMyClubs';
+import { useInvitations } from '@/features/clubs/hooks/useInvitations';
+import { useNotifications } from '@/features/notifications/hooks/useNotifications';
 import {
   buildHubItems,
   countUnreadConversations,
@@ -26,6 +29,7 @@ import { ConversationEmptyState } from '@/features/chat/components/ConversationE
 import { ConversationListPanel } from '@/features/chat/components/ConversationListPanel';
 import { ConversationThreadPanel } from '@/features/chat/components/ConversationThreadPanel';
 import { GroupChatView } from '@/features/chat/components/GroupChatView';
+import { MemberProfileDrawer } from '@/features/chat/components/MemberProfileDrawer';
 
 const EMPTY_MESSAGES: Record<HubFilter, string> = {
   all: en.hub.emptyListAll,
@@ -46,9 +50,12 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebouncedValue(search, SEARCH_DEBOUNCE_MS);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
   const conversationsQuery = useConversations();
   const myClubsQuery = useMyClubs();
+  const notificationsQuery = useNotifications();
+  const invitationsQuery = useInvitations();
 
   const itemsByFilter = useMemo(
     () => buildHubItems(conversationsQuery.data ?? [], myClubsQuery.data ?? []),
@@ -64,6 +71,8 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
     () => countUnreadConversations(itemsByFilter.all),
     [itemsByFilter.all],
   );
+  const unreadNotificationsCount = (notificationsQuery.data ?? []).filter((n) => !n.read).length;
+  const pendingInvitationsCount = invitationsQuery.data?.length ?? 0;
 
   const selectedItem = itemsByFilter.all.find((item) => item.key === selectedKey) ?? null;
 
@@ -131,6 +140,8 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
         avatarFallback={selectedItem.avatarFallback}
         isSquareAvatar={false}
         onBack={handleBack}
+        onOpenProfile={setProfileUserId}
+        headerUserId={selectedItem.otherUserId}
       />
     );
   } else if (hasDeepLinkFallback && dmResolution.data && resolvedDmUser) {
@@ -142,6 +153,8 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
         avatarFallback={resolvedDmUser.fullName.charAt(0)}
         isSquareAvatar={false}
         onBack={handleBack}
+        onOpenProfile={setProfileUserId}
+        headerUserId={dmUserId}
       />
     );
   } else {
@@ -149,7 +162,14 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
+    <div className="flex h-[calc(100vh-4rem)] items-stretch overflow-hidden">
+      <Sidebar
+        unreadChatsCount={unreadConversationCount}
+        unreadNotificationsCount={unreadNotificationsCount}
+        pendingInvitationsCount={pendingInvitationsCount}
+        className="hidden h-full w-64 shrink-0 md:flex"
+      />
+
       <ConversationListPanel
         className={cn('w-full shrink-0 md:flex md:w-[22rem]', isDetailOpen ? 'hidden' : 'flex')}
         items={visibleItems}
@@ -170,6 +190,11 @@ export function ConversationsHubPage({ defaultFilter }: ConversationsHubPageProp
       <div className={cn('min-w-0 flex-1 md:flex', isDetailOpen ? 'flex' : 'hidden')}>
         {detailPanel}
       </div>
+
+      <MemberProfileDrawer
+        userId={profileUserId}
+        onOpenChange={(open) => !open && setProfileUserId(null)}
+      />
     </div>
   );
 }

@@ -9,6 +9,7 @@ export function useLogin() {
 
   return useMutation<AuthSuccessResponse, AxiosError<ApiErrorResponse>, LoginRequest>({
     mutationFn: authService.login,
-    onSuccess: (data) => setAuth(data.user, data.accessToken, data.refreshToken),
+    onSuccess: (data, variables) =>
+      setAuth(data.user, data.accessToken, data.refreshToken, variables.rememberMe ?? false),
   });
 }

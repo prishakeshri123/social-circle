@@ -5,6 +5,8 @@ import {
   BellOff,
   BarChart3,
   ChevronRight,
+  Download,
+  FileText,
   LogOut,
   MoreHorizontal,
   Paperclip,
@@ -21,11 +23,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/DropdownMenu';
-import { toast } from '@/shared/components/ui/Toast';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { cn } from '@/shared/utils/cn';
+import { formatFileSize } from '@/shared/utils/formatFileSize';
 import { CategoryIconBadge } from '@/features/clubs/components/CategoryIconBadge';
+import { MediaLightbox } from '@/features/chat/components/MediaLightbox';
 import type { ChatMessage } from '@/types/chat.types';
 import type { MyClub } from '@/types/club.types';
 
@@ -39,6 +42,7 @@ interface GroupInfoPanelProps {
   onToggleNotifications: () => void;
   onInvite: () => void;
   onOpenSearch: () => void;
+  onCreatePoll: () => void;
   onExit: () => void;
   className?: string;
 }
@@ -83,12 +87,14 @@ export function GroupInfoPanel({
   onToggleNotifications,
   onInvite,
   onOpenSearch,
+  onCreatePoll,
   onExit,
   className,
 }: GroupInfoPanelProps) {
   const navigate = useNavigate();
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [mediaOpen, setMediaOpen] = useState(false);
+  const [lightboxUrl, setLightboxUrl] = useState<string | undefined>(undefined);
 
   const mediaMessages = messages.filter((m) => !m.deleted && m.type === 'image' && m.mediaUrl);
   const fileMessages = messages.filter((m) => !m.deleted && m.type === 'document');
@@ -177,7 +183,7 @@ export function GroupInfoPanel({
               variant="outline"
               size="icon"
               className="size-11 rounded-2xl"
-              onClick={() => toast(en.hub.pollComingSoon)}
+              onClick={onCreatePoll}
               aria-label={en.chat.pollQuestion}
               title={en.chat.pollQuestion}
             >
@@ -214,18 +220,54 @@ export function GroupInfoPanel({
               value={String(mediaCount)}
               onClick={() => setMediaOpen((v) => !v)}
             />
-            {mediaOpen && mediaCount > 0 && (
+            {mediaOpen && mediaMessages.length > 0 && (
               <div className="grid grid-cols-3 gap-1.5 px-2 pb-2">
                 {mediaMessages.slice(0, 9).map((m) => (
-                  <img
+                  <button
                     key={m.id}
-                    src={m.mediaThumbnailUrl ?? m.mediaUrl}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-square w-full rounded-lg object-cover"
-                  />
+                    type="button"
+                    onClick={() => setLightboxUrl(m.mediaUrl)}
+                    className="aspect-square overflow-hidden rounded-lg"
+                  >
+                    <img
+                      src={m.mediaThumbnailUrl ?? m.mediaUrl}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="size-full object-cover"
+                    />
+                  </button>
                 ))}
+              </div>
+            )}
+            {mediaOpen && fileMessages.length > 0 && (
+              <div className="space-y-1 px-2 pb-2">
+                <p className="pt-1 text-xs font-semibold text-text-muted">
+                  {en.chat.documentsHeading}
+                </p>
+                {fileMessages.map((m) => {
+                  const hasRealFile = Boolean(m.mediaUrl) && m.mediaUrl !== '#';
+                  return (
+                    <a
+                      key={m.id}
+                      href={hasRealFile ? m.mediaUrl : undefined}
+                      download={hasRealFile}
+                      target={hasRealFile ? '_blank' : undefined}
+                      rel={hasRealFile ? 'noreferrer' : undefined}
+                      onClick={(e) => {
+                        if (!hasRealFile) e.preventDefault();
+                      }}
+                      className="flex items-center gap-2 rounded-lg border border-border bg-surface px-2 py-1.5 text-xs"
+                    >
+                      <FileText className="size-4 shrink-0 text-error-500" aria-hidden="true" />
+                      <span className="min-w-0 flex-1 truncate">{m.text}</span>
+                      <span className="shrink-0 text-text-muted">
+                        {formatFileSize(m.mediaSize ?? 0)}
+                      </span>
+                      <Download className="size-3.5 shrink-0 text-text-muted" aria-hidden="true" />
+                    </a>
+                  );
+                })}
               </div>
             )}
             {mediaOpen && mediaCount === 0 && (
@@ -261,6 +303,13 @@ export function GroupInfoPanel({
           </div>
         </div>
       </div>
+
+      <MediaLightbox
+        open={Boolean(lightboxUrl)}
+        onOpenChange={(open) => !open && setLightboxUrl(undefined)}
+        mediaUrl={lightboxUrl}
+        mediaType="image"
+      />
     </div>
   );
 }

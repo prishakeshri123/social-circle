@@ -104,6 +104,11 @@ const ConversationsHubPage = lazy(() =>
     default: m.ConversationsHubPage,
   })),
 );
+const ClubDashboardChatPage = lazy(() =>
+  import('@/features/chat/pages/ClubDashboardChatPage').then((m) => ({
+    default: m.ClubDashboardChatPage,
+  })),
+);
 const ClubDashboardLayout = lazy(() =>
   import('@/features/clubs/components/ClubDashboardLayout').then((m) => ({
     default: m.ClubDashboardLayout,
@@ -111,6 +116,9 @@ const ClubDashboardLayout = lazy(() =>
 );
 const MyClubsPage = lazy(() =>
   import('@/features/clubs/pages/MyClubsPage').then((m) => ({ default: m.MyClubsPage })),
+);
+const MyEventsPage = lazy(() =>
+  import('@/features/events/pages/MyEventsPage').then((m) => ({ default: m.MyEventsPage })),
 );
 
 // Wraps a lazily-loaded page element in its own Suspense boundary so
@@ -186,7 +194,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorFallback />,
     children: [
       { path: ROUTES.myClubs, element: <MyClubsPage /> },
-      { path: ROUTES.myEvents, element: <PlaceholderPage title="Events & Meetings" /> },
+      { path: ROUTES.myEvents, element: <MyEventsPage /> },
       { path: ROUTES.albums, element: <PlaceholderPage title="Albums" /> },
       { path: ROUTES.members, element: <PlaceholderPage title="Members" /> },
       { path: ROUTES.invitations, element: <PlaceholderPage title="Invitations" /> },
@@ -215,7 +223,7 @@ export const router = createBrowserRouter([
         element: <ClubDashboardLayout />,
         children: [
           { index: true, element: <Navigate to="chat" replace /> },
-          { path: 'chat', element: <PlaceholderPage title="Chat" /> },
+          { path: 'chat', element: <ClubDashboardChatPage /> },
           { path: 'events', element: <PlaceholderPage title="Events" /> },
           { path: 'events/:eventId', element: <PlaceholderPage title="Event Detail" /> },
           { path: 'albums', element: <PlaceholderPage title="Albums" /> },

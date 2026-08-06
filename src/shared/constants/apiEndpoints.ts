@@ -39,5 +39,6 @@ export const API_ENDPOINTS = {
     reactions: (messageId: string) => `/messages/${messageId}/reactions`,
     vote: (messageId: string) => `/messages/${messageId}/vote`,
     pin: (channelId: string) => `/channels/${channelId}/pin`,
+    read: (channelId: string) => `/channels/${channelId}/read`,
   },
 } as const;

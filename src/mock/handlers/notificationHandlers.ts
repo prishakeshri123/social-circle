@@ -1,10 +1,22 @@
 import type MockAdapter from 'axios-mock-adapter';
+import { nanoid } from 'nanoid';
 import type { Notification } from '@/types/user.types';
 import { PAGE_SIZE_NOTIFICATIONS } from '@/shared/constants/app.constants';
 import { userIdFromToken } from '@/mock/handlers/authHandlers';
 import seedNotifications from '@/mock/data/notifications.json';
 
 const notifications: Notification[] = [...(seedNotifications as Notification[])];
+
+// Lets other mock handlers (e.g. chatHandlers's @mention detection) create a
+// notification without duplicating this module's in-memory store.
+export function pushNotification(input: Omit<Notification, 'id' | 'read' | 'createdAt'>): void {
+  notifications.unshift({
+    ...input,
+    id: `ntf_${nanoid(10)}`,
+    read: false,
+    createdAt: new Date().toISOString(),
+  });
+}
 
 function extractUserId(headers: unknown): string | null {
   const authHeader =

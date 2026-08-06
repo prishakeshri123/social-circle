@@ -7,10 +7,14 @@ import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { ROUTES } from '@/shared/constants/routes';
 import { cn } from '@/shared/utils/cn';
+import { useChatRealtimeSync } from '@/features/chat/hooks/useChatRealtimeSync';
 
 export function AppShell() {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
+  // Keeps unread badges / open threads live across tabs regardless of which
+  // page is open, not just while the chat hub itself is mounted.
+  useChatRealtimeSync();
   // The home hero renders full-bleed behind the transparent guest header, so it
   // supplies its own top spacing instead of the usual fixed-header offset.
   const hasTransparentHero = !isAuthenticated && pathname === ROUTES.home;

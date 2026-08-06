@@ -40,6 +40,9 @@ export function EventCard({ event }: EventCardProps) {
             className="size-full object-cover"
           />
         )}
+        <Badge className="absolute left-2 top-2 z-20 border-transparent bg-black/70 text-white backdrop-blur-sm">
+          {event.type === 'meeting' ? en.events.typeMeeting : en.events.typeEvent}
+        </Badge>
       </div>
 
       <div className="relative z-10 space-y-2 p-4">
