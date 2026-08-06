@@ -476,6 +476,9 @@ export const en = {
     searchPlaceholder: 'Search events and meetings',
     emptyPast: "You haven't attended any events yet.",
     emptyCancelled: 'No cancelled events.',
+    nextUpLabel: 'Next up',
+    viewDetailsCta: 'View Details',
+    resultsCount: (n: number) => `${n} ${n === 1 ? 'event' : 'events'}`,
   },
 
   // ── Search ───────────────────────────────────────────────

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Search, Sparkles } from 'lucide-react';
 import { Sidebar } from '@/shared/components/layout/Sidebar';
 import { EmptyState } from '@/shared/components/feedback/EmptyState';
+import { Button } from '@/shared/components/ui/Button';
 import { Input } from '@/shared/components/ui/Input';
 import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/Tabs';
 import {
@@ -13,7 +15,9 @@ import {
   SelectValue,
 } from '@/shared/components/ui/Select';
 import { en } from '@/shared/constants/locales/en';
+import { ROUTES } from '@/shared/constants/routes';
 import { SEARCH_DEBOUNCE_MS } from '@/shared/constants/app.constants';
+import { formatDate, formatTime } from '@/shared/utils/formatDate';
 import { useDebouncedValue } from '@/shared/hooks/useDebouncedValue';
 import { useConversations } from '@/features/chat/hooks/useConversations';
 import { useInvitations } from '@/features/clubs/hooks/useInvitations';
@@ -50,6 +54,10 @@ export function MyEventsPage() {
   const pendingInvitationsCount = invitationsQuery.data?.length ?? 0;
 
   const events = eventsQuery.data;
+  const nextEvent =
+    status === 'upcoming' && events.length > 0
+      ? [...events].sort((a, b) => new Date(a.startAt).getTime() - new Date(b.startAt).getTime())[0]
+      : undefined;
 
   return (
     <div className="flex items-start">
@@ -70,7 +78,43 @@ export function MyEventsPage() {
           <p className="mt-1 text-sm text-text-secondary">{en.myEvents.subtitle}</p>
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {nextEvent && (
+          <section className="relative isolate overflow-hidden rounded-2xl border border-primary-100 bg-primary-50 px-6 py-5 sm:px-8">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-center gap-4">
+                {nextEvent.coverImageUrl && (
+                  <img
+                    src={nextEvent.coverImageUrl}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="hidden size-16 shrink-0 rounded-xl object-cover sm:block"
+                  />
+                )}
+                <div className="min-w-0">
+                  <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary-700">
+                    <Sparkles className="size-3.5" aria-hidden="true" />
+                    {en.myEvents.nextUpLabel}
+                  </p>
+                  <h2 className="mt-1 truncate text-lg font-bold text-text-primary">
+                    {nextEvent.title}
+                  </h2>
+                  <p className="mt-1 truncate text-sm text-text-secondary">
+                    {nextEvent.club.name} · {formatDate(nextEvent.startAt, 'EEE, MMM d')} ·{' '}
+                    {formatTime(nextEvent.startAt)}
+                  </p>
+                </div>
+              </div>
+              <Button asChild className="shrink-0">
+                <Link to={ROUTES.eventDetail(nextEvent.club.slug, nextEvent.id)}>
+                  {en.myEvents.viewDetailsCta}
+                </Link>
+              </Button>
+            </div>
+          </section>
+        )}
+
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface-raised p-3 sm:flex-row sm:items-center sm:justify-between">
           <Tabs value={status} onValueChange={(v) => setStatus(v as StatusFilter)}>
             <TabsList>
               <TabsTrigger value="upcoming">{en.events.filterUpcoming}</TabsTrigger>
@@ -104,6 +148,10 @@ export function MyEventsPage() {
             </Select>
           </div>
         </div>
+
+        {!eventsQuery.isPending && events.length > 0 && (
+          <p className="text-sm text-text-secondary">{en.myEvents.resultsCount(events.length)}</p>
+        )}
 
         {eventsQuery.isPending && (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
