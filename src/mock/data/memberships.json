@@ -98,6 +98,16 @@
     "joinedAt": "2026-01-22T09:00:00.000Z"
   },
   {
+    "id": "mem_mt_member01",
+    "clubId": "clu_mentor01",
+    "userId": "usr_member01",
+    "role": "member",
+    "status": "active",
+    "joinedAt": "2026-07-06T09:00:00.000Z",
+    "subscriptionId": "sub_002",
+    "expiresAt": "2026-08-20T09:00:00.000Z"
+  },
+  {
     "id": "mem_co_owner",
     "clubId": "clu_competorg01",
     "userId": "usr_owner01",

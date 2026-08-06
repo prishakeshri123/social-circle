@@ -125,6 +125,11 @@ const NotificationsPage = lazy(() =>
     default: m.NotificationsPage,
   })),
 );
+const SubscriptionsPage = lazy(() =>
+  import('@/features/payments/pages/SubscriptionsPage').then((m) => ({
+    default: m.SubscriptionsPage,
+  })),
+);
 
 // Wraps a lazily-loaded page element in its own Suspense boundary so
 // navigating to it shows a spinner instead of blocking on the whole tree.
@@ -216,7 +221,7 @@ export const router = createBrowserRouter([
       { path: ROUTES.settingsNotifs, element: <PlaceholderPage title="Notification Settings" /> },
       { path: ROUTES.settingsPrivacy, element: <PlaceholderPage title="Privacy Settings" /> },
       { path: ROUTES.settingsPayments, element: <PlaceholderPage title="Payment Settings" /> },
-      { path: ROUTES.subscriptions, element: <PlaceholderPage title="Subscriptions" /> },
+      { path: ROUTES.payments, element: <SubscriptionsPage /> },
       { path: ROUTES.checkout(':planId'), element: <PlaceholderPage title="Checkout" /> },
       { path: ROUTES.checkoutSuccess, element: <PlaceholderPage title="Payment Success" /> },
       { path: ROUTES.checkoutFailure, element: <PlaceholderPage title="Payment Failure" /> },

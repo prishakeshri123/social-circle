@@ -374,6 +374,8 @@ export const en = {
 
   // ── Payment / checkout ─────────────────────────────────────
   payment: {
+    title: 'Payments',
+    subtitle: 'Manage your club subscriptions and view your payment history.',
     checkoutTitle: 'Complete your purchase',
     orderSummary: 'Order summary',
     paymentMethod: 'Payment method',
@@ -398,6 +400,7 @@ export const en = {
     renewsOn: (date: string) => `Renews on ${date}`,
     accessUntil: (date: string) => `Access continues until ${date}`,
     statusActive: 'Active',
+    statusExpiringSoon: 'Expiring soon',
     statusExpired: 'Expired',
     statusCancelled: 'Cancelled',
     statusTrialing: 'Trial',
@@ -410,6 +413,11 @@ export const en = {
     statusColumn: 'Status',
     keepSubscription: 'Keep Subscription',
     subscriptionCancelledTitle: 'Subscription cancelled',
+    txnStatusSuccess: 'Successful',
+    txnStatusPending: 'Pending',
+    txnStatusFailed: 'Failed',
+    txnStatusRefunded: 'Refunded',
+    txnStatusPartiallyRefunded: 'Partially refunded',
   },
 
   // ── Discovery / Home feed ───────────────────────────────────

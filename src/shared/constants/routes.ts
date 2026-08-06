@@ -26,7 +26,7 @@ export const ROUTES = {
   settingsNotifs: '/settings/notifications',
   settingsPrivacy: '/settings/privacy',
   settingsPayments: '/settings/payments',
-  subscriptions: '/subscriptions',
+  payments: '/payments',
   checkout: (planId: string) => `/checkout/${planId}`,
   checkoutSuccess: '/checkout/success',
   checkoutFailure: '/checkout/failure',

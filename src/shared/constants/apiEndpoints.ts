@@ -45,4 +45,9 @@ export const API_ENDPOINTS = {
     list: '/me/notifications',
     markRead: '/me/notifications/mark-read',
   },
+  payments: {
+    subscriptions: '/users/me/subscriptions',
+    transactions: '/users/me/transactions',
+    cancelSubscription: (subscriptionId: string) => `/subscriptions/${subscriptionId}`,
+  },
 } as const;

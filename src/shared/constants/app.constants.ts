@@ -124,6 +124,9 @@ export const BILLING_CYCLE_LABELS = {
   yearly: 'Yearly',
 } as const;
 
+// ── Payments ────────────────────────────────────────────────
+export const SUBSCRIPTION_EXPIRING_SOON_DAYS = 7;
+
 // ── Layout ─────────────────────────────────────────────────
 export const HEADER_HEIGHT_PX = 64;
 export const TRANSPARENT_HEADER_SCROLL_THRESHOLD_PX = 40;

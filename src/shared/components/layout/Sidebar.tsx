@@ -50,7 +50,7 @@ export function Sidebar({
       icon: Bell,
       badge: unreadNotificationsCount,
     },
-    { to: ROUTES.subscriptions, label: en.nav.payments, icon: CreditCard },
+    { to: ROUTES.payments, label: en.nav.payments, icon: CreditCard },
     {
       to: ROUTES.invitations,
       label: en.nav.invitations,
@@ -108,7 +108,7 @@ export function Sidebar({
           size="sm"
           className="mt-3 w-full bg-white text-neutral-900 hover:bg-neutral-200"
         >
-          <Link to={ROUTES.subscriptions}>{en.home.premiumCta}</Link>
+          <Link to={ROUTES.payments}>{en.home.premiumCta}</Link>
         </Button>
       </div>
     </aside>

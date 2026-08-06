@@ -40,5 +40,36 @@
     "gateway": "mock",
     "description": "Investors — Annual Membership (renewal attempt)",
     "createdAt": "2026-05-28T09:00:00.000Z"
+  },
+  {
+    "id": "txn_004",
+    "userId": "usr_member01",
+    "clubId": "clu_mentor01",
+    "type": "club_subscription",
+    "amount": 999,
+    "currency": "INR",
+    "status": "success",
+    "gateway": "mock",
+    "gatewayTransactionId": "mockpay_txn_004",
+    "planId": "plan_mentor_monthly",
+    "description": "Mentor — Monthly Membership",
+    "invoiceUrl": "#",
+    "createdAt": "2026-07-06T09:05:00.000Z"
+  },
+  {
+    "id": "txn_005",
+    "userId": "usr_member01",
+    "clubId": "clu_investors01",
+    "type": "event_ticket",
+    "amount": 499,
+    "currency": "INR",
+    "status": "refunded",
+    "gateway": "mock",
+    "gatewayTransactionId": "mockpay_txn_005",
+    "description": "Investors Meetup — Event Ticket (refunded)",
+    "refundReason": "Event rescheduled",
+    "refundedAt": "2026-07-15T12:00:00.000Z",
+    "invoiceUrl": "#",
+    "createdAt": "2026-07-10T10:00:00.000Z"
   }
 ]

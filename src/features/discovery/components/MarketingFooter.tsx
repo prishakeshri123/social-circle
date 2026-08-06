@@ -83,7 +83,7 @@ const QUICK_LINKS = [
 const MEMBER_LINKS = [
   { label: en.marketing.footerLinkOurClubs, to: ROUTES.clubs },
   { label: en.marketing.footerLinkUpcomingEvents, to: ROUTES.events },
-  { label: en.marketing.footerLinkMembershipPlans, to: ROUTES.subscriptions },
+  { label: en.marketing.footerLinkMembershipPlans, to: ROUTES.payments },
 ] as const;
 
 const LEGAL_LINKS = [
