@@ -5,13 +5,11 @@ import {
   Calendar,
   CreditCard,
   Home,
-  Image,
   MessageCircle,
   Settings,
   Sparkles,
   UserPlus,
   Users,
-  Users2,
   type LucideIcon,
 } from 'lucide-react';
 import { ROUTES } from '@/shared/constants/routes';
@@ -46,8 +44,6 @@ export function Sidebar({
     { to: ROUTES.myClubs, label: en.nav.myClubs, icon: Users },
     { to: ROUTES.messages, label: en.nav.chats, icon: MessageCircle, badge: unreadChatsCount },
     { to: ROUTES.myEvents, label: en.nav.eventsAndMeetings, icon: Calendar },
-    { to: ROUTES.albums, label: en.nav.albums, icon: Image },
-    { to: ROUTES.members, label: en.nav.members, icon: Users2 },
     {
       to: ROUTES.notifications,
       label: en.nav.notifications,

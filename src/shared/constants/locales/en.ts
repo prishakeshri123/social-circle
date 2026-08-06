@@ -327,7 +327,7 @@ export const en = {
     discover: 'Discover',
     myClubs: 'My Clubs',
     chats: 'Chats',
-    eventsAndMeetings: 'Events & Meetings',
+    eventsAndMeetings: 'Events',
     albums: 'Albums',
     members: 'Members',
     payments: 'Payments',
@@ -1462,11 +1462,20 @@ export const en = {
     privacyLabel: 'Privacy',
   },
 
-  // ── Notifications (mock-generated, e.g. chat @mentions) ─────
+  // ── Notifications ─────────────────────────────────────────
   notifications: {
     mentionTitle: 'New mention',
     mentionBody: (senderName: string, clubName: string) =>
       `${senderName} mentioned you in a message in "${clubName}".`,
+    title: 'Notifications',
+    subtitle: 'Stay on top of club activity, events, and payments.',
+    markAllRead: 'Mark all read',
+    filterAll: 'All',
+    filterClubActivity: 'Club Activity',
+    filterEvents: 'Events',
+    filterPayments: 'Payments',
+    filterSystem: 'System',
+    emptyCategory: (category: string) => `No ${category.toLowerCase()} notifications yet.`,
   },
 
   // ── Club dashboard: shell ───────────────────────────────────

@@ -27,6 +27,10 @@ function extractUserId(headers: unknown): string | null {
   return userIdFromToken(token);
 }
 
+function parseBody<T>(data: unknown): T {
+  return (typeof data === 'string' ? JSON.parse(data) : data) as T;
+}
+
 function handleList(
   userId: string | null,
   params: Record<string, string> | undefined,
@@ -40,8 +44,22 @@ function handleList(
   return [200, { data }];
 }
 
+function handleMarkRead(userId: string | null, data: unknown): [number, unknown] {
+  if (!userId) return [401, { code: 'UNAUTHORIZED', message: 'Unauthorized' }];
+  const { ids, all } = parseBody<{ ids?: string[]; all?: boolean }>(data);
+  notifications.forEach((n) => {
+    if (n.userId !== userId) return;
+    if (all || ids?.includes(n.id)) n.read = true;
+  });
+  return [204, undefined];
+}
+
 export function registerNotificationHandlers(mock: MockAdapter): void {
   mock
     .onGet('/me/notifications')
     .reply((config) => handleList(extractUserId(config.headers), config.params));
+
+  mock
+    .onPost('/me/notifications/mark-read')
+    .reply((config) => handleMarkRead(extractUserId(config.headers), config.data));
 }

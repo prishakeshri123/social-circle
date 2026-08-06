@@ -41,4 +41,8 @@ export const API_ENDPOINTS = {
     pin: (channelId: string) => `/channels/${channelId}/pin`,
     read: (channelId: string) => `/channels/${channelId}/read`,
   },
+  notifications: {
+    list: '/me/notifications',
+    markRead: '/me/notifications/mark-read',
+  },
 } as const;
