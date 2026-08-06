@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Globe, Lock, Mail, MoreVertical, Share2 } from 'lucide-react';
+import { Bookmark, Globe, Lock, Mail, MoreVertical, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/Avatar';
 import { Button } from '@/shared/components/ui/Button';
 import {
@@ -11,6 +11,12 @@ import {
 import { CATEGORIES } from '@/shared/constants/categories';
 import { en } from '@/shared/constants/locales/en';
 import { toast } from '@/shared/components/ui/Toast';
+import { cn } from '@/shared/utils/cn';
+import { useAuth } from '@/shared/hooks/useAuth';
+import { useRequireAuth } from '@/shared/hooks/useRequireAuth';
+import { useSavedClubs } from '@/features/clubs/hooks/useSavedClubs';
+import { useSaveClub } from '@/features/clubs/hooks/useSaveClub';
+import { useUnsaveClub } from '@/features/clubs/hooks/useUnsaveClub';
 import type { Club } from '@/types/club.types';
 
 const PRIVACY_LABEL: Record<Club['privacy'], string> = {
@@ -35,6 +41,15 @@ export function ClubHero({ club }: ClubHeroProps) {
   const PrivacyIcon = PRIVACY_ICON[club.privacy];
   const foundedYear = new Date(club.createdAt).getFullYear().toString();
 
+  const { isAuthenticated } = useAuth();
+  const requireAuth = useRequireAuth();
+  const savedClubsQuery = useSavedClubs();
+  const saveMutation = useSaveClub();
+  const unsaveMutation = useUnsaveClub();
+
+  const isSaved = isAuthenticated && (savedClubsQuery.data ?? []).some((c) => c.id === club.id);
+  const isToggling = saveMutation.isPending || unsaveMutation.isPending;
+
   function handleShare() {
     navigator.clipboard
       ?.writeText(window.location.href)
@@ -44,6 +59,16 @@ export function ClubHero({ club }: ClubHeroProps) {
   function handleReport() {
     setReported(true);
     toast.success(en.actions.report);
+  }
+
+  function handleToggleSave() {
+    requireAuth('save', () => {
+      if (isSaved) {
+        unsaveMutation.mutate(club.id);
+      } else {
+        saveMutation.mutate(club.id);
+      }
+    });
   }
 
   return (
@@ -61,6 +86,18 @@ export function ClubHero({ club }: ClubHeroProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
 
         <div className="absolute right-4 top-4 flex items-center gap-2 sm:right-6 sm:top-6">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={handleToggleSave}
+            disabled={isToggling}
+            aria-label={isSaved ? en.savedClubs.unsaveCta : en.savedClubs.saveCta}
+            aria-pressed={isSaved}
+            className="border-white/20 bg-black/30 text-white backdrop-blur-sm hover:bg-black/50 hover:text-white"
+          >
+            <Bookmark className={cn('size-4', isSaved && 'fill-current')} />
+          </Button>
           <Button
             type="button"
             variant="outline"

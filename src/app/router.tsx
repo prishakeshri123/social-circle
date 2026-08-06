@@ -130,6 +130,12 @@ const SubscriptionsPage = lazy(() =>
     default: m.SubscriptionsPage,
   })),
 );
+const InvitationsPage = lazy(() =>
+  import('@/features/clubs/pages/InvitationsPage').then((m) => ({ default: m.InvitationsPage })),
+);
+const SavedClubsPage = lazy(() =>
+  import('@/features/clubs/pages/SavedClubsPage').then((m) => ({ default: m.SavedClubsPage })),
+);
 
 // Wraps a lazily-loaded page element in its own Suspense boundary so
 // navigating to it shows a spinner instead of blocking on the whole tree.
@@ -207,8 +213,8 @@ export const router = createBrowserRouter([
       { path: ROUTES.myEvents, element: <MyEventsPage /> },
       { path: ROUTES.albums, element: <PlaceholderPage title="Albums" /> },
       { path: ROUTES.members, element: <PlaceholderPage title="Members" /> },
-      { path: ROUTES.invitations, element: <PlaceholderPage title="Invitations" /> },
-      { path: ROUTES.savedClubs, element: <PlaceholderPage title="Saved Clubs" /> },
+      { path: ROUTES.invitations, element: <InvitationsPage /> },
+      { path: ROUTES.savedClubs, element: <SavedClubsPage /> },
       { path: ROUTES.notifications, element: <NotificationsPage /> },
       { path: ROUTES.messages, element: <ConversationsHubPage defaultFilter="all" /> },
       {

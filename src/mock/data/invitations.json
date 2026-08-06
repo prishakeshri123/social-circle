@@ -1,7 +1,7 @@
 [
   {
     "id": "inv_001",
-    "clubId": "clu_kocbooks01",
+    "clubId": "clu_bizpromo01",
     "invitedUserId": "usr_member01",
     "invitedByUserId": "usr_member06",
     "status": "pending",
@@ -9,7 +9,7 @@
   },
   {
     "id": "inv_002",
-    "clubId": "clu_goayoga01",
+    "clubId": "clu_foundation01",
     "invitedUserId": "usr_member01",
     "invitedByUserId": "usr_member05",
     "status": "pending",
@@ -17,7 +17,7 @@
   },
   {
     "id": "inv_003",
-    "clubId": "clu_chdstartup01",
+    "clubId": "clu_startupidea01",
     "invitedUserId": "usr_member01",
     "invitedByUserId": "usr_member04",
     "status": "pending",

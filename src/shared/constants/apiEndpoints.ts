@@ -45,6 +45,16 @@ export const API_ENDPOINTS = {
     list: '/me/notifications',
     markRead: '/me/notifications/mark-read',
   },
+  invitations: {
+    list: '/me/invitations',
+    accept: (invitationId: string) => `/me/invitations/${invitationId}/accept`,
+    decline: (invitationId: string) => `/me/invitations/${invitationId}/decline`,
+  },
+  savedClubs: {
+    list: '/me/saved-clubs',
+    save: (clubId: string) => `/me/saved-clubs/${clubId}`,
+    unsave: (clubId: string) => `/me/saved-clubs/${clubId}`,
+  },
   payments: {
     subscriptions: '/users/me/subscriptions',
     transactions: '/users/me/transactions',

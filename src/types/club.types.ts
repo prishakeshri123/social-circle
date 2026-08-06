@@ -61,6 +61,10 @@ export interface MyClub extends Club {
   myRole: ClubMembership['role'];
 }
 
+export interface SavedClub extends Club {
+  savedAt: string;
+}
+
 export interface ClubMemberWithUser extends ClubMembership {
   isOnline: boolean;
   user: User;

@@ -106,6 +106,36 @@ function handleDetail(slug: string): [number, unknown] {
   return [200, club];
 }
 
+// Creates (or returns the existing) membership for a user in a club,
+// skipping the paid-checkout gate -- shared by the public "Join" flow
+// (still gated by club.type upstream in handleJoin) and the invitation
+// accept flow (an invite is treated as pre-authorized access). Both still
+// respect manual approval clubs.
+export function grantMembership(clubId: string, userId: string): ClubMembership {
+  const existing = memberships.find((m) => m.clubId === clubId && m.userId === userId);
+  if (existing) {
+    return existing;
+  }
+
+  const club = clubs.find((c) => c.id === clubId);
+  const status = club?.membershipApproval === 'manual' ? 'pending_approval' : 'active';
+  const membership: ClubMembership = {
+    id: `mem_${nanoid(10)}`,
+    clubId,
+    userId,
+    role: 'member',
+    status,
+    joinedAt: new Date().toISOString(),
+  };
+  memberships.push(membership);
+
+  if (status === 'active' && club) {
+    club.memberCount += 1;
+  }
+
+  return membership;
+}
+
 function handleJoin(id: string, headers: unknown): [number, unknown] {
   const club = clubs.find((c) => c.id === id);
   if (!club) {
@@ -126,22 +156,7 @@ function handleJoin(id: string, headers: unknown): [number, unknown] {
     return [402, { checkoutUrl: `/checkout/${club.pricingPlans?.[0]?.id ?? ''}` }];
   }
 
-  const status = club.membershipApproval === 'manual' ? 'pending_approval' : 'active';
-  const membership: ClubMembership = {
-    id: `mem_${nanoid(10)}`,
-    clubId: id,
-    userId,
-    role: 'member',
-    status,
-    joinedAt: new Date().toISOString(),
-  };
-  memberships.push(membership);
-
-  if (status === 'active') {
-    club.memberCount += 1;
-  }
-
-  return [200, membership];
+  return [200, grantMembership(id, userId)];
 }
 
 function paginate<T>(list: T[], page: number, limit: number): PaginatedResponse<T> {

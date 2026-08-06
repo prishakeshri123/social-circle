@@ -37,6 +37,9 @@ export const queryKeys = {
   invitations: {
     list: (userId: string) => ['invitations', userId] as const,
   },
+  savedClubs: {
+    list: (userId: string) => ['saved-clubs', userId] as const,
+  },
   users: {
     me: ['users', 'me'] as const,
     detail: (userId: string) => ['users', userId] as const,

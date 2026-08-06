@@ -315,6 +315,10 @@ export const en = {
     noMessages: 'No conversations yet.',
     noMessagesCta: 'Find a club member and start chatting.',
     noNotifications: "You're all caught up! No new notifications.",
+    noInvitations: "You're all caught up! No pending invitations.",
+    noInvitationsCta: 'Discover clubs',
+    noSavedClubs: "You haven't saved any clubs yet.",
+    noSavedClubsCta: 'Discover clubs',
     noResults: (query: string) => `No results for "${query}". Try different keywords.`,
     noSubscriptions: 'You have no active subscriptions.',
     noMembers: 'No members found.',
@@ -1496,6 +1500,31 @@ export const en = {
     filterSystem: 'System',
     emptyCategory: (category: string) => `No ${category.toLowerCase()} notifications yet.`,
     unreadCount: (n: number) => `${n} unread`,
+  },
+
+  // ── Invitations page ─────────────────────────────────────────
+  invitations: {
+    title: 'Invitations',
+    subtitle: 'Clubs that have invited you to join.',
+    pendingCount: (n: number) => `${n} pending`,
+    invitedYouToJoin: (inviterName: string) => `${inviterName} invited you to join`,
+    acceptCta: 'Accept',
+    declineCta: 'Decline',
+    acceptSuccess: "You've joined the club!",
+    declineSuccess: 'Invitation declined.',
+  },
+
+  // ── Saved Clubs ──────────────────────────────────────────────
+  savedClubs: {
+    title: 'Saved Clubs',
+    subtitle: "Clubs you've bookmarked to revisit later.",
+    savedCount: (n: number) => `${n} saved`,
+    savedLabel: (relative: string) => `Saved ${relative}`,
+    saveCta: 'Save Club',
+    unsaveCta: 'Unsave',
+    saveSuccess: 'Club saved.',
+    unsaveSuccess: 'Removed from saved clubs.',
+    viewClubCta: 'View Club',
   },
 
   // ── Club dashboard: shell ───────────────────────────────────

@@ -8,6 +8,7 @@ import { registerAlbumHandlers } from '@/mock/handlers/albumHandlers';
 import { registerPaymentHandlers } from '@/mock/handlers/paymentHandlers';
 import { registerNotificationHandlers } from '@/mock/handlers/notificationHandlers';
 import { registerInvitationHandlers } from '@/mock/handlers/invitationHandlers';
+import { registerSavedClubHandlers } from '@/mock/handlers/savedClubHandlers';
 
 export function registerMockHandlers(mock: MockAdapter): void {
   registerAuthHandlers(mock);
@@ -19,4 +20,5 @@ export function registerMockHandlers(mock: MockAdapter): void {
   registerPaymentHandlers(mock);
   registerNotificationHandlers(mock);
   registerInvitationHandlers(mock);
+  registerSavedClubHandlers(mock);
 }

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "svd_bp_member01",
+    "clubId": "clu_bizpromo01",
+    "userId": "usr_member01",
+    "savedAt": "2026-07-28T09:00:00.000Z"
+  },
+  {
+    "id": "svd_fo_member01",
+    "clubId": "clu_foundation01",
+    "userId": "usr_member01",
+    "savedAt": "2026-08-02T09:00:00.000Z"
+  },
+  {
+    "id": "svd_co_member01",
+    "clubId": "clu_competorg01",
+    "userId": "usr_member01",
+    "savedAt": "2026-08-04T09:00:00.000Z"
+  }
+]
