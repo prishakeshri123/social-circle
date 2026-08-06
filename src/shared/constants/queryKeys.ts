@@ -43,9 +43,14 @@ export const queryKeys = {
   users: {
     me: ['users', 'me'] as const,
     detail: (userId: string) => ['users', userId] as const,
+    notificationPreferences: (userId: string) =>
+      ['users', userId, 'notification-preferences'] as const,
+    privacy: (userId: string) => ['users', userId, 'privacy'] as const,
   },
   payments: {
     subscriptions: (userId: string) => ['payments', 'subscriptions', userId] as const,
     transactions: (userId: string) => ['payments', 'transactions', userId] as const,
+    methods: (userId: string) => ['payments', 'methods', userId] as const,
+    billingAddress: (userId: string) => ['payments', 'billing-address', userId] as const,
   },
 } as const;

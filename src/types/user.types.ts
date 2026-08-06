@@ -34,6 +34,15 @@ export interface NotificationPreferences {
   paymentAlerts: boolean;
 }
 
+export type ProfileVisibility = 'public' | 'members_only' | 'private';
+export type DmPermission = 'anyone' | 'club_members' | 'nobody';
+
+export interface PrivacySettings {
+  profileVisibility: ProfileVisibility;
+  showInDiscovery: boolean;
+  allowDmsFrom: DmPermission;
+}
+
 export type NotificationType =
   | 'club_joined'
   | 'event_created'

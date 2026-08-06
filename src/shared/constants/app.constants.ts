@@ -11,6 +11,7 @@ export const CONVERSATION_LIST_BADGE_MAX = 9;
 
 // ── File upload limits ────────────────────────────────────
 export const MAX_AVATAR_SIZE_MB = 5;
+export const MAX_COVER_PHOTO_SIZE_MB = 8;
 export const MAX_VIDEO_SIZE_MB = 50;
 export const MAX_DOC_SIZE_MB = 20;
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const;
@@ -126,6 +127,13 @@ export const BILLING_CYCLE_LABELS = {
 
 // ── Payments ────────────────────────────────────────────────
 export const SUBSCRIPTION_EXPIRING_SOON_DAYS = 7;
+export const MAX_SAVED_PAYMENT_METHODS = 5;
+export const CARD_BRAND_LABELS = {
+  visa: 'Visa',
+  mastercard: 'Mastercard',
+  rupay: 'RuPay',
+  amex: 'Amex',
+} as const;
 
 // ── Layout ─────────────────────────────────────────────────
 export const HEADER_HEIGHT_PX = 64;

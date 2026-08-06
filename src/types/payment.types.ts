@@ -35,3 +35,24 @@ export interface Subscription {
 }
 
 export type PaymentMethod = 'upi' | 'card' | 'net_banking' | 'wallet';
+
+export type CardBrand = 'visa' | 'mastercard' | 'rupay' | 'amex';
+
+export interface SavedPaymentMethod {
+  id: string;
+  userId: string;
+  brand: CardBrand;
+  last4: string;
+  expiryMonth: number;
+  expiryYear: number;
+  isDefault: boolean;
+  createdAt: string;
+}
+
+export interface BillingAddress {
+  line1: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+}

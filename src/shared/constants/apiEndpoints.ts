@@ -16,6 +16,16 @@ export const API_ENDPOINTS = {
     byId: (userId: string) => `/users/${userId}`,
     me: '/users/me',
     dmChannel: (userId: string) => `/users/${userId}/dm-channel`,
+    notificationPreferences: '/users/me/notification-preferences',
+    privacy: '/users/me/privacy',
+  },
+  account: {
+    changeEmail: '/account/email',
+    verifyEmailChange: '/account/email/verify',
+    changePhone: '/account/phone',
+    verifyPhoneChange: '/account/phone/verify',
+    changePassword: '/account/password',
+    deleteAccount: '/account/delete',
   },
   clubs: {
     myClubs: '/me/clubs',
@@ -59,5 +69,8 @@ export const API_ENDPOINTS = {
     subscriptions: '/users/me/subscriptions',
     transactions: '/users/me/transactions',
     cancelSubscription: (subscriptionId: string) => `/subscriptions/${subscriptionId}`,
+    paymentMethods: '/users/me/payment-methods',
+    paymentMethod: (id: string) => `/users/me/payment-methods/${id}`,
+    billingAddress: '/users/me/billing-address',
   },
 } as const;

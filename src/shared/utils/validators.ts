@@ -115,10 +115,15 @@ export const resetPasswordSchema = z
 // ── Profile ───────────────────────────────────────────────
 export const profileSchema = z.object({
   fullName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
-  bio: z.string().max(MAX_BIO_LENGTH, e.bioTooLong).optional(),
-  city: z.string().max(80).optional(),
+  bio: z.string().max(MAX_BIO_LENGTH, e.bioTooLong).optional().or(z.literal('')),
+  city: z.string().max(80).optional().or(z.literal('')),
   websiteUrl: urlSchema,
   interests: z.array(z.string()).min(1, e.atLeastOneInterest),
+  socialLinks: z.object({
+    twitter: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+    linkedin: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+    instagram: z.string().max(MAX_SHORT_FIELD_LENGTH).optional().or(z.literal('')),
+  }),
 });
 
 // ── Onboarding (2-step profile setup) ──────────────────────
@@ -171,4 +176,52 @@ export const pollCreateSchema = z.object({
     .min(MIN_POLL_OPTIONS)
     .max(MAX_POLL_OPTIONS),
   allowMultiple: z.boolean(),
+});
+
+// ── Settings: account ───────────────────────────────────────
+export const changeEmailSchema = z.object({ email: emailSchema });
+export const changePhoneSchema = z.object({ phone: indiaPhoneSchema });
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, e.required),
+    newPassword: passwordSchema,
+    confirmPassword: z.string(),
+  })
+  .refine((d) => d.newPassword === d.confirmPassword, {
+    message: e.passwordMatch,
+    path: ['confirmPassword'],
+  });
+
+export const deleteAccountSchema = z.object({
+  confirmText: z.string().refine((v) => v === 'DELETE', { message: e.deleteConfirmMismatch }),
+});
+
+// ── Settings: payments ───────────────────────────────────────
+const CARD_NUMBER_REGEX = /^\d{16}$/;
+const CARD_EXPIRY_REGEX = /^(0[1-9]|1[0-2])\/\d{2}$/;
+const CARD_CVV_REGEX = /^\d{3,4}$/;
+
+export const addPaymentMethodSchema = z.object({
+  cardNumber: z
+    .string()
+    .refine((v) => CARD_NUMBER_REGEX.test(v.replace(/\s+/g, '')), { message: e.cardNumberInvalid }),
+  cardExpiry: z.string().refine((v) => CARD_EXPIRY_REGEX.test(v), { message: e.cardExpiryInvalid }),
+  cardCvv: z.string().refine((v) => CARD_CVV_REGEX.test(v), { message: e.cardCvvInvalid }),
+  cardName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
+});
+
+export const billingAddressSchema = z.object({
+  line1: z.string().min(1, e.required).max(MAX_ADDRESS_LENGTH),
+  city: z.string().min(1, e.required).max(MAX_SHORT_FIELD_LENGTH),
+  state: z.string().min(1, e.required).max(MAX_SHORT_FIELD_LENGTH),
+  postalCode: z.string().min(1, e.required).max(20),
+  country: z.string().min(1, e.required).max(MAX_SHORT_FIELD_LENGTH),
+});
+
+// ── Settings: privacy ─────────────────────────────────────────
+export const privacySettingsSchema = z.object({
+  profileVisibility: z.enum(['public', 'members_only', 'private']),
+  showInDiscovery: z.boolean(),
+  allowDmsFrom: z.enum(['anyone', 'club_members', 'nobody']),
 });

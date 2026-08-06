@@ -289,4 +289,12 @@ export function registerAuthHandlers(mock: MockAdapter): void {
   mock.onPost('/auth/logout').reply(200, { message: en.auth.logoutSuccess });
 }
 
-export { users as mockUsers, userIdFromToken };
+function verifyPassword(email: string, password: string): boolean {
+  return passwordsByEmail.get(email) === password;
+}
+
+function setPassword(email: string, password: string): void {
+  passwordsByEmail.set(email, password);
+}
+
+export { users as mockUsers, userIdFromToken, verifyPassword, setPassword };

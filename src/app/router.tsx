@@ -136,6 +136,17 @@ const InvitationsPage = lazy(() =>
 const SavedClubsPage = lazy(() =>
   import('@/features/clubs/pages/SavedClubsPage').then((m) => ({ default: m.SavedClubsPage })),
 );
+const SettingsPage = lazy(() =>
+  import('@/features/settings/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })),
+);
+const ProfilePage = lazy(() =>
+  import('@/features/profile/pages/ProfilePage').then((m) => ({ default: m.ProfilePage })),
+);
+const EditProfilePage = lazy(() =>
+  import('@/features/profile/pages/EditProfilePage').then((m) => ({
+    default: m.EditProfilePage,
+  })),
+);
 
 // Wraps a lazily-loaded page element in its own Suspense boundary so
 // navigating to it shows a spinner instead of blocking on the whole tree.
@@ -221,12 +232,12 @@ export const router = createBrowserRouter([
         path: ROUTES.messageThread(':userId'),
         element: <ConversationsHubPage defaultFilter="chats" />,
       },
-      { path: ROUTES.profile(':userId'), element: <PlaceholderPage title="Profile" /> },
-      { path: ROUTES.profileEdit, element: <PlaceholderPage title="Edit Profile" /> },
-      { path: ROUTES.settings, element: <PlaceholderPage title="Settings" /> },
-      { path: ROUTES.settingsNotifs, element: <PlaceholderPage title="Notification Settings" /> },
-      { path: ROUTES.settingsPrivacy, element: <PlaceholderPage title="Privacy Settings" /> },
-      { path: ROUTES.settingsPayments, element: <PlaceholderPage title="Payment Settings" /> },
+      { path: ROUTES.profile(':userId'), element: <ProfilePage /> },
+      { path: ROUTES.profileEdit, element: <EditProfilePage /> },
+      { path: ROUTES.settings, element: <SettingsPage /> },
+      { path: ROUTES.settingsNotifs, element: <SettingsPage /> },
+      { path: ROUTES.settingsPrivacy, element: <SettingsPage /> },
+      { path: ROUTES.settingsPayments, element: <SettingsPage /> },
       { path: ROUTES.payments, element: <SubscriptionsPage /> },
       { path: ROUTES.checkout(':planId'), element: <PlaceholderPage title="Checkout" /> },
       { path: ROUTES.checkoutSuccess, element: <PlaceholderPage title="Payment Success" /> },

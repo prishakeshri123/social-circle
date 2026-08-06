@@ -213,6 +213,13 @@ export const en = {
     referenceId2: 'Reference ID 2',
     photo: 'Photo',
     familyPhoto: 'Family photo',
+    state: 'State',
+    postalCode: 'PIN / Postal code',
+    country: 'Country',
+    coverPhoto: 'Cover photo',
+    twitterHandle: 'Twitter',
+    linkedinUrl: 'LinkedIn',
+    instagramHandle: 'Instagram',
   },
 
   // ── Forms: placeholders ───────────────────────────────────
@@ -239,6 +246,13 @@ export const en = {
     contactMessage: 'Tell us a little more...',
     community: 'Select a community',
     address: 'e.g. 12 MG Road, Sector 16, Bengaluru',
+    state: 'e.g. Karnataka',
+    postalCode: 'e.g. 560001',
+    country: 'e.g. India',
+    cardNumber: '1234 5678 9012 3456',
+    cardExpiry: 'MM/YY',
+    cardCvv: '123',
+    cardName: 'Name as on card',
     religion: 'e.g. Hindu, Muslim, Christian, Sikh...',
     nationality: 'e.g. Indian',
     residentStatus: 'e.g. Citizen, Resident, Visitor',
@@ -249,6 +263,9 @@ export const en = {
     spouseName: "Spouse's full name",
     childrenNames: 'Names of children, comma separated',
     referenceContact: 'Name and phone number',
+    twitterHandle: '@yourhandle',
+    linkedinUrl: 'linkedin.com/in/yourname',
+    instagramHandle: '@yourhandle',
   },
 
   // ── Forms: validation error messages ──────────────────────
@@ -286,6 +303,11 @@ export const en = {
     serverError: 'A server error occurred. Please try again.',
     notFound: 'The page you are looking for does not exist.',
     unauthorized: 'You do not have permission to view this page.',
+    currentPasswordIncorrect: 'Current password is incorrect.',
+    deleteConfirmMismatch: 'Type DELETE exactly to confirm.',
+    cardNumberInvalid: 'Please enter a valid 16-digit card number.',
+    cardExpiryInvalid: 'Please enter a valid expiry in MM/YY format.',
+    cardCvvInvalid: 'Please enter a valid CVV.',
   },
 
   // ── Forms: success messages ───────────────────────────────
@@ -302,6 +324,14 @@ export const en = {
     subscriptionCancelled: 'Subscription cancelled. You have access until',
     linkCopied: 'Link copied to clipboard.',
     settingsSaved: 'Settings saved.',
+    passwordChanged: 'Password changed successfully.',
+    emailChanged: 'Email address updated.',
+    phoneChanged: 'Phone number updated.',
+    accountDeleted: 'Your account has been deleted.',
+    paymentMethodAdded: 'Payment method added.',
+    paymentMethodRemoved: 'Payment method removed.',
+    defaultPaymentMethodUpdated: 'Default payment method updated.',
+    billingAddressSaved: 'Billing address saved.',
   },
 
   // ── Empty states ───────────────────────────────────────────
@@ -323,6 +353,8 @@ export const en = {
     noSubscriptions: 'You have no active subscriptions.',
     noMembers: 'No members found.',
     searchPrompt: 'Start typing to search clubs, events and people.',
+    noBlockedUsers: "You haven't blocked anyone.",
+    noPaymentMethods: 'No saved payment methods yet.',
   },
 
   // ── Navigation labels ──────────────────────────────────────
@@ -368,12 +400,114 @@ export const en = {
     payments: 'Payments',
   },
 
-  // ── Settings section labels ────────────────────────────────
+  // ── Settings ────────────────────────────────────────────────
   settings: {
     account: 'Account',
     notifications: 'Notifications',
     privacy: 'Privacy',
     payments: 'Payments & Billing',
+    title: 'Settings',
+    subtitle: 'Manage your account, notifications, privacy, and payment preferences.',
+
+    // Account tab
+    accountSectionTitle: 'Account details',
+    accountSectionSubtitle: 'Update the email, phone, and password used to sign in.',
+    emailLabel: 'Email address',
+    phoneLabel: 'Phone number',
+    passwordLabel: 'Password',
+    passwordMaskedValue: '••••••••',
+    changeCta: 'Change',
+    noPhoneSet: 'No phone number on file',
+    verifiedBadge: 'Verified',
+    dangerZoneTitle: 'Danger zone',
+    dangerZoneSubtitle: 'Deleting your account is permanent and cannot be undone.',
+    deleteAccountCta: 'Delete account',
+    deleteAccountDialogTitle: 'Delete your account?',
+    deleteAccountDialogBody:
+      'This will permanently remove your profile, club memberships, and messages. Type DELETE to confirm.',
+    deleteAccountConfirmLabel: 'Type DELETE to confirm',
+    deleteAccountConfirmPlaceholder: 'DELETE',
+
+    changeEmailDialogTitle: 'Change email address',
+    changePhoneDialogTitle: 'Change phone number',
+    changeContactStep1Body:
+      'Enter your new value below. We will send a verification code to confirm it.',
+    changeContactStep2Body: (target: string) => `Enter the 6-digit code we sent to ${target}.`,
+    newEmailLabel: 'New email address',
+    newPhoneLabel: 'New phone number',
+
+    changePasswordDialogTitle: 'Change password',
+    currentPasswordLabel: 'Current password',
+    newPasswordLabel: 'New password',
+
+    // Notifications tab
+    notificationsSectionTitle: 'Notification preferences',
+    notificationsSectionSubtitle:
+      'Choose what you want to be notified about. Changes save automatically.',
+    notifEmailEnabled: 'Email notifications',
+    notifEmailEnabledDesc: 'Receive updates and receipts by email.',
+    notifPushEnabled: 'Push notifications',
+    notifPushEnabledDesc: 'Get real-time alerts on your device.',
+    notifEventReminders: 'Event reminders',
+    notifEventRemindersDesc: 'Reminders before events you are attending.',
+    notifChatMentions: 'Chat mentions',
+    notifChatMentionsDesc: 'When someone mentions you in a club chat.',
+    notifClubUpdates: 'Club updates',
+    notifClubUpdatesDesc: 'Announcements and activity from your clubs.',
+    notifPaymentAlerts: 'Payment alerts',
+    notifPaymentAlertsDesc: 'Receipts, renewals, and failed payments.',
+    savedIndicator: 'Saved',
+
+    // Privacy tab
+    privacySectionTitle: 'Privacy',
+    privacySectionSubtitle: 'Control who can see your profile and reach out to you.',
+    profileVisibilityLabel: 'Profile visibility',
+    visibilityPublic: 'Public',
+    visibilityMembersOnly: 'Members only',
+    visibilityPrivate: 'Private',
+    showInDiscoveryLabel: 'Show in discovery',
+    showInDiscoveryDesc: 'Let other members find you in search and recommendations.',
+    allowDmsFromLabel: 'Allow direct messages from',
+    dmAnyone: 'Anyone',
+    dmClubMembers: 'Club members only',
+    dmNobody: 'Nobody',
+    blockedUsersTitle: 'Blocked users',
+    blockedUsersSubtitle: 'People you have blocked cannot message you or see your activity.',
+
+    // Payments tab
+    paymentMethodsTitle: 'Saved payment methods',
+    paymentMethodsSubtitle: 'Manage the cards used for club memberships and event tickets.',
+    addPaymentMethodCta: 'Add payment method',
+    defaultBadge: 'Default',
+    setDefaultCta: 'Set as default',
+    removeCardCta: 'Remove',
+    addCardDialogTitle: 'Add payment method',
+    billingAddressTitle: 'Billing address',
+    billingAddressSubtitle: 'Used for invoices and payment receipts.',
+    saveAddressCta: 'Save address',
+  },
+
+  // ── Profile (public view + edit) ───────────────────────────
+  profile: {
+    clubsJoinedLabel: 'Clubs Joined',
+    tabClubs: 'Clubs',
+    tabActivity: 'Activity',
+    activityComingSoon: "Activity feed is coming soon — for now, check out this member's clubs.",
+    noBio: "This member hasn't added a bio yet.",
+    clubsEmptyOwn: "You haven't joined any clubs yet.",
+    clubsEmptyOwnCta: 'Discover clubs',
+    clubsEmptyOther: "This member's clubs aren't visible here.",
+    notFoundTitle: 'Member not found',
+    notFoundBody: "The profile you're looking for doesn't exist or may have been removed.",
+
+    editTitle: 'Edit Profile',
+    editSubtitle: 'Update your photo, bio, interests, and links.',
+    photosSectionTitle: 'Photos',
+    basicInfoTitle: 'Basic info',
+    interestsSectionTitle: 'Interests',
+    socialLinksTitle: 'Social links',
+    changeCoverCta: 'Change cover',
+    uploadCoverCta: 'Upload cover',
   },
 
   // ── Payment / checkout ─────────────────────────────────────
