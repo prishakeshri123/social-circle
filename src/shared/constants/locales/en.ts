@@ -1489,6 +1489,7 @@ export const en = {
     filterPayments: 'Payments',
     filterSystem: 'System',
     emptyCategory: (category: string) => `No ${category.toLowerCase()} notifications yet.`,
+    unreadCount: (n: number) => `${n} unread`,
   },
 
   // ── Club dashboard: shell ───────────────────────────────────

@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Bell, Calendar, CreditCard, LayoutGrid, Users, type LucideIcon } from 'lucide-react';
+import {
+  Bell,
+  Calendar,
+  CheckCheck,
+  CreditCard,
+  LayoutGrid,
+  Users,
+  type LucideIcon,
+} from 'lucide-react';
 import { Sidebar } from '@/shared/components/layout/Sidebar';
 import { EmptyState } from '@/shared/components/feedback/EmptyState';
 import { Button } from '@/shared/components/ui/Button';
+import { Card } from '@/shared/components/ui/Card';
 import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/Tabs';
 import { en } from '@/shared/constants/locales/en';
 import { PAGE_SIZE_NOTIFICATIONS } from '@/shared/constants/app.constants';
@@ -81,7 +90,14 @@ export function NotificationsPage() {
       <div className="min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-text-primary">{en.notifications.title}</h1>
+            <div className="flex items-center gap-2.5">
+              <h1 className="text-2xl font-bold text-text-primary">{en.notifications.title}</h1>
+              {unreadNotificationsCount > 0 && (
+                <span className="inline-flex h-5 items-center rounded-full bg-primary-100 px-2 text-xs font-semibold text-primary-700">
+                  {en.notifications.unreadCount(unreadNotificationsCount)}
+                </span>
+              )}
+            </div>
             <p className="mt-1 text-sm text-text-secondary">{en.notifications.subtitle}</p>
           </div>
           <Button
@@ -90,6 +106,7 @@ export function NotificationsPage() {
             disabled={unreadNotificationsCount === 0 || markAllRead.isPending}
             onClick={() => markAllRead.mutate()}
           >
+            <CheckCheck className="size-4" aria-hidden="true" />
             {en.notifications.markAllRead}
           </Button>
         </div>
@@ -122,26 +139,28 @@ export function NotificationsPage() {
         </Tabs>
 
         {notificationsQuery.isPending && (
-          <div className="space-y-1">
+          <Card className="divide-y divide-border overflow-hidden">
             {Array.from({ length: 6 }).map((_, i) => (
               <NotificationItemSkeleton key={i} />
             ))}
-          </div>
+          </Card>
         )}
 
         {!notificationsQuery.isPending && filtered.length === 0 && (
-          <EmptyState
-            icon={Bell}
-            title={
-              category === 'all'
-                ? en.empty.noNotifications
-                : en.notifications.emptyCategory(activeTabLabel)
-            }
-          />
+          <Card>
+            <EmptyState
+              icon={Bell}
+              title={
+                category === 'all'
+                  ? en.empty.noNotifications
+                  : en.notifications.emptyCategory(activeTabLabel)
+              }
+            />
+          </Card>
         )}
 
         {!notificationsQuery.isPending && filtered.length > 0 && (
-          <div className="space-y-1">
+          <Card className="divide-y divide-border overflow-hidden">
             {filtered.map((notification) => (
               <NotificationItem
                 key={notification.id}
@@ -149,7 +168,7 @@ export function NotificationsPage() {
                 onRead={(id) => markAsRead.mutate(id)}
               />
             ))}
-          </div>
+          </Card>
         )}
       </div>
     </div>

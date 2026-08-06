@@ -27,7 +27,7 @@ export function NotificationItem({ notification, onRead }: NotificationItemProps
       type="button"
       onClick={handleClick}
       className={cn(
-        'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors duration-fast',
+        'flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors duration-fast',
         notification.read ? 'hover:bg-surface' : 'bg-primary-50/60 hover:bg-primary-50',
       )}
     >
