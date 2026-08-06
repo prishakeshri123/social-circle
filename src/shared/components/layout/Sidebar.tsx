@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   Bell,
   Bookmark,
@@ -7,7 +7,6 @@ import {
   Home,
   MessageCircle,
   Settings,
-  Sparkles,
   UserPlus,
   Users,
   type LucideIcon,
@@ -15,7 +14,6 @@ import {
 import { ROUTES } from '@/shared/constants/routes';
 import { en } from '@/shared/constants/locales/en';
 import { Badge } from '@/shared/components/ui/Badge';
-import { Button } from '@/shared/components/ui/Button';
 import { cn } from '@/shared/utils/cn';
 
 interface SidebarNavItem {
@@ -62,12 +60,7 @@ export function Sidebar({
   ];
 
   return (
-    <aside
-      className={cn(
-        'flex flex-col justify-between border-r border-border bg-surface-raised',
-        className,
-      )}
-    >
+    <aside className={cn('flex flex-col border-r border-border bg-surface-raised', className)}>
       <nav className="flex flex-col gap-1 overflow-y-auto p-3" aria-label={en.nav.home}>
         {items.map(({ to, label, icon: Icon, end, badge }) => (
           <NavLink
@@ -95,22 +88,6 @@ export function Sidebar({
           </NavLink>
         ))}
       </nav>
-
-      <div
-        className="m-3 rounded-2xl p-4 text-white"
-        style={{ background: 'var(--gradient-brand)' }}
-      >
-        <Sparkles className="size-5" aria-hidden="true" />
-        <p className="mt-2 text-sm font-semibold">{en.home.premiumTitle}</p>
-        <p className="mt-1 text-xs text-white/85">{en.home.premiumBody}</p>
-        <Button
-          asChild
-          size="sm"
-          className="mt-3 w-full bg-white text-neutral-900 hover:bg-neutral-200"
-        >
-          <Link to={ROUTES.payments}>{en.home.premiumCta}</Link>
-        </Button>
-      </div>
     </aside>
   );
 }

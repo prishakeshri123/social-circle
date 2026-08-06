@@ -418,6 +418,11 @@ export const en = {
     txnStatusFailed: 'Failed',
     txnStatusRefunded: 'Refunded',
     txnStatusPartiallyRefunded: 'Partially refunded',
+    paymentsCount: (n: number) => `${n} ${n === 1 ? 'payment' : 'payments'}`,
+    statActiveSubscriptions: 'Active Subscriptions',
+    statTotalSpent: 'Total Spent',
+    statNextRenewal: 'Next Renewal',
+    noUpcomingRenewal: 'None due',
   },
 
   // ── Discovery / Home feed ───────────────────────────────────
@@ -1591,9 +1596,6 @@ export const en = {
     imGoingCta: "I'm Going",
     recentAlbumsTitle: 'Recent Albums',
     photosCount: (n: number) => `${n} Photo${n === 1 ? '' : 's'}`,
-    premiumTitle: 'Upgrade Your Experience',
-    premiumBody: 'Unlock premium features and grow your community.',
-    premiumCta: 'Explore Premium',
   },
 } as const;
 
