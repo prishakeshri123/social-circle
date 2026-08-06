@@ -489,6 +489,7 @@ export const en = {
 
   // ── Profile (public view + edit) ───────────────────────────
   profile: {
+    title: 'Profile',
     clubsJoinedLabel: 'Clubs Joined',
     tabClubs: 'Clubs',
     tabActivity: 'Activity',

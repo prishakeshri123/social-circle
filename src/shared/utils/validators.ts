@@ -194,7 +194,9 @@ export const changePasswordSchema = z
   });
 
 export const deleteAccountSchema = z.object({
-  confirmText: z.string().refine((v) => v === 'DELETE', { message: e.deleteConfirmMismatch }),
+  confirmText: z.string().refine((v): boolean => v === 'DELETE', {
+    message: e.deleteConfirmMismatch,
+  }),
 });
 
 // ── Settings: payments ───────────────────────────────────────
