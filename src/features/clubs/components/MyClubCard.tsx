@@ -37,7 +37,7 @@ export function MyClubCard({ club, eventsCount, unreadCount }: MyClubCardProps) 
   const roleLabel = club.myRole === 'owner' ? en.members.roleOwner : en.members.roleMember;
 
   return (
-    <Card className="overflow-hidden p-0">
+    <Card className="overflow-hidden p-0 transition-shadow duration-fast hover:shadow-card-hover">
       <div className="relative aspect-video w-full bg-surface">
         {club.bannerUrl && (
           <img
@@ -68,7 +68,7 @@ export function MyClubCard({ club, eventsCount, unreadCount }: MyClubCardProps) 
           <StatItem icon={MessageCircle} value={unreadCount} label={en.myClubs.unreadLabel} />
         </div>
 
-        <Button asChild className="w-full bg-primary-50 text-white hover:bg-white/10">
+        <Button asChild className="w-full">
           <Link to={dashboardUrl}>{en.myClubs.openClubCta}</Link>
         </Button>
       </div>

@@ -3,8 +3,8 @@ import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { RECOMMENDED_CLUBS_STRIP_LIMIT } from '@/shared/constants/app.constants';
 import { useRecommendedClubs } from '@/features/discovery/hooks/useRecommendedClubs';
-import { RecommendedClubMiniCard } from '@/features/clubs/components/RecommendedClubMiniCard';
-import { Skeleton } from '@/shared/components/ui/Skeleton';
+import { ClubCard } from '@/features/discovery/components/ClubCard';
+import { ClubCardSkeleton } from '@/features/discovery/components/ClubCardSkeleton';
 
 export function ClubsYouMightLikeSection() {
   const { data: clubs, isPending } = useRecommendedClubs(RECOMMENDED_CLUBS_STRIP_LIMIT);
@@ -28,12 +28,12 @@ export function ClubsYouMightLikeSection() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {isPending
           ? Array.from({ length: RECOMMENDED_CLUBS_STRIP_LIMIT }).map((_, i) => (
-              <Skeleton key={i} className="h-[72px] w-full rounded-lg" />
+              <ClubCardSkeleton key={i} />
             ))
-          : clubs.map((club) => <RecommendedClubMiniCard key={club.id} club={club} />)}
+          : clubs.map((club) => <ClubCard key={club.id} club={club} />)}
       </div>
     </section>
   );

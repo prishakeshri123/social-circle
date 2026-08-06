@@ -1,12 +1,14 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Search } from 'lucide-react';
+import { Calendar, MessageCircle, Search, Users, type LucideIcon } from 'lucide-react';
 import { Sidebar } from '@/shared/components/layout/Sidebar';
 import { EmptyState } from '@/shared/components/feedback/EmptyState';
+import { Card } from '@/shared/components/ui/Card';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { MY_CLUBS_EVENTS_SCAN_LIMIT } from '@/shared/constants/app.constants';
+import { cn } from '@/shared/utils/cn';
 import { useMyClubs } from '@/features/clubs/hooks/useMyClubs';
 import { useInvitations } from '@/features/clubs/hooks/useInvitations';
 import { useConversations } from '@/features/chat/hooks/useConversations';
@@ -15,6 +17,43 @@ import { useEventsFeed } from '@/features/events/hooks/useEventsFeed';
 import { MyClubCard } from '@/features/clubs/components/MyClubCard';
 import { MyClubCardSkeleton } from '@/features/clubs/components/MyClubCardSkeleton';
 import { ClubsYouMightLikeSection } from '@/features/clubs/components/ClubsYouMightLikeSection';
+import type { EventWithClub } from '@/types/event.types';
+
+function countUpcomingEvents(events: EventWithClub[], clubIds: Set<string>): number {
+  const now = Date.now();
+  return events.filter(
+    (event) =>
+      clubIds.has(event.clubId) &&
+      event.status === 'published' &&
+      new Date(event.startAt).getTime() >= now,
+  ).length;
+}
+
+interface SummaryTileProps {
+  icon: LucideIcon;
+  iconClassName: string;
+  label: string;
+  value: number;
+}
+
+function SummaryTile({ icon: Icon, iconClassName, label, value }: SummaryTileProps) {
+  return (
+    <Card className="flex items-center gap-3 p-5">
+      <span
+        className={cn(
+          'flex size-11 shrink-0 items-center justify-center rounded-xl',
+          iconClassName,
+        )}
+      >
+        <Icon className="size-5" aria-hidden="true" />
+      </span>
+      <div className="min-w-0">
+        <p className="text-sm text-text-secondary">{label}</p>
+        <p className="text-2xl font-bold text-text-primary">{value}</p>
+      </div>
+    </Card>
+  );
+}
 
 export function MyClubsPage() {
   const navigate = useNavigate();
@@ -51,6 +90,10 @@ export function MyClubsPage() {
     return map;
   }, [eventsQuery.data]);
 
+  const myClubIds = useMemo(() => new Set(myClubs.map((c) => c.id)), [myClubs]);
+
+  const totalUpcomingEvents = countUpcomingEvents(eventsQuery.data?.data ?? [], myClubIds);
+
   return (
     <div className="flex items-start">
       <Helmet>
@@ -69,6 +112,29 @@ export function MyClubsPage() {
           <h1 className="text-2xl font-bold text-text-primary">{en.myClubs.title}</h1>
           <p className="mt-1 text-sm text-text-secondary">{en.myClubs.subtitle}</p>
         </div>
+
+        {!myClubsQuery.isPending && myClubs.length > 0 && (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <SummaryTile
+              icon={Users}
+              iconClassName="bg-primary-100 text-primary-600"
+              label={en.myClubs.statClubsJoined}
+              value={myClubs.length}
+            />
+            <SummaryTile
+              icon={Calendar}
+              iconClassName="bg-success-100 text-success-500"
+              label={en.myClubs.statUpcomingEvents}
+              value={totalUpcomingEvents}
+            />
+            <SummaryTile
+              icon={MessageCircle}
+              iconClassName="bg-info-100 text-info-500"
+              label={en.myClubs.statUnreadMessages}
+              value={unreadChatsCount}
+            />
+          </div>
+        )}
 
         {myClubsQuery.isPending && (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

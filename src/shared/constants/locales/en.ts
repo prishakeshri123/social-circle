@@ -467,6 +467,9 @@ export const en = {
     openClubCta: 'Open Club',
     recommendedTitle: 'Clubs You Might Like',
     recommendedSubtitle: 'Discover more amazing communities',
+    statClubsJoined: 'Clubs Joined',
+    statUnreadMessages: 'Unread Messages',
+    statUpcomingEvents: 'Upcoming Events',
   },
 
   // ── Events & Meetings hub (cross-club) ──────────────────────
