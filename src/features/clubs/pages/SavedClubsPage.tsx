@@ -47,7 +47,7 @@ export function SavedClubsPage() {
         className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 md:flex"
       />
 
-      <div className="auth-neon min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <div>
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-bold tracking-tight text-text-primary">

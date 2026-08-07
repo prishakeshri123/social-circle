@@ -62,7 +62,7 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="auth-neon">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{en.settings.addCardDialogTitle}</DialogTitle>
         </DialogHeader>

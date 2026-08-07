@@ -60,9 +60,7 @@ export function Sidebar({
   ];
 
   return (
-    <aside
-      className={cn('auth-neon flex flex-col border-r border-border bg-surface-raised', className)}
-    >
+    <aside className={cn('flex flex-col border-r border-border bg-surface-raised', className)}>
       <nav className="flex flex-col gap-1 overflow-y-auto p-3" aria-label={en.nav.home}>
         {items.map(({ to, label, icon: Icon, end, badge }) => (
           <NavLink

@@ -191,7 +191,7 @@ function MemberTopBar() {
   }
 
   return (
-    <header className={cn(HEADER_BASE_CLASS, 'auth-neon border-b border-border bg-background')}>
+    <header className={cn(HEADER_BASE_CLASS, 'border-b border-border bg-background')}>
       <div className="flex w-full items-center justify-between gap-4">
         <Logo />
 

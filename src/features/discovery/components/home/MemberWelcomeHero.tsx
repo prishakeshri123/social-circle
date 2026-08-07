@@ -44,7 +44,7 @@ export function MemberWelcomeHero({ fullName }: MemberWelcomeHeroProps) {
   }, []);
 
   return (
-    <section className="auth-neon relative isolate overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary-50 via-white to-accent-500/10 px-6 py-8 shadow-[0_0_60px_-15px_var(--color-glow-primary)] sm:px-8 sm:py-10">
+    <section className="relative isolate overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary-50 via-white to-accent-500/10 px-6 py-8 shadow-[0_0_60px_-15px_var(--color-glow-primary)] sm:px-8 sm:py-10">
       <div className="auth-neon-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <div
         className="auth-orb pointer-events-none absolute -left-16 -top-24 size-64 rounded-full bg-primary-500/25 blur-3xl"
@@ -98,8 +98,8 @@ export function MemberWelcomeHero({ fullName }: MemberWelcomeHeroProps) {
           <svg viewBox="0 0 160 160" className="absolute inset-0 size-full" aria-hidden="true">
             <defs>
               <linearGradient id="heroOrbitLine" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="var(--color-info-500)" stopOpacity="0.7" />
-                <stop offset="1" stopColor="var(--color-info-500)" stopOpacity="0" />
+                <stop offset="0" stopColor="var(--color-brand-cyan)" stopOpacity="0.7" />
+                <stop offset="1" stopColor="var(--color-brand-cyan)" stopOpacity="0" />
               </linearGradient>
             </defs>
 
@@ -146,7 +146,7 @@ export function MemberWelcomeHero({ fullName }: MemberWelcomeHeroProps) {
                       cx={node.x}
                       cy={node.y}
                       r={node.r + 5}
-                      fill="var(--color-info-500)"
+                      fill="var(--color-brand-cyan)"
                       fillOpacity="0.2"
                     />
                   )}
@@ -154,7 +154,7 @@ export function MemberWelcomeHero({ fullName }: MemberWelcomeHeroProps) {
                     cx={node.x}
                     cy={node.y}
                     r={node.r}
-                    fill={node.highlighted ? 'var(--color-info-500)' : 'var(--color-text-muted)'}
+                    fill={node.highlighted ? 'var(--color-brand-cyan)' : 'var(--color-text-muted)'}
                     fillOpacity={node.highlighted ? 1 : 0.5}
                   />
                 </g>

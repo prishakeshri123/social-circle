@@ -79,7 +79,7 @@ export function SettingsPage() {
         className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 md:flex"
       />
 
-      <div className="auth-neon min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3.5">
           <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl gradient-bg text-text-inverse shadow-md shadow-primary-500/25">
             <SettingsIcon className="size-5" aria-hidden="true" />

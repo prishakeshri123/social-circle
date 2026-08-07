@@ -133,7 +133,7 @@ export function ContinueYourCommunities() {
     .map(({ signal, type }) => renderCard(signal, type));
 
   return (
-    <section aria-labelledby="continue-communities-heading" className="auth-neon space-y-3">
+    <section aria-labelledby="continue-communities-heading" className="space-y-3">
       <div className="flex items-center justify-between">
         <h2 id="continue-communities-heading" className="text-lg font-semibold text-text-primary">
           {en.home.continueCommunitiesTitle}

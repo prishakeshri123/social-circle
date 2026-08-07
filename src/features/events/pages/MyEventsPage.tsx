@@ -72,7 +72,7 @@ export function MyEventsPage() {
         className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 md:flex"
       />
 
-      <div className="auth-neon min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <div>
           <h1 className="text-2xl font-bold text-text-primary">{en.myEvents.title}</h1>
           <p className="mt-1 text-sm text-text-secondary">{en.myEvents.subtitle}</p>
@@ -93,7 +93,10 @@ export function MyEventsPage() {
                 )}
                 <div className="min-w-0">
                   <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide gradient-text">
-                    <Sparkles className="size-3.5 text-info-500" aria-hidden="true" />
+                    <Sparkles
+                      className="size-3.5 text-[var(--color-brand-cyan)]"
+                      aria-hidden="true"
+                    />
                     {en.myEvents.nextUpLabel}
                   </p>
                   <h2 className="mt-1 truncate text-lg font-bold text-text-primary">

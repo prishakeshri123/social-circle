@@ -94,7 +94,7 @@ export function SubscriptionsPage() {
         className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 md:flex"
       />
 
-      <div className="auth-neon min-w-0 flex-1 space-y-8 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="min-w-0 flex-1 space-y-8 px-4 py-6 sm:px-6 lg:px-8">
         <div>
           <h1 className="text-2xl font-bold text-text-primary">{en.payment.title}</h1>
           <p className="mt-1 text-sm text-text-secondary">{en.payment.subtitle}</p>

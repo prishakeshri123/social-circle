@@ -12,7 +12,7 @@ export function MemberUpcomingEvents() {
   const { data: events, isPending } = useMyUpcomingEvents(4);
 
   return (
-    <section aria-labelledby="my-upcoming-events-heading" className="auth-neon space-y-3">
+    <section aria-labelledby="my-upcoming-events-heading" className="space-y-3">
       <div className="flex items-center justify-between">
         <h2 id="my-upcoming-events-heading" className="text-lg font-semibold text-text-primary">
           {en.home.upcomingEventsTitle}

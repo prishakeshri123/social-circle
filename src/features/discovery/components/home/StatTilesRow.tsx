@@ -57,7 +57,7 @@ function StatTile({
         className="mt-3 inline-flex items-center gap-1 text-sm font-semibold gradient-text transition-opacity duration-fast hover:opacity-80"
       >
         {ctaLabel}
-        <ArrowRight className="size-3.5 text-info-500" aria-hidden="true" />
+        <ArrowRight className="size-3.5 text-[var(--color-brand-cyan)]" aria-hidden="true" />
       </Link>
     </Card>
   );
@@ -78,7 +78,7 @@ export function StatTilesRow() {
   const pendingInvitationsCount = invitationsQuery.data?.length ?? 0;
 
   return (
-    <div className="auth-neon grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatTile
         icon={Users}
         iconGradientClassName="gradient-bg"

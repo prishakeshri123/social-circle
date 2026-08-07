@@ -77,7 +77,8 @@
   --sidebar-width-sm: 4rem;
 
   /* ── Marketing surface (hero + closing CTA gradient/glow) ── */
-  --gradient-brand: linear-gradient(135deg, var(--color-primary-600), var(--color-accent-500));
+  --color-brand-cyan: #0ea5c4;
+  --gradient-brand: linear-gradient(135deg, var(--color-primary-600), var(--color-brand-cyan));
   --color-glow-primary: rgb(99 102 241 / 0.35);
   --color-glow-accent: rgb(139 92 246 / 0.3);
 }

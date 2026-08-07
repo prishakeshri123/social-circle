@@ -92,7 +92,7 @@ export function ChangeContactDialog({ mode, open, onOpenChange }: ChangeContactD
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="auth-neon">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>
             {isEmail ? en.settings.changeEmailDialogTitle : en.settings.changePhoneDialogTitle}
