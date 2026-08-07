@@ -44,12 +44,12 @@ export function InvitationsPage() {
         className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 md:flex"
       />
 
-      <div className="min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="auth-neon min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <div>
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-bold text-text-primary">{en.invitations.title}</h1>
             {pendingInvitationsCount > 0 && (
-              <span className="inline-flex h-5 items-center gap-1 rounded-full bg-primary-100 px-2 text-xs font-semibold text-primary-700">
+              <span className="inline-flex h-5 items-center gap-1 rounded-full bg-[image:var(--gradient-brand)] px-2 text-xs font-semibold text-text-inverse shadow-sm shadow-primary-500/25">
                 <UserPlus className="size-3" aria-hidden="true" />
                 {en.invitations.pendingCount(pendingInvitationsCount)}
               </span>

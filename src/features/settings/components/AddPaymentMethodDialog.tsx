@@ -12,7 +12,12 @@ import { Input } from '@/shared/components/ui/Input';
 import { Label } from '@/shared/components/ui/Label';
 import { toast } from '@/shared/components/ui/Toast';
 import { en } from '@/shared/constants/locales/en';
+import {
+  CARD_EXPIRY_INPUT_MAX_LENGTH,
+  CARD_NUMBER_INPUT_MAX_LENGTH,
+} from '@/shared/constants/app.constants';
 import { addPaymentMethodSchema } from '@/shared/utils/validators';
+import { formatCardExpiryInput, formatCardNumberInput } from '@/shared/utils/formatCardInput';
 import { getApiErrorMessage } from '@/shared/utils/getApiErrorMessage';
 import { useAddPaymentMethod } from '@/features/settings/hooks/useAddPaymentMethod';
 import type { z } from 'zod';
@@ -35,6 +40,8 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
     resolver: zodResolver(addPaymentMethodSchema),
     defaultValues: { cardNumber: '', cardExpiry: '', cardCvv: '', cardName: '' },
   });
+  const cardNumberField = register('cardNumber');
+  const cardExpiryField = register('cardExpiry');
 
   function handleClose(next: boolean) {
     if (!next) {
@@ -55,7 +62,7 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent>
+      <DialogContent className="auth-neon">
         <DialogHeader>
           <DialogTitle>{en.settings.addCardDialogTitle}</DialogTitle>
         </DialogHeader>
@@ -77,7 +84,12 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
               inputMode="numeric"
               autoComplete="cc-number"
               placeholder={en.placeholders.cardNumber}
-              {...register('cardNumber')}
+              maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
+              {...cardNumberField}
+              onChange={(e) => {
+                e.target.value = formatCardNumberInput(e.target.value);
+                cardNumberField.onChange(e);
+              }}
             />
             {errors.cardNumber && (
               <p className="text-xs text-error-500">{errors.cardNumber.message}</p>
@@ -88,9 +100,15 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
               <Label htmlFor="cardExpiry">{en.labels.cardExpiry}</Label>
               <Input
                 id="cardExpiry"
+                inputMode="numeric"
                 autoComplete="cc-exp"
                 placeholder={en.placeholders.cardExpiry}
-                {...register('cardExpiry')}
+                maxLength={CARD_EXPIRY_INPUT_MAX_LENGTH}
+                {...cardExpiryField}
+                onChange={(e) => {
+                  e.target.value = formatCardExpiryInput(e.target.value);
+                  cardExpiryField.onChange(e);
+                }}
               />
               {errors.cardExpiry && (
                 <p className="text-xs text-error-500">{errors.cardExpiry.message}</p>

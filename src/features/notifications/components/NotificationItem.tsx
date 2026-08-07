@@ -1,5 +1,3 @@
-import { ChevronRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import {
   NOTIFICATION_TONE_CLASSES,
   NOTIFICATION_TYPE_CONFIG,
@@ -10,25 +8,16 @@ import type { Notification } from '@/types/user.types';
 
 interface NotificationItemProps {
   notification: Notification;
-  onRead: (notificationId: string) => void;
 }
 
-export function NotificationItem({ notification, onRead }: NotificationItemProps) {
-  const navigate = useNavigate();
+export function NotificationItem({ notification }: NotificationItemProps) {
   const { icon: Icon, tone } = NOTIFICATION_TYPE_CONFIG[notification.type];
 
-  function handleClick() {
-    if (!notification.read) onRead(notification.id);
-    if (notification.deepLink) navigate(notification.deepLink);
-  }
-
   return (
-    <button
-      type="button"
-      onClick={handleClick}
+    <div
       className={cn(
-        'flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors duration-fast',
-        notification.read ? 'hover:bg-surface' : 'bg-primary-50/60 hover:bg-primary-50',
+        'flex w-full items-center gap-3 px-4 py-3.5',
+        !notification.read && 'bg-primary-50/60',
       )}
     >
       <div
@@ -53,14 +42,15 @@ export function NotificationItem({ notification, onRead }: NotificationItemProps
             {notification.title}
           </p>
           {!notification.read && (
-            <span className="size-2 shrink-0 rounded-full bg-primary-600" aria-hidden="true" />
+            <span
+              className="size-2 shrink-0 rounded-full bg-[image:var(--gradient-brand)]"
+              aria-hidden="true"
+            />
           )}
         </div>
         <p className="mt-0.5 truncate text-sm text-text-secondary">{notification.body}</p>
         <p className="mt-1 text-xs text-text-muted">{formatRelativeTime(notification.createdAt)}</p>
       </div>
-
-      <ChevronRight className="size-4 shrink-0 text-text-muted" aria-hidden="true" />
-    </button>
+    </div>
   );
 }

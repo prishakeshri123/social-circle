@@ -60,7 +60,9 @@ export function Sidebar({
   ];
 
   return (
-    <aside className={cn('flex flex-col border-r border-border bg-surface-raised', className)}>
+    <aside
+      className={cn('auth-neon flex flex-col border-r border-border bg-surface-raised', className)}
+    >
       <nav className="flex flex-col gap-1 overflow-y-auto p-3" aria-label={en.nav.home}>
         {items.map(({ to, label, icon: Icon, end, badge }) => (
           <NavLink
@@ -71,7 +73,7 @@ export function Sidebar({
               cn(
                 'flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-fast',
                 isActive
-                  ? 'bg-primary-50 text-primary-700'
+                  ? 'bg-[image:var(--gradient-brand)] text-text-inverse shadow-sm shadow-primary-500/25'
                   : 'text-text-secondary hover:bg-surface hover:text-text-primary',
               )
             }

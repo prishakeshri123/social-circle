@@ -62,7 +62,7 @@ export function PublicEventDetailPage() {
   }
 
   return (
-    <div className="pb-20 md:pb-8">
+    <div className="auth-neon pb-20 md:pb-8">
       <Helmet>
         <title>{`${event?.title} — ${event?.club?.name} | Social Circle`}</title>
         <meta name="description" content={description} />

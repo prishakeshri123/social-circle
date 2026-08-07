@@ -61,7 +61,7 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent>
+      <DialogContent className="auth-neon">
         <DialogHeader>
           <DialogTitle>{en.settings.changePasswordDialogTitle}</DialogTitle>
         </DialogHeader>

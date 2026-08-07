@@ -41,6 +41,7 @@ export const SETTINGS_DEBOUNCE_MS = 500;
 export const MESSAGE_EDIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 export const NOTIFICATION_POLL_MS = 30_000;
 export const MESSAGE_POLL_MS = 4_000;
+export const HOME_HERO_CLOCK_TICK_MS = 30_000;
 export const MOCK_API_DELAY_MS = 400;
 
 // ── Token / auth ──────────────────────────────────────────
@@ -128,6 +129,9 @@ export const BILLING_CYCLE_LABELS = {
 // ── Payments ────────────────────────────────────────────────
 export const SUBSCRIPTION_EXPIRING_SOON_DAYS = 7;
 export const MAX_SAVED_PAYMENT_METHODS = 5;
+export const CARD_NUMBER_DIGITS = 16;
+export const CARD_NUMBER_INPUT_MAX_LENGTH = 19;
+export const CARD_EXPIRY_INPUT_MAX_LENGTH = 5;
 export const CARD_BRAND_LABELS = {
   visa: 'Visa',
   mastercard: 'Mastercard',

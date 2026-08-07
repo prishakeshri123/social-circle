@@ -133,14 +133,14 @@ export function ContinueYourCommunities() {
     .map(({ signal, type }) => renderCard(signal, type));
 
   return (
-    <section aria-labelledby="continue-communities-heading" className="space-y-3">
+    <section aria-labelledby="continue-communities-heading" className="auth-neon space-y-3">
       <div className="flex items-center justify-between">
         <h2 id="continue-communities-heading" className="text-lg font-semibold text-text-primary">
           {en.home.continueCommunitiesTitle}
         </h2>
         <Link
           to={ROUTES.myClubs}
-          className="text-sm font-medium text-primary-600 transition-colors duration-fast hover:text-primary-700"
+          className="text-sm font-semibold gradient-text transition-opacity duration-fast hover:opacity-80"
         >
           {en.home.seeAllCta}
         </Link>
@@ -158,7 +158,10 @@ export function ContinueYourCommunities() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map(({ club, subtitleLine1, subtitleLine2, ctaLabel, ctaTo }) => (
-            <Card key={club.id} className="overflow-hidden p-0">
+            <Card
+              key={club.id}
+              className="overflow-hidden p-0 transition-all duration-normal hover:-translate-y-0.5 hover:shadow-lg"
+            >
               <div className="relative aspect-[16/9] w-full bg-surface">
                 {club.bannerUrl && (
                   <img
@@ -169,7 +172,7 @@ export function ContinueYourCommunities() {
                     className="size-full object-cover"
                   />
                 )}
-                <Avatar className="absolute -bottom-4 left-4 size-9 border-2 border-surface-raised">
+                <Avatar className="absolute -bottom-4 left-4 size-9 border-2 border-surface-raised shadow-sm">
                   <AvatarImage src={club.logoUrl} alt="" />
                   <AvatarFallback>{club.name.charAt(0)}</AvatarFallback>
                 </Avatar>
@@ -180,7 +183,7 @@ export function ContinueYourCommunities() {
                 {subtitleLine2 && (
                   <p className="truncate text-xs text-text-muted">{subtitleLine2}</p>
                 )}
-                <Button asChild variant="outline" size="sm" className="mt-2 w-full">
+                <Button asChild size="sm" className="mt-2 w-full">
                   <Link to={ctaTo}>{ctaLabel}</Link>
                 </Button>
               </div>

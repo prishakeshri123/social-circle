@@ -18,21 +18,31 @@ import { useMyUpcomingEvents } from '@/features/events/hooks/useMyUpcomingEvents
 
 interface StatTileProps {
   icon: LucideIcon;
-  iconClassName: string;
+  iconGradientClassName: string;
+  iconShadowClassName: string;
   label: string;
   value: number;
   ctaLabel: string;
   to: string;
 }
 
-function StatTile({ icon: Icon, iconClassName, label, value, ctaLabel, to }: StatTileProps) {
+function StatTile({
+  icon: Icon,
+  iconGradientClassName,
+  iconShadowClassName,
+  label,
+  value,
+  ctaLabel,
+  to,
+}: StatTileProps) {
   return (
-    <Card className="p-5">
+    <Card className="p-5 transition-all duration-normal hover:-translate-y-0.5 hover:shadow-lg">
       <div className="flex items-center gap-3">
         <span
           className={cn(
-            'flex size-11 shrink-0 items-center justify-center rounded-xl',
-            iconClassName,
+            'flex size-11 shrink-0 items-center justify-center rounded-xl text-text-inverse shadow-sm',
+            iconGradientClassName,
+            iconShadowClassName,
           )}
         >
           <Icon className="size-5" aria-hidden="true" />
@@ -44,10 +54,10 @@ function StatTile({ icon: Icon, iconClassName, label, value, ctaLabel, to }: Sta
       </div>
       <Link
         to={to}
-        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-600 transition-colors duration-fast hover:text-primary-700"
+        className="mt-3 inline-flex items-center gap-1 text-sm font-semibold gradient-text transition-opacity duration-fast hover:opacity-80"
       >
         {ctaLabel}
-        <ArrowRight className="size-3.5" aria-hidden="true" />
+        <ArrowRight className="size-3.5 text-info-500" aria-hidden="true" />
       </Link>
     </Card>
   );
@@ -68,10 +78,11 @@ export function StatTilesRow() {
   const pendingInvitationsCount = invitationsQuery.data?.length ?? 0;
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="auth-neon grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatTile
         icon={Users}
-        iconClassName="bg-primary-100 text-primary-600"
+        iconGradientClassName="gradient-bg"
+        iconShadowClassName="shadow-primary-500/25"
         label={en.home.statMyClubs}
         value={myClubsCount}
         ctaLabel={en.home.viewAllCta}
@@ -79,7 +90,8 @@ export function StatTilesRow() {
       />
       <StatTile
         icon={Calendar}
-        iconClassName="bg-success-100 text-success-500"
+        iconGradientClassName="bg-gradient-to-br from-emerald-400 to-success-500"
+        iconShadowClassName="shadow-success-500/25"
         label={en.home.statUpcomingEvents}
         value={upcomingEventsCount}
         ctaLabel={en.home.viewAllCta}
@@ -87,7 +99,8 @@ export function StatTilesRow() {
       />
       <StatTile
         icon={MessageCircle}
-        iconClassName="bg-info-100 text-info-500"
+        iconGradientClassName="bg-gradient-to-br from-sky-400 to-info-500"
+        iconShadowClassName="shadow-info-500/25"
         label={en.home.statUnreadMessages}
         value={unreadMessagesCount}
         ctaLabel={en.home.viewChatsCta}
@@ -95,7 +108,8 @@ export function StatTilesRow() {
       />
       <StatTile
         icon={UserPlus}
-        iconClassName="bg-warning-100 text-warning-500"
+        iconGradientClassName="bg-gradient-to-br from-amber-400 to-warning-500"
+        iconShadowClassName="shadow-warning-500/25"
         label={en.home.statPendingInvitations}
         value={pendingInvitationsCount}
         ctaLabel={en.home.viewInvitesCta}

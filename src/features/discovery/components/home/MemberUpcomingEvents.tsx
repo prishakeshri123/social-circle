@@ -12,14 +12,14 @@ export function MemberUpcomingEvents() {
   const { data: events, isPending } = useMyUpcomingEvents(4);
 
   return (
-    <section aria-labelledby="my-upcoming-events-heading" className="space-y-3">
+    <section aria-labelledby="my-upcoming-events-heading" className="auth-neon space-y-3">
       <div className="flex items-center justify-between">
         <h2 id="my-upcoming-events-heading" className="text-lg font-semibold text-text-primary">
           {en.home.upcomingEventsTitle}
         </h2>
         <Link
           to={ROUTES.myEvents}
-          className="text-sm font-medium text-primary-600 transition-colors duration-fast hover:text-primary-700"
+          className="text-sm font-semibold gradient-text transition-opacity duration-fast hover:opacity-80"
         >
           {en.home.seeAllCta}
         </Link>
@@ -41,8 +41,11 @@ export function MemberUpcomingEvents() {
 
         {!isPending &&
           events.map((event) => (
-            <div key={event.id} className="flex items-center gap-4 p-4">
-              <div className="flex size-14 shrink-0 flex-col items-center justify-center rounded-lg bg-primary-50 text-primary-700">
+            <div
+              key={event.id}
+              className="flex items-center gap-4 p-4 transition-colors duration-normal hover:bg-surface"
+            >
+              <div className="flex size-14 shrink-0 flex-col items-center justify-center rounded-xl gradient-bg text-text-inverse shadow-sm shadow-primary-500/20">
                 <span className="text-[10px] font-semibold uppercase tracking-wide">
                   {formatDate(event.startAt, 'MMM')}
                 </span>

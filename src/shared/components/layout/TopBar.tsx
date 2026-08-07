@@ -191,7 +191,7 @@ function MemberTopBar() {
   }
 
   return (
-    <header className={cn(HEADER_BASE_CLASS, 'border-b border-border bg-background')}>
+    <header className={cn(HEADER_BASE_CLASS, 'auth-neon border-b border-border bg-background')}>
       <div className="flex w-full items-center justify-between gap-4">
         <Logo />
 
@@ -257,7 +257,7 @@ function MemberTopBar() {
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="ml-1 flex items-center gap-2 rounded-full ring-offset-2 ring-offset-background transition-shadow duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                className="ml-1 flex cursor-pointer items-center gap-2 rounded-full ring-offset-2 ring-offset-background transition-shadow duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                 aria-label={en.nav.profile}
               >
                 <Avatar>

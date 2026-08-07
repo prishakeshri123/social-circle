@@ -20,7 +20,6 @@ import { cn } from '@/shared/utils/cn';
 import { useConversations } from '@/features/chat/hooks/useConversations';
 import { useInvitations } from '@/features/clubs/hooks/useInvitations';
 import { useNotifications } from '@/features/notifications/hooks/useNotifications';
-import { useMarkNotificationAsRead } from '@/features/notifications/hooks/useMarkNotificationAsRead';
 import { useMarkAllNotificationsRead } from '@/features/notifications/hooks/useMarkAllNotificationsRead';
 import { NotificationItem } from '@/features/notifications/components/NotificationItem';
 import { NotificationItemSkeleton } from '@/features/notifications/components/NotificationItemSkeleton';
@@ -43,7 +42,6 @@ export function NotificationsPage() {
   const conversationsQuery = useConversations();
   const notificationsQuery = useNotifications(PAGE_SIZE_NOTIFICATIONS);
   const invitationsQuery = useInvitations();
-  const markAsRead = useMarkNotificationAsRead();
   const markAllRead = useMarkAllNotificationsRead();
 
   const unreadChatsCount = (conversationsQuery.data ?? []).reduce(
@@ -87,13 +85,13 @@ export function NotificationsPage() {
         className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 md:flex"
       />
 
-      <div className="min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="auth-neon min-w-0 flex-1 space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-2xl font-bold text-text-primary">{en.notifications.title}</h1>
               {unreadNotificationsCount > 0 && (
-                <span className="inline-flex h-5 items-center rounded-full bg-primary-100 px-2 text-xs font-semibold text-primary-700">
+                <span className="inline-flex h-5 items-center rounded-full bg-[image:var(--gradient-brand)] px-2 text-xs font-semibold text-text-inverse shadow-sm shadow-primary-500/25">
                   {en.notifications.unreadCount(unreadNotificationsCount)}
                 </span>
               )}
@@ -126,7 +124,7 @@ export function NotificationsPage() {
                         'flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-semibold',
                         isActive
                           ? 'bg-white/25 text-text-inverse'
-                          : 'bg-primary-100 text-primary-700',
+                          : 'bg-[image:var(--gradient-brand)] text-text-inverse',
                       )}
                     >
                       {unread}
@@ -162,11 +160,7 @@ export function NotificationsPage() {
         {!notificationsQuery.isPending && filtered.length > 0 && (
           <Card className="divide-y divide-border overflow-hidden">
             {filtered.map((notification) => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-                onRead={(id) => markAsRead.mutate(id)}
-              />
+              <NotificationItem key={notification.id} notification={notification} />
             ))}
           </Card>
         )}

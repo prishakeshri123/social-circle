@@ -38,7 +38,7 @@ export function ClubLandingPage() {
     : (club.tagline ?? '');
 
   return (
-    <div className="pb-20 md:pb-8">
+    <div className="auth-neon pb-20 md:pb-8">
       <Helmet>
         <title>{`${club.name} — ${club.tagline ?? ''} | Social Circle`}</title>
         <meta name="description" content={description} />
