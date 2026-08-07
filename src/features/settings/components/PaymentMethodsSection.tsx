@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreditCard, MapPin, Plus, Trash2 } from 'lucide-react';
+import { CreditCard, MapPin, Plus } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -16,32 +16,20 @@ import { Input } from '@/shared/components/ui/Input';
 import { Label } from '@/shared/components/ui/Label';
 import { toast } from '@/shared/components/ui/Toast';
 import { en } from '@/shared/constants/locales/en';
-import { CARD_BRAND_LABELS, MAX_SAVED_PAYMENT_METHODS } from '@/shared/constants/app.constants';
+import { MAX_SAVED_PAYMENT_METHODS } from '@/shared/constants/app.constants';
 import { billingAddressSchema } from '@/shared/utils/validators';
 import { getApiErrorMessage } from '@/shared/utils/getApiErrorMessage';
-import { cn } from '@/shared/utils/cn';
 import { usePaymentMethods } from '@/features/settings/hooks/usePaymentMethods';
-import { useDeletePaymentMethod } from '@/features/settings/hooks/useDeletePaymentMethod';
-import { useSetDefaultPaymentMethod } from '@/features/settings/hooks/useSetDefaultPaymentMethod';
 import { useBillingAddress } from '@/features/settings/hooks/useBillingAddress';
 import { useUpdateBillingAddress } from '@/features/settings/hooks/useUpdateBillingAddress';
 import { AddPaymentMethodDialog } from '@/features/settings/components/AddPaymentMethodDialog';
-import type { CardBrand } from '@/types/payment.types';
+import { SavedPaymentMethodCard } from '@/features/settings/components/SavedPaymentMethodCard';
 import type { z } from 'zod';
 
 type BillingAddressValues = z.infer<typeof billingAddressSchema>;
 
-const BRAND_GRADIENT: Record<CardBrand, string> = {
-  visa: 'bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900',
-  mastercard: 'bg-gradient-to-br from-orange-500 via-red-500 to-rose-700',
-  rupay: 'bg-gradient-to-br from-violet-600 via-purple-700 to-indigo-900',
-  amex: 'bg-gradient-to-br from-teal-500 via-cyan-600 to-sky-800',
-};
-
 function SavedPaymentMethods() {
   const query = usePaymentMethods();
-  const deleteMethod = useDeletePaymentMethod();
-  const setDefaultMethod = useSetDefaultPaymentMethod();
   const [addDialogOpen, setAddDialogOpen] = useState(false);
 
   const methods = query.data ?? [];
@@ -66,9 +54,9 @@ function SavedPaymentMethods() {
       </CardHeader>
       <CardContent>
         {query.isPending && (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
             {Array.from({ length: 2 }).map((_, i) => (
-              <Skeleton key={i} className="h-44 w-full rounded-2xl" />
+              <Skeleton key={i} className="h-56 w-full max-w-[27rem] rounded-xl" />
             ))}
           </div>
         )}
@@ -78,68 +66,9 @@ function SavedPaymentMethods() {
         )}
 
         {!query.isPending && methods.length > 0 && (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
             {methods.map((method) => (
-              <div
-                key={method.id}
-                className={cn(
-                  'relative flex flex-col overflow-hidden rounded-2xl p-5 text-white shadow-lg transition-transform duration-normal hover:-translate-y-0.5 hover:shadow-xl',
-                  BRAND_GRADIENT[method.brand],
-                )}
-              >
-                <div
-                  className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-white/10 blur-2xl"
-                  aria-hidden="true"
-                />
-                <div className="relative flex items-start justify-between">
-                  <CreditCard className="size-7 opacity-90" aria-hidden="true" />
-                  {method.isDefault && (
-                    <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-                      {en.settings.defaultBadge}
-                    </span>
-                  )}
-                </div>
-
-                <p className="relative mt-6 font-mono text-lg tracking-[0.2em]">
-                  •••• •••• •••• {method.last4}
-                </p>
-
-                <div className="relative mt-3 flex items-center justify-between text-xs">
-                  <span className="font-semibold uppercase tracking-wide opacity-90">
-                    {CARD_BRAND_LABELS[method.brand]}
-                  </span>
-                  <span className="opacity-80">
-                    {String(method.expiryMonth).padStart(2, '0')}/
-                    {String(method.expiryYear).slice(-2)}
-                  </span>
-                </div>
-
-                <div className="relative mt-4 flex items-center gap-3 border-t border-white/15 pt-3">
-                  {!method.isDefault && (
-                    <button
-                      type="button"
-                      disabled={setDefaultMethod.isPending}
-                      onClick={() => setDefaultMethod.mutate(method.id)}
-                      className="text-xs font-medium text-white/85 underline-offset-2 hover:text-white hover:underline disabled:opacity-50"
-                    >
-                      {en.settings.setDefaultCta}
-                    </button>
-                  )}
-                  <button
-                    type="button"
-                    disabled={deleteMethod.isPending}
-                    onClick={() =>
-                      deleteMethod.mutate(method.id, {
-                        onSuccess: () => toast.success(en.success.paymentMethodRemoved),
-                      })
-                    }
-                    className="ml-auto flex items-center gap-1 text-xs font-medium text-white/70 hover:text-white disabled:opacity-50"
-                  >
-                    <Trash2 className="size-3.5" aria-hidden="true" />
-                    {en.settings.removeCardCta}
-                  </button>
-                </div>
-              </div>
+              <SavedPaymentMethodCard key={method.id} method={method} />
             ))}
           </div>
         )}
@@ -197,7 +126,7 @@ function BillingAddressForm() {
               <Input id="line1" placeholder={en.placeholders.address} {...register('line1')} />
               {errors.line1 && <p className="text-xs text-error-500">{errors.line1.message}</p>}
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="city">{en.labels.city}</Label>
                 <Input id="city" placeholder={en.placeholders.city} {...register('city')} />

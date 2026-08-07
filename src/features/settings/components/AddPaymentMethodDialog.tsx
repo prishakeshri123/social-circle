@@ -13,11 +13,16 @@ import { Label } from '@/shared/components/ui/Label';
 import { toast } from '@/shared/components/ui/Toast';
 import { en } from '@/shared/constants/locales/en';
 import {
+  CARD_CVV_LENGTH,
   CARD_EXPIRY_INPUT_MAX_LENGTH,
   CARD_NUMBER_INPUT_MAX_LENGTH,
 } from '@/shared/constants/app.constants';
 import { addPaymentMethodSchema } from '@/shared/utils/validators';
-import { formatCardExpiryInput, formatCardNumberInput } from '@/shared/utils/formatCardInput';
+import {
+  formatCardCvvInput,
+  formatCardExpiryInput,
+  formatCardNumberInput,
+} from '@/shared/utils/formatCardInput';
 import { getApiErrorMessage } from '@/shared/utils/getApiErrorMessage';
 import { useAddPaymentMethod } from '@/features/settings/hooks/useAddPaymentMethod';
 import type { z } from 'zod';
@@ -42,6 +47,7 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
   });
   const cardNumberField = register('cardNumber');
   const cardExpiryField = register('cardExpiry');
+  const cardCvvField = register('cardCvv');
 
   function handleClose(next: boolean) {
     if (!next) {
@@ -121,7 +127,12 @@ export function AddPaymentMethodDialog({ open, onOpenChange }: AddPaymentMethodD
                 inputMode="numeric"
                 autoComplete="cc-csc"
                 placeholder={en.placeholders.cardCvv}
-                {...register('cardCvv')}
+                maxLength={CARD_CVV_LENGTH}
+                {...cardCvvField}
+                onChange={(e) => {
+                  e.target.value = formatCardCvvInput(e.target.value);
+                  cardCvvField.onChange(e);
+                }}
               />
               {errors.cardCvv && <p className="text-xs text-error-500">{errors.cardCvv.message}</p>}
             </div>

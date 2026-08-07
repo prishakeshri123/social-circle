@@ -10,6 +10,7 @@ import {
   MAX_ADDRESS_LENGTH,
   MAX_SHORT_FIELD_LENGTH,
   MAX_REFERENCE_CONTACT_LENGTH,
+  CARD_CVV_LENGTH,
 } from '@/shared/constants/app.constants';
 import { en } from '@/shared/constants/locales/en';
 
@@ -202,13 +203,24 @@ export const deleteAccountSchema = z.object({
 // ── Settings: payments ───────────────────────────────────────
 const CARD_NUMBER_REGEX = /^\d{16}$/;
 const CARD_EXPIRY_REGEX = /^(0[1-9]|1[0-2])\/\d{2}$/;
-const CARD_CVV_REGEX = /^\d{3,4}$/;
+const CARD_CVV_REGEX = new RegExp(`^\\d{${CARD_CVV_LENGTH}}$`);
+
+function isCardExpiryInFuture(value: string): boolean {
+  const [month, twoDigitYear] = value.split('/').map(Number);
+  const expiryMonthEnd = new Date(2000 + twoDigitYear, month, 1);
+  return expiryMonthEnd > new Date();
+}
 
 export const addPaymentMethodSchema = z.object({
   cardNumber: z
     .string()
     .refine((v) => CARD_NUMBER_REGEX.test(v.replace(/\s+/g, '')), { message: e.cardNumberInvalid }),
-  cardExpiry: z.string().refine((v) => CARD_EXPIRY_REGEX.test(v), { message: e.cardExpiryInvalid }),
+  cardExpiry: z
+    .string()
+    .refine((v) => CARD_EXPIRY_REGEX.test(v), { message: e.cardExpiryInvalid })
+    .refine((v) => !CARD_EXPIRY_REGEX.test(v) || isCardExpiryInFuture(v), {
+      message: e.cardExpiryPast,
+    }),
   cardCvv: z.string().refine((v) => CARD_CVV_REGEX.test(v), { message: e.cardCvvInvalid }),
   cardName: z.string().min(2, e.nameTooShort).max(100, e.nameTooLong),
 });

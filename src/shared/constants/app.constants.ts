@@ -132,6 +132,7 @@ export const MAX_SAVED_PAYMENT_METHODS = 5;
 export const CARD_NUMBER_DIGITS = 16;
 export const CARD_NUMBER_INPUT_MAX_LENGTH = 19;
 export const CARD_EXPIRY_INPUT_MAX_LENGTH = 5;
+export const CARD_CVV_LENGTH = 3;
 export const CARD_BRAND_LABELS = {
   visa: 'Visa',
   mastercard: 'Mastercard',

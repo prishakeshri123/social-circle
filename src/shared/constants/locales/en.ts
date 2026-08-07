@@ -307,6 +307,7 @@ export const en = {
     deleteConfirmMismatch: 'Type DELETE exactly to confirm.',
     cardNumberInvalid: 'Please enter a valid 16-digit card number.',
     cardExpiryInvalid: 'Please enter a valid expiry in MM/YY format.',
+    cardExpiryPast: 'This card has expired.',
     cardCvvInvalid: 'Please enter a valid CVV.',
   },
 
@@ -482,6 +483,8 @@ export const en = {
     setDefaultCta: 'Set as default',
     removeCardCta: 'Remove',
     addCardDialogTitle: 'Add payment method',
+    showCardNumber: 'Show card number',
+    hideCardNumber: 'Hide card number',
     billingAddressTitle: 'Billing address',
     billingAddressSubtitle: 'Used for invoices and payment receipts.',
     saveAddressCta: 'Save address',
