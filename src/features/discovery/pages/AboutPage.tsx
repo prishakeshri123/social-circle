@@ -1,71 +1,62 @@
 import { Helmet } from 'react-helmet-async';
-import { CalendarCheck, Heart, MessageCircle, ShieldCheck, Users } from 'lucide-react';
+import { Heart, MessageCircle, Users } from 'lucide-react';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
 import { Reveal, RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
+import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
+import { EmptyState } from '@/shared/components/feedback/EmptyState';
 import { CommunityCtaSection } from '@/features/discovery/components/CommunityCtaSection';
 import { MarketingFooter } from '@/features/discovery/components/MarketingFooter';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useAboutContent } from '@/features/discovery/hooks/useContent';
 import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { getIcon } from '@/shared/utils/iconRegistry';
 import aboutIllustration from '@/assets/images/about-us.svg';
 
-const HERO_STATS = [
-  { icon: Users, value: en.marketing.statsMembersValue, label: en.marketing.statsMembersLabel },
-  {
-    icon: ShieldCheck,
-    value: en.marketing.statsClubsValue,
-    label: en.marketing.statsClubsLabel,
-  },
-  {
-    icon: CalendarCheck,
-    value: en.marketing.statsEventsValue,
-    label: en.marketing.statsEventsLabel,
-  },
-] as const;
-
 export function AboutPage() {
   const { user } = useAuth();
-  const marketingCopy = en.marketing as unknown as Record<string, string>;
-  const aboutHeroHighlight = marketingCopy.aboutHeroHighlight;
-  const aboutHeroCardSubtitle = marketingCopy.aboutHeroCardSubtitle;
+  const { data, isPending, isError } = useAboutContent();
+
+  if (isPending) return <LoadingSpinner className="min-h-[50vh]" />;
+  if (isError || !data) return <EmptyState title={en.errors.networkError} />;
 
   return (
     <PageContainer className="space-y-16">
       <Helmet>
-        <title>{en.marketing.aboutPageTitle} | Social Circle</title>
-        <meta name="description" content={en.marketing.aboutMetaDescription} />
+        <title>{data.pageTitle} | Social Circle</title>
+        <meta name="description" content={data.metaDescription} />
       </Helmet>
 
       <section className="grid grid-cols-1 items-center gap-10 py-6 lg:grid-cols-2 lg:gap-16">
         <Reveal className="space-y-5">
           <p className="text-xs font-bold uppercase tracking-wider text-primary-600">
-            {en.marketing.aboutHeroEyebrow}
+            {data.heroEyebrow}
           </p>
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-text-primary sm:text-5xl">
-            {en.marketing.aboutHeroTitleLine1}
+            {data.heroTitleLine1}
             <br />
-            {en.marketing.aboutHeroTitleLine2Prefix}
+            {data.heroTitleLine2Prefix}
             <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-pink-500 bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl">
-              {en.marketing.aboutHeroTitleHighlight}
+              {data.heroTitleHighlight}
             </span>
           </h1>
-          <p className="max-w-lg text-base text-text-secondary sm:text-lg">
-            {en.marketing.aboutHeroSubtitle}
-          </p>
+          <p className="max-w-lg text-base text-text-secondary sm:text-lg">{data.heroSubtitle}</p>
 
           <div className="flex flex-wrap items-center gap-6 pt-2">
-            {HERO_STATS.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-3">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
-                  <stat.icon className="size-4" aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block text-xl font-bold text-text-primary">{stat.value}</span>
-                  <span className="block text-xs text-text-secondary">{stat.label}</span>
-                </span>
-              </div>
-            ))}
+            {data.stats.map((stat) => {
+              const Icon = getIcon(stat.icon);
+              return (
+                <div key={stat.label} className="flex items-center gap-3">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+                    <Icon className="size-4" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-xl font-bold text-text-primary">{stat.value}</span>
+                    <span className="block text-xs text-text-secondary">{stat.label}</span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </Reveal>
 
@@ -85,8 +76,8 @@ export function AboutPage() {
                   <Users className="size-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-text-primary">{aboutHeroHighlight}</p>
-                  <p className="text-xs text-text-secondary">{aboutHeroCardSubtitle}</p>
+                  <p className="text-sm font-semibold text-text-primary">{data.heroHighlight}</p>
+                  <p className="text-xs text-text-secondary">{data.heroCardSubtitle}</p>
                 </div>
               </div>
             </div>
@@ -107,16 +98,14 @@ export function AboutPage() {
       <section className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <Reveal className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">
-            {en.marketing.missionEyebrow}
+            {data.missionEyebrow}
           </p>
-          <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">
-            {en.marketing.missionTitle}
-          </h2>
-          <p className="text-sm text-text-secondary sm:text-base">{en.marketing.missionBody}</p>
+          <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">{data.missionTitle}</h2>
+          <p className="text-sm text-text-secondary sm:text-base">{data.missionBody}</p>
         </Reveal>
 
         <RevealGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {en.marketing.missionFeatures.map((feature) => {
+          {data.missionFeatures.map((feature) => {
             const Icon = getIcon(feature.icon);
             return (
               <RevealItem
@@ -137,12 +126,10 @@ export function AboutPage() {
       <section className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-center lg:gap-8">
         <Reveal className="space-y-4 lg:col-span-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">
-            {en.marketing.storyEyebrow}
+            {data.storyEyebrow}
           </p>
-          <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">
-            {en.marketing.storyTitle}
-          </h2>
-          <p className="text-sm text-text-secondary sm:text-base">{en.marketing.storyBody[0]}</p>
+          <h2 className="text-2xl font-bold text-text-primary sm:text-3xl">{data.storyTitle}</h2>
+          <p className="text-sm text-text-secondary sm:text-base">{data.storyBody[0]}</p>
         </Reveal>
 
         <div className="relative lg:col-span-2">
@@ -151,7 +138,7 @@ export function AboutPage() {
             aria-hidden="true"
           />
           <RevealGroup className="relative grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {en.marketing.storyTimeline.map((step) => {
+            {data.storyTimeline.map((step) => {
               const Icon = getIcon(step.icon);
               return (
                 <RevealItem
@@ -176,14 +163,14 @@ export function AboutPage() {
       <section className="space-y-8">
         <div className="space-y-2 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">
-            {en.marketing.valuesEyebrow}
+            {data.valuesEyebrow}
           </p>
           <h2 className="text-2xl font-semibold text-text-primary sm:text-3xl">
-            {en.marketing.valuesTitle}
+            {data.valuesTitle}
           </h2>
         </div>
         <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {en.marketing.values.map((value) => {
+          {data.values.map((value) => {
             const Icon = getIcon(value.icon);
             return (
               <RevealItem
@@ -202,11 +189,11 @@ export function AboutPage() {
       </section>
 
       <CommunityCtaSection
-        title={en.marketing.aboutCtaTitle}
-        subtitle={en.marketing.aboutCtaSubtitle}
-        primaryCta={en.marketing.aboutCtaPrimaryCta}
+        title={data.ctaTitle}
+        subtitle={data.ctaSubtitle}
+        primaryCta={data.ctaPrimaryCta}
         primaryTo={ROUTES.clubs}
-        secondaryCta={en.marketing.aboutCtaSecondaryCta}
+        secondaryCta={data.ctaSecondaryCta}
         secondaryTo={ROUTES.services}
       />
 

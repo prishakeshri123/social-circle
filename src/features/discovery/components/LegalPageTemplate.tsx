@@ -10,26 +10,10 @@ import { en } from '@/shared/constants/locales/en';
 import { ROUTES } from '@/shared/constants/routes';
 import { cn } from '@/shared/utils/cn';
 import { getIcon } from '@/shared/utils/iconRegistry';
-
-interface LegalSection {
-  readonly heading: string;
-  readonly icon?: string;
-  readonly body?: readonly string[];
-  readonly list?: readonly string[];
-}
-
-export interface LegalPageContent {
-  readonly pageTitle: string;
-  readonly metaDescription: string;
-  readonly eyebrow: string;
-  readonly heading: string;
-  readonly intro: string;
-  readonly calloutText?: string;
-  readonly sections: readonly LegalSection[];
-}
+import type { LegalContent } from '@/types/content.types';
 
 interface LegalPageTemplateProps {
-  content: LegalPageContent;
+  content: LegalContent;
   illustration?: string;
 }
 
@@ -90,7 +74,7 @@ export function LegalPageTemplate({ content, illustration }: LegalPageTemplatePr
             )}
           >
             <CalendarDays className="size-3.5" aria-hidden="true" />
-            {en.legal.lastUpdatedLabel}: {en.legal.lastUpdatedDate}
+            {en.legal.lastUpdatedLabel}: {content.lastUpdatedDate}
           </div>
         </Reveal>
 

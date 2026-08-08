@@ -1,17 +1,20 @@
 import { en } from '@/shared/constants/locales/en';
 import { RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
 import { getIcon } from '@/shared/utils/iconRegistry';
+import type { IconedItem } from '@/types/content.types';
 
-export function HowItWorksSection() {
+interface HowItWorksSectionProps {
+  eyebrow: string;
+  title: string;
+  steps: IconedItem[];
+}
+
+export function HowItWorksSection({ eyebrow, title, steps }: HowItWorksSectionProps) {
   return (
     <section className="space-y-10 py-8">
       <div className="space-y-2 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">
-          {en.marketing.howItWorksStepsEyebrow}
-        </p>
-        <h2 className="text-2xl font-semibold text-text-primary sm:text-3xl">
-          {en.marketing.howItWorksTitle}
-        </h2>
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">{eyebrow}</p>
+        <h2 className="text-2xl font-semibold text-text-primary sm:text-3xl">{title}</h2>
       </div>
 
       <div className="relative">
@@ -20,7 +23,7 @@ export function HowItWorksSection() {
           aria-hidden="true"
         />
         <RevealGroup className="relative grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {en.marketing.howItWorksSteps.map((step, index) => {
+          {steps.map((step, index) => {
             const Icon = getIcon(step.icon);
             return (
               <RevealItem key={step.title} className="flex flex-col items-center gap-2 text-center">

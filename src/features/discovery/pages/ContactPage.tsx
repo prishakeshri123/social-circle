@@ -10,12 +10,15 @@ import { Input } from '@/shared/components/ui/Input';
 import { Label } from '@/shared/components/ui/Label';
 import { Textarea } from '@/shared/components/ui/Textarea';
 import { Reveal, RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
+import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
+import { EmptyState } from '@/shared/components/feedback/EmptyState';
 import { MarketingFooter } from '@/features/discovery/components/MarketingFooter';
 import { toast } from '@/shared/components/ui/Toast';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useContactContent, useSubmitContactForm } from '@/features/discovery/hooks/useContent';
 import { en } from '@/shared/constants/locales/en';
 import { contactSchema } from '@/shared/utils/validators';
-import { MOCK_API_DELAY_MS } from '@/shared/constants/app.constants';
+import { getApiErrorMessage } from '@/shared/utils/getApiErrorMessage';
 import { getIcon } from '@/shared/utils/iconRegistry';
 import contactIllustration from '@/assets/images/contact-us.svg';
 
@@ -24,6 +27,8 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 export function ContactPage() {
   const { user } = useAuth();
   const [submitted, setSubmitted] = useState(false);
+  const { data, isPending, isError } = useContactContent();
+  const submitContact = useSubmitContactForm();
 
   const {
     register,
@@ -40,10 +45,14 @@ export function ContactPage() {
     },
   });
 
-  const onSubmit = handleSubmit(async () => {
-    await new Promise((resolve) => setTimeout(resolve, MOCK_API_DELAY_MS));
-    setSubmitted(true);
-    toast.success(en.marketing.contactSuccessTitle);
+  const onSubmit = handleSubmit(async (values) => {
+    try {
+      const result = await submitContact.mutateAsync(values);
+      setSubmitted(true);
+      toast.success(result.message);
+    } catch (error) {
+      toast.error(getApiErrorMessage(error));
+    }
   });
 
   function handleSendAnother() {
@@ -51,32 +60,33 @@ export function ContactPage() {
     setSubmitted(false);
   }
 
+  if (isPending) return <LoadingSpinner className="min-h-[50vh]" />;
+  if (isError || !data) return <EmptyState title={en.errors.networkError} />;
+
   return (
     <PageContainer className="space-y-14">
       <Helmet>
-        <title>{en.marketing.contactPageTitle} | Social Circle</title>
-        <meta name="description" content={en.marketing.contactMetaDescription} />
+        <title>{data.pageTitle} | Social Circle</title>
+        <meta name="description" content={data.metaDescription} />
       </Helmet>
 
       <section className="grid grid-cols-1 items-center gap-10 py-6 lg:grid-cols-2 lg:gap-16">
         <Reveal className="space-y-5">
           <span className="inline-flex items-center rounded-full bg-primary-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-600">
-            {en.marketing.contactHeroEyebrow}
+            {data.heroEyebrow}
           </span>
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-text-primary sm:text-5xl">
-            {en.marketing.contactHeroTitleLine1}
+            {data.heroTitleLine1}
             <br />
-            {en.marketing.contactHeroTitleLine2Prefix}
+            {data.heroTitleLine2Prefix}
             <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-pink-500 bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl">
-              {en.marketing.contactHeroTitleHighlight}
+              {data.heroTitleHighlight}
             </span>
           </h1>
-          <p className="max-w-lg text-base text-text-secondary sm:text-lg">
-            {en.marketing.contactHeroSubtitle}
-          </p>
+          <p className="max-w-lg text-base text-text-secondary sm:text-lg">{data.heroSubtitle}</p>
 
           <div className="flex flex-wrap items-center gap-6 pt-2">
-            {en.marketing.contactQuickInfo.map((item) => {
+            {data.quickInfo.map((item) => {
               const Icon = getIcon(item.icon);
               return (
                 <div key={item.title} className="flex items-center gap-3">
@@ -132,10 +142,8 @@ export function ContactPage() {
           ) : (
             <>
               <div>
-                <h2 className="text-xl font-semibold text-text-primary">
-                  {en.marketing.contactFormTitle}
-                </h2>
-                <p className="text-sm text-text-secondary">{en.marketing.contactFormSubtitle}</p>
+                <h2 className="text-xl font-semibold text-text-primary">{data.formTitle}</h2>
+                <p className="text-sm text-text-secondary">{data.formSubtitle}</p>
               </div>
 
               <form onSubmit={onSubmit} noValidate className="space-y-4 pt-2">
@@ -224,11 +232,9 @@ export function ContactPage() {
 
         <div className="space-y-6">
           <RevealGroup className="space-y-2 rounded-2xl border border-border bg-surface p-6">
-            <h3 className="text-sm font-semibold text-text-primary">
-              {en.marketing.contactChannelsTitle}
-            </h3>
+            <h3 className="text-sm font-semibold text-text-primary">{data.channelsTitle}</h3>
             <div className="space-y-4 pt-2">
-              {en.marketing.contactChannels.map((channel) => {
+              {data.channels.map((channel) => {
                 const Icon = getIcon(channel.icon);
                 return (
                   <RevealItem key={channel.title} className="flex items-start gap-3">
@@ -246,13 +252,11 @@ export function ContactPage() {
           </RevealGroup>
 
           <Reveal className="space-y-3 rounded-2xl border border-border bg-surface p-6">
-            <h3 className="text-sm font-semibold text-text-primary">
-              {en.marketing.contactOfficeTitle}
-            </h3>
+            <h3 className="text-sm font-semibold text-text-primary">{data.officeTitle}</h3>
             <p className="text-xs text-text-secondary">
-              {en.marketing.contactOfficeAddress}
+              {data.officeAddress}
               <br />
-              {en.marketing.contactOfficeAddressLine2}
+              {data.officeAddressLine2}
             </p>
             <div className="relative flex h-28 items-center justify-center overflow-hidden rounded-xl bg-primary-50">
               <div
@@ -281,10 +285,8 @@ export function ContactPage() {
             <LifeBuoy className="size-5" aria-hidden="true" />
           </span>
           <div>
-            <h2 className="text-lg font-bold tracking-tight sm:text-xl">
-              {en.marketing.contactBannerTitle}
-            </h2>
-            <p className="mt-1 text-sm text-white/85">{en.marketing.contactBannerSubtitle}</p>
+            <h2 className="text-lg font-bold tracking-tight sm:text-xl">{data.bannerTitle}</h2>
+            <p className="mt-1 text-sm text-white/85">{data.bannerSubtitle}</p>
           </div>
         </Reveal>
       </section>

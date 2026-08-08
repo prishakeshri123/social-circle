@@ -73,4 +73,12 @@ export const API_ENDPOINTS = {
     paymentMethod: (id: string) => `/users/me/payment-methods/${id}`,
     billingAddress: '/users/me/billing-address',
   },
+  content: {
+    about: '/content/about',
+    services: '/content/services',
+    howItWorks: '/content/how-it-works',
+    contact: '/content/contact',
+    legal: (slug: string) => `/content/legal/${slug}`,
+    submitContact: '/contact',
+  },
 } as const;

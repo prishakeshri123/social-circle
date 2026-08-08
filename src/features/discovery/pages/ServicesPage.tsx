@@ -2,8 +2,11 @@ import { Helmet } from 'react-helmet-async';
 import { Compass, CreditCard, MessageCircle, Sparkles, Ticket } from 'lucide-react';
 import { PageContainer } from '@/shared/components/layout/PageContainer';
 import { Reveal, RevealGroup, RevealItem } from '@/shared/components/ui/Reveal';
+import { LoadingSpinner } from '@/shared/components/feedback/LoadingSpinner';
+import { EmptyState } from '@/shared/components/feedback/EmptyState';
 import { MarketingFooter } from '@/features/discovery/components/MarketingFooter';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useServicesContent } from '@/features/discovery/hooks/useContent';
 import { en } from '@/shared/constants/locales/en';
 import { getIcon } from '@/shared/utils/iconRegistry';
 import servicesIllustration from '@/assets/images/services.png';
@@ -11,12 +14,16 @@ import { CommunityCtaSection } from '../components/CommunityCtaSection';
 
 export function ServicesPage() {
   const { user } = useAuth();
+  const { data, isPending, isError } = useServicesContent();
+
+  if (isPending) return <LoadingSpinner className="min-h-[50vh]" />;
+  if (isError || !data) return <EmptyState title={en.errors.networkError} />;
 
   return (
     <PageContainer className="space-y-14">
       <Helmet>
-        <title>{en.marketing.servicesPageTitle} | Social Circle</title>
-        <meta name="description" content={en.marketing.servicesMetaDescription} />
+        <title>{data.pageTitle} | Social Circle</title>
+        <meta name="description" content={data.metaDescription} />
       </Helmet>
 
       {/* Hero: same split-layout pattern as Clubs/Events (gradient + dotted
@@ -36,17 +43,17 @@ export function ServicesPage() {
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal className="space-y-3">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-text-secondary">
-                {en.marketing.servicesHeroEyebrow}
+                {data.heroEyebrow}
               </span>
               <h1 className="flex items-center gap-2 bg-gradient-to-r from-blue-600 via-violet-600 to-pink-500 bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl">
-                {en.marketing.servicesHeroTitle}
+                {data.heroTitle}
                 <Sparkles
                   className="hidden size-6 shrink-0 text-accent-500 sm:block"
                   aria-hidden="true"
                 />
               </h1>
               <p className="max-w-lg text-sm text-text-secondary sm:text-base">
-                {en.marketing.servicesHeroSubtitle}
+                {data.heroSubtitle}
               </p>
             </Reveal>
 
@@ -76,7 +83,7 @@ export function ServicesPage() {
       </section>
 
       <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {en.marketing.services.map((service) => {
+        {data.services.map((service) => {
           const Icon = getIcon(service.icon);
           return (
             <RevealItem
@@ -96,7 +103,12 @@ export function ServicesPage() {
         })}
       </RevealGroup>
 
-      <CommunityCtaSection />
+      <CommunityCtaSection
+        title={data.ctaTitle}
+        subtitle={data.ctaSubtitle}
+        primaryCta={data.ctaPrimaryCta}
+        secondaryCta={data.ctaSecondaryCta}
+      />
 
       {!user && <MarketingFooter />}
     </PageContainer>

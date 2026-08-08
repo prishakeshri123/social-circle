@@ -53,4 +53,11 @@ export const queryKeys = {
     methods: (userId: string) => ['payments', 'methods', userId] as const,
     billingAddress: (userId: string) => ['payments', 'billing-address', userId] as const,
   },
+  content: {
+    about: ['content', 'about'] as const,
+    services: ['content', 'services'] as const,
+    howItWorks: ['content', 'how-it-works'] as const,
+    contact: ['content', 'contact'] as const,
+    legal: (slug: string) => ['content', 'legal', slug] as const,
+  },
 } as const;
